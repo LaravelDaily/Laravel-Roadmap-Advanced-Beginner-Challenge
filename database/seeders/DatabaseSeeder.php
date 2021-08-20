@@ -17,26 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        /*
-         * admin setting
-         */
-
-        $role = Role::create(['name' => 'admin']);
-        $role = Role::create(['name' => 'user']);
-
-        $user=User::create(['name'=>'Admin',
-            'email'=>'info@faxunil.hu',
-            'password'=>Hash::make('1')
+        $this->call([
+            UserSeeder::class,
+            PictureSeeder::class,
+            ClientSeeder::class,
+            ProjectSeeder::class
         ]);
 
-        $user->assignRole('admin');
-
-        $user=User::create(['name'=>'User',
-            'email'=>'info@faxunil.hu',
-            'password'=>Hash::make('1')
-        ]);
-        $user->assignRole('user');
-
-        // \App\Models\User::factory(10)->create();
     }
 }
