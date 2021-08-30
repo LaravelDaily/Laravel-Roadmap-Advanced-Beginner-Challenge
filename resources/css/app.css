@@ -1,0 +1,42 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base{
+    h2{
+        @apply text-2xl mb-10;
+    }
+
+    h3{
+        @apply text-xl mb-2;
+    }
+
+    h4{
+        @apply font-bold mb-2;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    select,
+    textarea{
+        @apply rounded border-gray-300 block mt-1 w-full;
+    }
+
+    input[type="date"]{
+        @apply rounded border-gray-300 block mt-1;
+    }
+
+    select{
+        @apply cursor-pointer;
+    }
+
+    textarea{
+        @apply h-48;
+    }
+
+    input[type="submit"]{
+        @apply block rounded cursor-pointer text-center text-white;
+    }
+}
