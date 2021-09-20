@@ -1,0 +1,9 @@
+@import "~dropzone/dist/dropzone.css";
+
+.pagination{
+    margin-bottom: 0;
+}
+
+.dropzone{
+    min-height: auto;
+}

@@ -1,79 +1,108 @@
-# Laravel Roadmap: Advanced Beginner Level Challenge
+<h1>Installation</h1>
 
-This is a task for the [Advanced Beginner Level of the Laravel Roadmap](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#advanced-beginner-level), with the goal to implement as many of its topics as possible.
+- composer install
+- php artisan key:generate
+- php artisan migrate --seed
+- php artisan storage:link
+- npm install
+- npm run dev
+- php artisan serve / your deployment method
 
-This repository is intentionally empty, with only a Readme file. Your task if to submit a Pull Request with your version of implementing the task, and your PR may be reviewed by someone on our team, or other volunteers.
+<i>Remember to set .env APP_URL to make images path work properly</i>
 
-## The Task: Simple CRM System for Managing Clients
+Login as admin: admin@mail.com / admin<br>
+Login as user: user1@mail.com / user<br>
+For more data see database/seeders/UserSeeder
 
-You should create an adminpanel-like system to manage Clients, Projects, Tasks with CRUD operations.
+Full seeding of data can take more than one minute, because of adding images and conversion.
 
-A few screenshots from the example solution:
+<h3>Implemented features</h3>
 
-<img width="1370" alt="Screenshot 2021-08-12 at 10 56 42" src="https://user-images.githubusercontent.com/1510147/129160013-d5c895d3-92aa-4a32-9a62-d09807f623f9.png">
-<img width="1371" alt="Screenshot 2021-08-12 at 10 57 15" src="https://user-images.githubusercontent.com/1510147/129160023-8095c1b5-d6ce-4813-b708-af1b16605160.png">
+<h4>Routing Advanced</h4>
 
-You can come up with whatever structure of the database tables you want, but please try to use all the Laravel features listed below.
+- Route Model Binding in Resource Controllers
+  - All controllers use model binding
+- Route Redirect - homepage should automatically redirect to the login form 
+  - routes/web.php:48
 
-
-
------
-
-## Features to implement
-
-Here's the [list of Roadmap features](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#beginner-level) you need to try to implement in your code:
-
-
-**Routing Advanced**	
-
-- Route Model Binding	in Resource Controllers
-- Route Redirect - homepage should automatically redirect to the login form
-
-
-**Database Advanced**
+<h4>Database Advanced</h4>
 
 - Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
+  - Done
 - Eloquent Query Scopes - show only active clients, for example
-- Polymorphic relationships	with [Spatie Media Library package](https://github.com/spatie/laravel-medialibrary)
-- Eloquent Accessors and Mutators	- view all date values in `m/d/Y` format
+  - app/Models/Project.php:60-87
+  - app/Models/Task.php:51-77
+- Polymorphic relationships with Spatie Media Library package
+  - Project, Task & Response models implement Spatie Medialibrary
+- Eloquent Accessors and Mutators - view all date values in m/d/Y format
+  - Datatime accessors defined in all models
 - Soft Deletes on any Eloquent models
+  - All models implement softdelete
 
+<h4>Auth Advanced</h4>
 
-**Auth Advanced**	
+- Authorization: Roles/Permissions (admin and simple users), Gates, Policies with Spatie Permissions package
+  - app/database/seeders/PermissionSeeder
+  - app/database/seeders/RoleSeeder
+  - All actions are controlled by Policies for all models
+- Authentication: Email Verification
+  - User implements MustVerifyEmail
+  - routes uses verified middleware
+  - app/Services/UserService.pgp dispatch Registered event and send verify email
 
-- Authorization: Roles/Permissions (admin and simple users), Gates, Policies with [Spatie Permissions package](https://github.com/spatie/laravel-permission)
-- Authentication: Email Verification	
+<h4>API Basics</h4>
 
+- API Routes and Controllers
+  - routes/api.php
+  - app/Http/Controllers/Api/V1/
+- API Eloquent Resources
+  - app/Http/Resources/V1/
+- API Auth with Sanctum
+  - routes/api.php:25
+- Override API Error Handling and Status Codes
+  - app/Exceptions/Handler.php:43-53 
 
-**API Basics**	
+<h5>Test with Postman:</h5>
 
-- API Routes and Controllers	
-- API Eloquent Resources	
-- API Auth with Sanctum	
-- Override API Error Handling and Status Codes	
+<i>(APP_URL depends on how you deploy on your system)</i>
 
+Login to app: POST APP_URL/login
 
-**Debugging Errors**	
+Pre-request script:
 
-- Try-Catch and Laravel Exceptions	
+    pm.sendRequest({
+      url: 'APP_URL/sanctum/csrf-cookie',
+      method: 'GET'
+    }, function(error, response, {cookies}){
+      if(!error){
+        pm.globals.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))
+      }
+    })
+
+Body / form-data:<br>
+- email: admin@mail.com
+- password: admin
+
+Expected response: 204
+
+GET projects: APP_URL/api/v1/project<br>
+Expected response: 200
+
+<h4>Debugging Errors</h4>
+
+- Try-Catch and Laravel Exceptions
+  - app/Rules/CheckEncryptedInput.php:29-33
 - Customizing Error Pages
+  - Customized layout: resources/views/errors/layout.blade.php
+  - all error pages use system styling
 
+<h4>Sending Email</h4>
 
-**Sending Email**
-
-- Mailables and Mail Facade	
+- Mailables and Mail Facade
 - Notifications System: Email
+  - app/Services/ProjectService.php notify user using ProjectAssignedNotification when it assigned on store & when user is changed on update
 
-
-**Extra**
+<h4>Extra</h4>
 
 - Automated Tests for CRUD Operations
-
-
------ 
-
-## Example Solution
-
-If you need help, or you want to compare your version with our simple version, here's [the public repository](https://github.com/LaravelDaily/Laravel-Roadmap-Advanced-Beginner-Roadmap) with a _possible_ solution.
-
-**Notice**: please look at that repository only AFTER you've accomplished the task yourself, or if you're confident about your Laravel Advanced Beginner skills and you think you don't need to practice this task.
+  - Test implemented for all CRUD operations
