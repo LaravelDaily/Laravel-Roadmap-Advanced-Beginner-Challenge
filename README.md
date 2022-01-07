@@ -15,65 +15,57 @@ A few screenshots from the example solution:
 
 You can come up with whatever structure of the database tables you want, but please try to use all the Laravel features listed below.
 
-
-
------
+---
 
 ## Features to implement
 
 Here's the [list of Roadmap features](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#beginner-level) you need to try to implement in your code:
 
+**Routing Advanced**
 
-**Routing Advanced**	
-
-- Route Model Binding	in Resource Controllers
+- Route Model Binding in Resource Controllers
 - Route Redirect - homepage should automatically redirect to the login form
-
 
 **Database Advanced**
 
 - Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
 - Eloquent Query Scopes - show only active clients, for example
-- Polymorphic relationships	with [Spatie Media Library package](https://github.com/spatie/laravel-medialibrary)
-- Eloquent Accessors and Mutators	- view all date values in `m/d/Y` format
+- Polymorphic relationships with [Spatie Media Library package](https://github.com/spatie/laravel-medialibrary)
+- Eloquent Accessors and Mutators - view all date values in `m/d/Y` format
 - Soft Deletes on any Eloquent models
 
-
-**Auth Advanced**	
+**Auth Advanced**
 
 - Authorization: Roles/Permissions (admin and simple users), Gates, Policies with [Spatie Permissions package](https://github.com/spatie/laravel-permission)
-- Authentication: Email Verification	
+- Authentication: Email Verification
 
+**API Basics**
 
-**API Basics**	
+- API Routes and Controllers
+- API Eloquent Resources
+- API Auth with Sanctum
+- Override API Error Handling and Status Codes
 
-- API Routes and Controllers	
-- API Eloquent Resources	
-- API Auth with Sanctum	
-- Override API Error Handling and Status Codes	
+**Debugging Errors**
 
-
-**Debugging Errors**	
-
-- Try-Catch and Laravel Exceptions	
+- Try-Catch and Laravel Exceptions
 - Customizing Error Pages
-
 
 **Sending Email**
 
-- Mailables and Mail Facade	
+- Mailables and Mail Facade
 - Notifications System: Email
-
 
 **Extra**
 
 - Automated Tests for CRUD Operations
 
-
------ 
+---
 
 ## Example Solution
 
 If you need help, or you want to compare your version with our simple version, here's [the public repository](https://github.com/LaravelDaily/Laravel-Roadmap-Advanced-Beginner-Roadmap) with a _possible_ solution.
 
 **Notice**: please look at that repository only AFTER you've accomplished the task yourself, or if you're confident about your Laravel Advanced Beginner skills and you think you don't need to practice this task.
+
+Thank you!
