@@ -9,7 +9,9 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "spatie/laravel-medialibrary": "^10.4",
+        "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
