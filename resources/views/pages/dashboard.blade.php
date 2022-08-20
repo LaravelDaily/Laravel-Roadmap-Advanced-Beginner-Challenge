@@ -1,4 +1,4 @@
-@extends('boilerpalte')
+@extends('app')
 @section('content')
 <div class="content-wrapper">
     <!-- Content -->
