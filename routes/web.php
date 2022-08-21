@@ -19,7 +19,7 @@ Route::redirect('/', 'login');
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->middleware(['auth'])->name('dashboard');
-
+Route::post('users/{id}/update/passowrd', [UserController::class , 'updatePassword'])->name('users.update.passowrd');
 Route::resource('users', UserController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';

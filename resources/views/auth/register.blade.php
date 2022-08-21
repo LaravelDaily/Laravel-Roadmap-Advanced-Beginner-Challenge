@@ -71,7 +71,7 @@
             <h4 class="mb-2">Adventure starts here 🚀</h4>
             <p class="mb-4">Make your app management easy and fun!</p>
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -127,10 +127,6 @@
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                 </div>
               </div>
-            <div class="mb-3">
-                <label for="photo" class="form-label">Avatar</label>
-                <input class="form-control" type="file" id="photo" name="photo" />
-            </div>
               <button class="btn btn-primary d-grid w-100">Sign up</button>
             </form>
 
