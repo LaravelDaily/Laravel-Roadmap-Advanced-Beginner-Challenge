@@ -6,6 +6,11 @@
 
         <div class="card">
             <h5 class="card-header">Users Table</h5>
+            <div class="px-3">
+                <a href="{{ route('users.create') }}" type="button" class="btn btn-dark">
+                   Craete &nbsp; <span class="tf-icons bx bx-user"></span>
+                  </a>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
@@ -30,7 +35,9 @@
                                     </div>
                             </td>
                             <td> <span class="badge {{ $user->roles->pluck('name')[0] === 'admin' ? 'bg-label-success' : 'bg-label-primary' }}  me-1">
-                                {{ $user->roles->pluck('name')[0];  }}</span>
+                                @foreach($user->roles as $role)
+                                {{ $role->name }}
+                                @endforeach</span>
                             </td>
                             <td>
                                 <div class="dropdown">

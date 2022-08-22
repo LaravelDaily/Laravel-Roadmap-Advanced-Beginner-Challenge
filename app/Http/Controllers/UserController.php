@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UserPasswordUpdate;
 use App\Http\Requests\User\UserProfileUpdate;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 class UserController extends Controller
@@ -30,12 +30,22 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request ,User $user)
+    public function store(CreateUserRequest $request)
     {
-        
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        if($request->hasFile('avatar')){
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
+        $user->assignRole('user');
+        toast()->success('Successed','User Created Successfully');
+        return redirect()->route('users.index');
     }
 
     /**
