@@ -63,11 +63,14 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+        @can('list-user')
         <li class="menu-item {{ Route::is('users.index') ? 'active' : '' }}">
-          <a href="{{ route('users.index') }}" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-user"></i>
-              <div data-i18n="Analytics">Users</div>
-          </a>
+            <a href="{{ route('users.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Users</div>
+            </a>
         </li>
+        @endcan
+        
     </ul>
 </aside>

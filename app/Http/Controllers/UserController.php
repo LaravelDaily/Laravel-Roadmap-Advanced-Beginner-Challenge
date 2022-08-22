@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UserPasswordUpdate;
 use App\Http\Requests\User\UserProfileUpdate;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 class UserController extends Controller
@@ -16,19 +17,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('media.model')->paginate(10);
+        $users = User::with('media.model','roles')->paginate(10);
         return view('pages.users.index', compact('users'));
+    }
+
+
+    public function create()
+    {
+        return view('pages.users.create');
     }
 
     /**
      * Display the specified resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function store(Request $request ,User $user)
     {
-        //
+        
     }
 
     /**

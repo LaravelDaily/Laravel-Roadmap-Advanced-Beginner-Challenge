@@ -13,6 +13,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Photo</th>
+                            <th>Role</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -27,6 +28,9 @@
                                         class="avatar avatar-l pull-up" title="Lilian Fuller">
                                         <img src="{{ $user->getFirstMediaUrl('avatar', 'thumb-38') ? $user->getFirstMediaUrl('avatar', 'thumb-38') : asset('assets/img/avatars/avatardefault.png') }}" alt="Avatar" class="rounded-circle" />
                                     </div>
+                            </td>
+                            <td> <span class="badge {{ $user->roles->pluck('name')[0] === 'admin' ? 'bg-label-success' : 'bg-label-primary' }}  me-1">
+                                {{ $user->roles->pluck('name')[0];  }}</span>
                             </td>
                             <td>
                                 <div class="dropdown">
