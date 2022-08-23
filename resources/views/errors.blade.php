@@ -2,7 +2,7 @@
 
 <html
   lang="en"
-  class="light-style layout-menu-fixed"
+  class="light-style"
   dir="ltr"
   data-theme="theme-default"
   data-template="vertical-menu-template-free"
@@ -40,10 +40,9 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
-
     <!-- Page CSS -->
-
+    <!-- Page -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-misc.css') }}" />
     <!-- Helpers -->
     <script src= "{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -53,36 +52,26 @@
   </head>
 
   <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        <!-- Menu -->
-
-        @include('body.sidebar')
-        <!-- / Menu -->
-
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
-
-          @include('body.navbar')
-
-          <!-- / Navbar -->
-
-          <!-- Content wrapper -->
-          @yield('content')
-          <!-- Content wrapper -->
-
-          @include('body.footer')
+    <!-- Content -->
+    @yield('errors')
+    <div class="container-xxl container-p-y">
+        <div class="misc-wrapper">
+          <h2 class="mb-2 mx-2">@yield('code')</h2>
+          <p class="mb-4 mx-2">@yield('message')</p>
+          <a href="{{ url('/') }}" class="btn btn-primary">Back to home</a>
+          <div class="mt-4">
+            <img
+              src="{{ asset('assets/img/illustrations/girl-doing-yoga-light.png') }}"
+              alt="girl-doing-yoga-light"
+              width="500"
+              class="img-fluid"
+              data-app-dark-img="illustrations/girl-doing-yoga-dark.png"
+              data-app-light-img="illustrations/girl-doing-yoga-light.png"
+            />
+          </div>
         </div>
-        <!-- / Layout page -->
       </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    
-    <!-- / Layout wrapper -->
+    <!-- / Content -->
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -95,20 +84,13 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
-    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    @include('sweetalert::alert')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.29/sweetalert2.all.js" integrity="sha512-W5SwJPyOiXXyfvtnUlX/T1s6PLgKSuUcSD++cdbY0zOPi4/Ymu4dCzBHnlH5OPxKPRp6XyBp+3jvmxuMyCsoaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    @stack('scripts')
-    
   </body>
 </html>
-

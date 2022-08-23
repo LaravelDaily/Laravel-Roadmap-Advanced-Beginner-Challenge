@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', __('Create User'))
 @section('content')
 <!-- Content wrapper -->
 <div class="content-wrapper">

@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', __('Edit Client'))
 @section('content')
 <!-- Content wrapper -->
 <div class="content-wrapper">
