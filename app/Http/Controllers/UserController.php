@@ -7,7 +7,6 @@ use App\Http\Requests\User\UserPasswordUpdate;
 use App\Http\Requests\User\UserProfileUpdate;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
 class UserController extends Controller
 {
     /**

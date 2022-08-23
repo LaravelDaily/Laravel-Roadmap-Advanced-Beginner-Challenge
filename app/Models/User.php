@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
@@ -53,7 +54,6 @@ class User extends Authenticatable implements HasMedia
     public function task(){
         return $this->hasMany(Tasks::class);
     }
-
 
     public function registerMediaConversions(Media $media = null): void
     {

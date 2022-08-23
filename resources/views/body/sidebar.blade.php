@@ -71,6 +71,14 @@
             </a>
         </li>
         @endcan
+        @can('list-client')
+        <li class="menu-item {{ Route::is('clients.index') ? 'active' : '' }}">
+            <a href="{{ route('clients.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-pin"></i>
+                <div data-i18n="Analytics">Clients</div>
+            </a>
+        </li>
+        @endcan
         
     </ul>
 </aside>
