@@ -95,13 +95,12 @@ class UserController extends Controller
             $user->delete();
             toast()->success('Successed','User deleted successfully');
             DB::commit();
-            return back();
-            
-        } catch (\Illuminate\Database\QueryException $e) {
+        } 
+        catch (\Illuminate\Database\QueryException $e) {
             DB::rollBack();
             toast()->error('Failed','User can not be deleted, because it is related Project or Task');
-            return back();
         }
+        return back();
     }
 
     public function updatePassword(UserPasswordUpdate $request,$id)

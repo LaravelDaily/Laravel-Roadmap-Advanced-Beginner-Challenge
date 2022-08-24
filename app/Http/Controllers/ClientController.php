@@ -78,12 +78,11 @@ class ClientController extends Controller
         try {
             $client->delete();
             toast()->success('Successed','Client deleted successfully');
-            return back();
-        } catch (\Illuminate\Database\QueryException $e) {
+        } 
+        catch (\Illuminate\Database\QueryException $e) {
             toast()->error('Failed','Client can not be deleted, because it is related Project or Task');
-            return back();
         }
-        
+        return back();
     }
 
 }
