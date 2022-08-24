@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,6 @@ Route::get('/dashboard', function () {
 Route::post('users/{id}/update/passowrd', [UserController::class , 'updatePassword'])->name('users.update.passowrd');
 Route::resource('users', UserController::class)->middleware(['auth']);
 Route::resource('clients', ClientController::class)->middleware(['auth']);
+Route::resource('projects', ProjectController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';

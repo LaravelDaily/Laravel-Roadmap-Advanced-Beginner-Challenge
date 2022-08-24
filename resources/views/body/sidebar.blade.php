@@ -79,6 +79,14 @@
             </a>
         </li>
         @endcan
+        @can('list-project')
+        <li class="menu-item {{ Route::is('projects.index') ? 'active' : '' }}">
+            <a href="{{ route('projects.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-laptop"></i>
+                <div data-i18n="Analytics">Porjects</div>
+            </a>
+        </li>
+        @endcan
         
     </ul>
 </aside>

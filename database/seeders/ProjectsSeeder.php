@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Clients;
+use App\Models\Projects;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-class ClientsSeeder extends Seeder
+
+class ProjectsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +15,8 @@ class ClientsSeeder extends Seeder
      */
     public function run()
     {
-        Clients::factory()->count(20)->create();
-        Clients::factory()->count(10)
+        Projects::factory()->count(20)->create();
+        Projects::factory()->count(10)
         ->state(['deleted_at' => now()->subDays(rand(1, 100))])
         ->create();
     }

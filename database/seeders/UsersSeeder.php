@@ -28,7 +28,7 @@ class UsersSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ])->assignRole('user');
 
-        User::factory(10)->create()->each(function ($user) {
+        User::factory(20)->create()->each(function ($user) {
             $user->assignRole('user');
         });
 
