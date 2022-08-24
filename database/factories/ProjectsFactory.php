@@ -29,8 +29,8 @@ final class ProjectsFactory extends Factory
         return [
             'title' => $this->faker->word,
             'description' => $this->faker->text,
-            'user_id' => \App\Models\User::factory(),
-            'client_id' => \App\Models\Clients::factory(),
+            'user_id' => $this->faker->numberBetween(1, 20),
+            'client_id' => $this->faker->numberBetween(1, 20),
             'deadline' => $this->faker->dateTimeBetween('10 days', '60 days'),
             'status' => $this->faker->randomElement(['open','canceled','pending', 'ongoing', 'completed']),
         ];

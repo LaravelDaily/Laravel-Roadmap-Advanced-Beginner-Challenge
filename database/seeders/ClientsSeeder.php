@@ -13,7 +13,7 @@ class ClientsSeeder extends Seeder
      */
     public function run()
     {
-        Clients::factory()->count(10)->create();
+        Clients::factory()->count(20)->create();
         Clients::factory()->count(10)
         ->state(['deleted_at' => now()->subDays(rand(1, 100))])
         ->create();
