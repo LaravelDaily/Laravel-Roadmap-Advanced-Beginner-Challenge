@@ -7,6 +7,7 @@ use App\Http\Requests\User\UserPasswordUpdate;
 use App\Http\Requests\User\UserProfileUpdate;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     /**
@@ -87,11 +88,17 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        // without transaction it deletes role for the user before 
+        // checking if the user related to any task or project
+        DB::beginTransaction();
         try {
             $user->delete();
             toast()->success('Successed','User deleted successfully');
+            DB::commit();
             return back();
+            
         } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
             toast()->error('Failed','User can not be deleted, because it is related Project or Task');
             return back();
         }
