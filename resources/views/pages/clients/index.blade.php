@@ -7,11 +7,13 @@
 
         <div class="card">
             <h5 class="card-header">Clients Table</h5>
+            @can('create-client')
             <div class="px-3">
                 <a href="{{ route('clients.create') }}" type="button" class="btn btn-dark">
                     Craete &nbsp; <span class="tf-icons bx bx-user-pin"></span>
                   </a>
             </div>
+            @endcan
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
@@ -36,14 +38,18 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
+                                        @can('edit-client')
                                         <a class="dropdown-item" href="{{ route('clients.edit',$client->id) }}"><i
-                                                class="bx bx-edit-alt me-1"></i> Edit</a>
+                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        @endcan
+                                        @can('delete-client')
                                         <form action="{{ route('clients.destroy',$client->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item show_confirm"><i
                                                     class="bx bx-trash me-1"></i> Delete</button>
                                         </form>
+                                        @endcan
                                     </div>
                                 </div>
                             </td>

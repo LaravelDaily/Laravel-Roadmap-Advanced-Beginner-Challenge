@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -98,7 +103,7 @@ class UserController extends Controller
         } 
         catch (\Illuminate\Database\QueryException $e) {
             DB::rollBack();
-            toast()->error('Failed','User can not be deleted, because it is related Project or Task');
+            toast()->error('Failed','User can not be deleted, because it is related to a Project');
         }
         return back();
     }

@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Tasks::class, 'task');
+    }
     /**
      * Display a listing of the resource.
      *

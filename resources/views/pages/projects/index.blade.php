@@ -8,9 +8,11 @@
         <div class="card">
             <h5 class="card-header">Projects Table</h5>
             <div class="card-header d-flex justify-content-between align-items-center">
+                @can('create-project')
                 <a href="{{ route('projects.create') }}" type="button" class="btn btn-dark">
                     Craete &nbsp; <span class="tf-icons bx bx-laptop"></span>
                 </a>
+                @endcan
          <div class="float-end">
             <label for="defaultSelect" class="form-label">Status </label>
             <select id="defaultSelect" class="form-select">
@@ -53,16 +55,22 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
+                                        @can('show-project')
                                         <a class="dropdown-item" href="{{ route('projects.show',$project->id) }}"><i
                                             class="bx bx-show-alt me-1"></i> Show</a>
+                                        @endcan
+                                        @can('edit-project')
                                         <a class="dropdown-item" href="{{ route('projects.edit',$project->id) }}"><i
-                                                class="bx bx-edit-alt me-1"></i> Edit</a>
+                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        @endcan
+                                        @can('delete-project')
                                         <form action="{{ route('projects.destroy',$project->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item show_confirm"><i
                                                     class="bx bx-trash me-1"></i> Delete</button>
                                         </form>
+                                        @endcan
                                     </div>
                                 </div>
                             </td>
