@@ -87,6 +87,14 @@
             </a>
         </li>
         @endcan
+        @can('list-task')
+        <li class="menu-item {{ Route::is('tasks.index') ? 'active' : '' }}">
+            <a href="{{ route('tasks.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <div data-i18n="Analytics">Tasks</div>
+            </a>
+        </li>
+        @endcan
         
     </ul>
 </aside>

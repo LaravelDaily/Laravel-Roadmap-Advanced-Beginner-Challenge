@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             ClientsSeeder::class,
             ProjectsSeeder::class,
+            TasksSeeder::class,
         ]);
     }
 }

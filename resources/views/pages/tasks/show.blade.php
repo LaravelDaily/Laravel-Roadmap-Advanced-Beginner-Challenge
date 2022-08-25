@@ -1,5 +1,5 @@
 @extends('app')
-@section('title', __('View Project'))
+@section('title', __('View Task'))
 @section('content')
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -113,59 +113,26 @@
                 </div>
             </div>
         </div>
-
+        <h4 class="fw-bold py-3 mb-4">Task Detail</h4>
         <div class="row">
-            <div class="col-lg">
-                <div class="card">
-                    <h5 class="card-header">Tasks Table</h5>
-                    <div class="table-responsive text-nowrap">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Deadline</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                @forelse ($project->task as $task)
-                                <tr class="table-default">
-                                    <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                        <strong>{{ $task->title }}</strong>
-                                    </td>
-                                    <td>{{ $task->deadline }}</td>
-                                    <td><span class="badge bg-label-{{ $task->status }} me-1">{{ $task->status }}</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('tasks.show',$task->id) }}"><i
-                                                    class="bx bx-show-alt me-1"></i> Show</a>
-                                                <a class="dropdown-item" href="{{ route('tasks.edit',$task->id) }}"><i
-                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <form action="{{ route('tasks.destroy',$task->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="dropdown-item show_confirm"><i
-                                                            class="bx bx-trash me-1"></i> Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr class="table-default">
-                                    <td colspan="4">No Tasks found</td>
-                                </tr>
-                                @endforelse
-        
-                            </tbody>
-        
-                        </table>
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <h5 class="card-header">Title : {{ $task->title }}</h5>
+                    <hr>
+                    <div class="p-3">
+                        <p>Description : {{ $task->description }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Paragraph -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <h5 class="card-header">Dates</h5>
+                    <hr>
+                    <div class="card-body">
+                        <p class="mb-0 mt-0">Srart Date : {{ $task->created_at }}</p>
+                        <p class="mb-0">Update Date : {{ $task->updated_at }}</p>
+                        <p class="mb-0">Deadline : {{ $task->deadline_format }}</p>
                     </div>
                 </div>
             </div>

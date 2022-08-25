@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Projects::class, 'project');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +62,7 @@ class ProjectController extends Controller
      */
     public function show(Projects $project)
     {
-        $project = Projects::with('client','user')->findOrFail($project->id);
+        $project = Projects::with('client','user','task')->findOrFail($project->id);
         return view('pages.projects.show', compact('project'));
     }
 

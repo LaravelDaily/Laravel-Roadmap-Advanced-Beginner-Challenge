@@ -18,7 +18,7 @@ class Projects extends Model
     }
 
     public function task(){
-        return $this->hasMany(Tasks::class);
+        return $this->hasMany(Tasks::class,'project_id');
     }
 
     public function user(){
@@ -34,7 +34,7 @@ class Projects extends Model
         }
     }
 
-    protected function Deadline(): Attribute
+    protected function DeadlineFormat(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => Carbon::parse($value)->format('m/d/Y'),

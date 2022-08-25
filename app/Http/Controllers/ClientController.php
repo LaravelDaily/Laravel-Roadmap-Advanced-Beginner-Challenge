@@ -8,6 +8,11 @@ use App\Models\Clients;
 
 class ClientController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Clients::class, 'client');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -80,7 +85,7 @@ class ClientController extends Controller
             toast()->success('Successed','Client deleted successfully');
         } 
         catch (\Illuminate\Database\QueryException $e) {
-            toast()->error('Failed','Client can not be deleted, because it is related Project or Task');
+            toast()->error('Failed','Client can not be deleted, because it is related to a Project');
         }
         return back();
     }

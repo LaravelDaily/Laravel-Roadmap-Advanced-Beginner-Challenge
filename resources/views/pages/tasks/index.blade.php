@@ -1,18 +1,16 @@
 @extends('app')
-@section('title', __('Projects Page'))
+@section('title', __('Tasks Page'))
 @section('content')
 <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <div class="card">
-            <h5 class="card-header">Projects Table</h5>
+            <h5 class="card-header">Tasks Table</h5>
             <div class="card-header d-flex justify-content-between align-items-center">
-                @can('create-project')
-                <a href="{{ route('projects.create') }}" type="button" class="btn btn-dark">
-                    Craete &nbsp; <span class="tf-icons bx bx-laptop"></span>
+                <a href="{{ route('tasks.create') }}" type="button" class="btn btn-dark">
+                    Craete &nbsp; <span class="tf-icons bx bx-task"></span>
                 </a>
-                @endcan
          <div class="float-end">
             <label for="defaultSelect" class="form-label">Status </label>
             <select id="defaultSelect" class="form-select">
@@ -31,23 +29,21 @@
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Assigned to</th>
-                            <th>Client</th>
+                            <th>Assigned Project</th>
                             <th>Deadline</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @forelse ($projects as $project)
+                        @forelse ($tasks as $task)
                         <tr class="table-default">
                             <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                <strong>{{ $project->title }}</strong>
+                                <strong>{{ $task->title }}</strong>
                             </td>
-                            <td>{{ $project->user->name}}</td>
-                            <td>{{ $project->client->company_name }}</td>
-                            <td>{{ $project->deadline }}</td>
-                            <td><span class="badge bg-label-{{ $project->status }} me-1">{{ $project->status }}</span></td>
+                            <td>{{ $task->project->title }}</td>
+                            <td>{{ $task->deadline }}</td>
+                            <td><span class="badge bg-label-{{ $task->status }} me-1">{{ $task->status }}</span></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -55,29 +51,23 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        @can('show-project')
-                                        <a class="dropdown-item" href="{{ route('projects.show',$project->id) }}"><i
+                                        <a class="dropdown-item" href="{{ route('tasks.show',$task->id) }}"><i
                                             class="bx bx-show-alt me-1"></i> Show</a>
-                                        @endcan
-                                        @can('edit-project')
-                                        <a class="dropdown-item" href="{{ route('projects.edit',$project->id) }}"><i
-                                            class="bx bx-edit-alt me-1"></i> Edit</a>
-                                        @endcan
-                                        @can('delete-project')
-                                        <form action="{{ route('projects.destroy',$project->id) }}" method="post">
+                                        <a class="dropdown-item" href="{{ route('tasks.edit',$task->id) }}"><i
+                                                class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <form action="{{ route('tasks.destroy',$task->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item show_confirm"><i
                                                     class="bx bx-trash me-1"></i> Delete</button>
                                         </form>
-                                        @endcan
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         @empty
                         <tr class="table-default">
-                            <td colspan="4">No Projects found</td>
+                            <td colspan="4">No Tasks found</td>
                         </tr>
                         @endforelse
 
@@ -85,7 +75,7 @@
 
                 </table>
                 <div class="m-3">
-                    {{ $projects->withQueryString()->links() }}
+                    {{ $tasks->withQueryString()->links() }}
                 </div>
             </div>
         </div>
@@ -121,7 +111,7 @@
     $(document).ready(function () {
         $('#defaultSelect').change(function () {
             var status = $(this).val();
-            var url = "{{ route('projects.index') }}";
+            var url = "{{ route('tasks.index') }}";
             window.location.href = url + "?status=" + status;
         });
     });
