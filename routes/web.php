@@ -18,14 +18,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', 'login');
-
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->middleware(['auth'])->name('dashboard');
-Route::post('users/{id}/update/passowrd', [UserController::class , 'updatePassword'])->name('users.update.passowrd');
-Route::resource('users', UserController::class)->middleware(['auth']);
-Route::resource('clients', ClientController::class)->middleware(['auth']);
-Route::resource('projects', ProjectController::class)->middleware(['auth']);
-Route::resource('tasks', TaskController::class)->middleware(['auth']);
+Route::group(['middleware' => 'auth'], function () {
+    Route::view('dashboard', 'pages.dashboard')->name('dashboard');
+    Route::post('users/{id}/update/passowrd', [UserController::class , 'updatePassword'])->name('users.update.passowrd');
+    Route::resources([
+        'users' => UserController::class,
+        'clients' => ClientController::class,
+        'projects' => ProjectController::class,
+        'tasks' => TaskController::class,
+    ]);
+});
 
 require __DIR__.'/auth.php';
