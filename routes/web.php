@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', 'login');
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','verified']], function () {
     Route::view('dashboard', 'pages.dashboard')->name('dashboard');
     Route::post('users/{id}/update/passowrd', [UserController::class , 'updatePassword'])->name('users.update.passowrd');
     Route::resources([
