@@ -73,10 +73,10 @@
                         <button class="btn btn-primary d-grid w-100" type="submit">{{ __('Resend Verification Email') }}</button>
                     </div>
                     </form>
-
-                    <a href="{{ route('logout') }}" class="mb-3">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
                         <button class="btn btn-primary d-grid w-100">{{ __('Log Out') }}</button>
-                    </a>
+                    </form>
                 </div>
             </div>
             <!-- /Forgot Password -->
