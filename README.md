@@ -1,3 +1,54 @@
+# My Solution
+I have completed the following challenges, you can find the solutions in the repository. 
+A few screenshots from my solution.
+<br/><br/>
+<img width="1370" alt="User Table" title="User Table" src="https://user-images.githubusercontent.com/110671428/187033450-5a8f9421-2f82-4448-9b9c-e82ed95cbb49.PNG">
+<br/><br/>
+<img width="1370" alt="Notifications" title="Notifications" src="https://user-images.githubusercontent.com/110671428/187033497-5abcc074-477b-4efe-94bb-3f1c5cc7e3a4.PNG">
+<br/><br/>
+<img width="1370" alt="Project Table" title="Project Table" src="https://user-images.githubusercontent.com/110671428/187033538-bb60a603-4c01-4c9f-b743-8f2b3f3abdad.png">
+<br/><br/>
+<img width="1370" alt="Project Details" title="Project Details" src="https://user-images.githubusercontent.com/110671428/187033570-db85f229-a15d-45cb-8c0c-830ba0cde0a4.PNG">
+<br/><br/>
+## Installation
+
+```bash
+git clone https://github.com/NarimanGardi/Laravel-Roadmap-Advanced-Challenge.git
+```
+## Configuration
+
+rename the .env.example to .env and create database
+
+run composer update
+
+```bash
+composer update --no-scripts
+```
+
+generate key
+
+```bash
+php artisan key:generate
+```
+
+migration and seeders  
+
+```bash
+    php artisan migrate --seed
+```
+## Default Users
+
+email: admin@example.com - password: password
+<br/>
+email: user@example.com - password: password
+<br/>
+(password for all users is password)
+## Final Note
+All default user are verified, when you create new user it needs to be verify manually. for this you must configure mailgun driver to send verification email, or you can remove the verification from the user model (MustVerifyEmail) and web route middleware (verified).
+
+
+****************************************************************************************
+
 # Laravel Roadmap: Advanced Beginner Level Challenge
 
 This is a task for the [Advanced Beginner Level of the Laravel Roadmap](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#advanced-beginner-level), with the goal to implement as many of its topics as possible.
