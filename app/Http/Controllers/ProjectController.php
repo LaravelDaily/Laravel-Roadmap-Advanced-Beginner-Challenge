@@ -25,6 +25,7 @@ class ProjectController extends Controller
     {
         $projects = Projects::with('client','user')
         ->porjectsWithStatus($request->get('status') ?? 'all')
+        ->orderBy('id', 'desc')
         ->paginate(10);
         return view('pages.projects.index', compact('projects'));
     }
