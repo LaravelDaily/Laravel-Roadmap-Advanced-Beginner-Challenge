@@ -24,6 +24,7 @@ class TaskController extends Controller
     {
         $tasks = Tasks::with('project')
         ->tasksWithStatus($request->get('status') ?? 'all')
+        ->orderBy('id', 'desc')
         ->paginate(10);
         return view('pages.tasks.index', compact('tasks'));
     }
@@ -47,7 +48,7 @@ class TaskController extends Controller
      */
     public function store(CreateTaskRequest $request)
     {
-        $task = Tasks::create($request->validated());
+        Tasks::create($request->validated());
         toast()->success('Successed','Task Created Successfully');
         return redirect()->route('tasks.index');
     }

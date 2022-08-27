@@ -48,7 +48,6 @@ class UserController extends Controller
         if($request->hasFile('avatar')){
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
-        $user->assignRole('user');
         toast()->success('Successed','User Created Successfully');
         return redirect()->route('users.index');
     }

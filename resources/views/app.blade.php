@@ -50,6 +50,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}" ></script>
+    @livewireStyles
   </head>
 
   <body>
@@ -108,7 +109,7 @@
     @include('sweetalert::alert')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.29/sweetalert2.all.js" integrity="sha512-W5SwJPyOiXXyfvtnUlX/T1s6PLgKSuUcSD++cdbY0zOPi4/Ymu4dCzBHnlH5OPxKPRp6XyBp+3jvmxuMyCsoaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @stack('scripts')
-    
+    @livewireScripts
   </body>
 </html>
 
