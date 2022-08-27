@@ -39,13 +39,15 @@ migration and seeders
 ## Default Users
 
 email: admin@example.com - password: password
-email: user@example.com - password: password/
-
+<br/>
+email: user@example.com - password: password
+<br/>
+(password for all users is password)
 ## Final Note
 All default user are verified when you create new user it needs to be verify manually. for this you must configure mailgun driver to send verification email, or you can remove the verification from the user model and web route middleware.
 
 
-
+****************************************************************************************
 
 # Laravel Roadmap: Advanced Beginner Level Challenge
 
