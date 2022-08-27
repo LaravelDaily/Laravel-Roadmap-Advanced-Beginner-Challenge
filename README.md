@@ -8,7 +8,7 @@ A few screenshots from my solution.
 <br/><br/>
 <img width="1370" alt="Project Table" title="Project Table" src="https://user-images.githubusercontent.com/110671428/187033538-bb60a603-4c01-4c9f-b743-8f2b3f3abdad.png">
 <br/><br/>
-<img width="1370" alt="Project Details" title="Project Details" src="(https://user-images.githubusercontent.com/110671428/187033570-db85f229-a15d-45cb-8c0c-830ba0cde0a4.PNG">
+<img width="1370" alt="Project Details" title="Project Details" src="https://user-images.githubusercontent.com/110671428/187033570-db85f229-a15d-45cb-8c0c-830ba0cde0a4.PNG">
 <br/><br/>
 ## Installation
 
