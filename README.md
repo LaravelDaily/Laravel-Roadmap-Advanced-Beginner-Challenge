@@ -1,11 +1,15 @@
 # My Solution
 I have completed the following challenges, you can find the solutions in the repository. 
 A few screenshots from my solution.
+<br/><br/>
 <img width="1370" alt="User Table" title="User Table" src="https://user-images.githubusercontent.com/110671428/187033450-5a8f9421-2f82-4448-9b9c-e82ed95cbb49.PNG">
+<br/><br/>
 <img width="1370" alt="Notifications" title="Notifications" src="https://user-images.githubusercontent.com/110671428/187033497-5abcc074-477b-4efe-94bb-3f1c5cc7e3a4.PNG">
+<br/><br/>
 <img width="1370" alt="Project Table" title="Project Table" src="https://user-images.githubusercontent.com/110671428/187033538-bb60a603-4c01-4c9f-b743-8f2b3f3abdad.png">
-<img width="1370" alt="Project Details" title="Project Details" src="(https://user-images.githubusercontent.com/110671428/187033570-db85f229-a15d-45cb-8c0c-830ba0cde0a4.PNG">
-
+<br/><br/>
+<img width="1370" alt="Project Details" title="Project Details" src="https://user-images.githubusercontent.com/110671428/187033570-db85f229-a15d-45cb-8c0c-830ba0cde0a4.PNG">
+<br/><br/>
 ## Installation
 
 ```bash
