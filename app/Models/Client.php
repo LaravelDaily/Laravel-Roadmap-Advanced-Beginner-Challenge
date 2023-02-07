@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
+
+    public function projects(){
+           return $this->belongsToMany(Project::class);
+    }
+    public function task(){
+          return $this->morphMany(Task::class, 'taskable');
+    }
 }
