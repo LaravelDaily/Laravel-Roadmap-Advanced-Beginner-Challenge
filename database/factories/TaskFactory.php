@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -18,8 +20,14 @@ class TaskFactory extends Factory
     public function definition()
     {
         $taskable = $this->faker->randomElement([
-            \App\Models\Client::class,
-            \App\Models\Project::class,
+            [
+                'id' => Client::all()->random(),
+                'type' => \App\Models\Client::class
+            ],
+            [
+                'id' => Project::all()->random(),
+                'type' => \App\Models\Project::class
+            ]
         ]);
 
         return [
@@ -28,10 +36,8 @@ class TaskFactory extends Factory
             'due_date' => fake()->dateTime(),
             'priority' => fake()->randomElement(['high', 'medium', 'low']),
             'status' => fake()->randomElement(['pending', 'open', 'closed']),
-            'taskable_type' => array_search($taskable, Relation::$morphMap),
-            'taskable_id' => str_contains($taskable,'Project') ? $taskable::factory()->create(
-                ['user_id' => 1]
-            ) : $taskable::factory(),
+            'taskable_type' => array_search($taskable['type'], Relation::$morphMap),
+            'taskable_id' => $taskable['id'],
         ];
     }
 }
