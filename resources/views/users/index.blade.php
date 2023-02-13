@@ -34,12 +34,17 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td> <button type="button" class="btn btn-info mr-1"><svg class="icon">
+                                <td> <a href="{{ route('users.edit',$user->id) }}" class="btn btn-info mr-1"><svg class="icon">
                                             <use xlink:href="{{asset('icons/free.svg#cil-pencil')}}"></use>
-                                        </svg> Edit </button>
-                                    <button type="button" class="btn btn-danger"><svg class="icon">
-                                            <use xlink:href="{{asset('icons/free.svg#cil-trash')}}"></use>
-                                        </svg> Delete </button>
+                                        </svg> Edit </a>
+                                    <form action="{{route('users.destroy',$user->id)}}" method="POST" style="all:unset">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><svg class="icon">
+                                                <use xlink:href="{{asset('icons/free.svg#cil-trash')}}"></use>
+                                            </svg> Delete </button>
+                                    </form>
+
                                 </td>
                             </tr>
                             @endforeach

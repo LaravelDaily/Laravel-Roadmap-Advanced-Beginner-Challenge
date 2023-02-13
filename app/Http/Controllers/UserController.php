@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -36,7 +37,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+        $validated['password'] = bcrypt($request->password);
+        User::create($validated);
+        return back()->with(['status' => 'user added successfully']);
     }
 
     /**
@@ -56,9 +64,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -68,9 +76,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' =>  Rule::when($request->password !== null, ['required', 'min:6'])
+        ]);
+        if (empty($validated['password']))
+            unset($validated['password']);
+        else
+            $validated['password'] = bcrypt($validated['password']);
+        $user->update($validated);
+        return back()->with('status', 'user updated successfully');
     }
 
     /**
@@ -79,8 +97,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return back()->with('status','user deleted successfully');
     }
 }
