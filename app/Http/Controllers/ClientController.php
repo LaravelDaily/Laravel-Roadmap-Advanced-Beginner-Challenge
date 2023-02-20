@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -13,7 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::withCount('projects')->paginate(10);
+        return view('clients.index', compact('clients'));
     }
 
     /**
@@ -23,7 +26,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $projects = Project::all();
+        return view('clients.create', compact('projects'));
     }
 
     /**
@@ -34,7 +38,16 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'company' => 'required|string',
+            'vat' => 'required|numeric',
+            'status' => 'required|boolean'
+        ]);
+        $validated['description'] = isset($request->description) ? $request->description : "no description";
+        $client = Client::create($validated);
+        if (isset($request->projects))
+            $client->projects()->attach($request->projects);
+        return back()->with('status', "client successfully added");
     }
 
     /**
@@ -54,9 +67,10 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        //
+        $projects = Project::all();
+        return view('clients.edit', compact('client', 'projects'));
     }
 
     /**
@@ -66,9 +80,16 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        //
+        $request->validate([
+            'company' => 'required|string',
+            'vat' => 'required|numeric',
+            'status' => 'required|boolean'
+        ]);
+        $client->update($request->all());
+        $client->projects()->sync($request->projects);
+        return back()->with('status','client updated successfully');
     }
 
     /**
@@ -77,8 +98,10 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        //
+        $client->projects()->detach();
+        $client->delete();
+        return back()->with('status', 'client deleted successfully');
     }
 }

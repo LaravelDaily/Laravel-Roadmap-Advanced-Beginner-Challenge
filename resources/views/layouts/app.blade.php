@@ -14,15 +14,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('/css/simplebar/simplebar.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/simplebar.css')}}">
     <!-- Main styles for this application-->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <!-- We use those styles to show code examples, you should remove them in your application.-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
-    <link href="{{asset('css/examples.css')}}" rel="stylesheet">
-    <!-- Global site tag (gtag.js) - Google Analytics-->
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
-    <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -35,7 +28,7 @@
                 <div class="container-fluid">
                     <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
                         <svg class="icon icon-lg">
-                            <use xlink:href="{{asset('icons/free.svg#cil-menu')}}"></use>
+                            <use xlink:href="{{asset('svg/free.svg#cil-menu')}}"></use>
                         </svg>
                     </button><a class="header-brand d-md-none" href="#">
                         <ul class="header-nav ms-3">
@@ -50,7 +43,7 @@
                                     <form action="{{ route('logout') }}" method="post">@csrf
                                         <button type="submit" class="dropdown-item">
                                             <svg class="icon me-2">
-                                                <use xlink:href="{{asset('/icons/free.svg#cil-account-logout')}}"></use>
+                                                <use xlink:href="{{asset('/svg/free.svg#cil-account-logout')}}"></use>
                                             </svg> Logout
                                         </button>
                                     </form>
@@ -65,11 +58,17 @@
     </div>
     <script src="{{asset('js/coreui.bundle.min.js')}}"></script>
     <script src="{{asset('js/simplebar.min.js')}}"></script>
-    <!-- Plugins and scripts required by this view-->
-    <script src="{{asset('js/chart.min.js')}}"></script>
-    <script src="{{asset('js/coreui-chartjs.js')}}"></script>
-    <script src="{{asset('js/coreui-utils.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('#multiple-select-field').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: false,
+        });
+    </script>
+
 </body>
 
 </html>

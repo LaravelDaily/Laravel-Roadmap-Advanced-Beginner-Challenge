@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -13,7 +14,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = cache()->remember('homepage-tasks-page-' . request()->page, 60 * 60 * 24, function () {
+            return Task::with('taskable')->with('user')->paginate(10);
+        });
+        return view('tasks.index', compact('tasks'));
     }
 
     /**

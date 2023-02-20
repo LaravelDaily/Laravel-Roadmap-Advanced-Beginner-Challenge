@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('company');
-            $table->bigInteger('VAT');
+            $table->bigInteger('vat');
             $table->text('description');
             $table->boolean('status');
             $table->timestamps();

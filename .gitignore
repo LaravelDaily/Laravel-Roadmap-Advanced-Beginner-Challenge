@@ -16,3 +16,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+mysql
+docker-compose.yml
+Dockerfile
+storage/debugbar
