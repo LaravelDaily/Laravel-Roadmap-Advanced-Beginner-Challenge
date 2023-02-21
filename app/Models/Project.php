@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['title','description','deadline','user_id','status'];
     public function user(){
          return $this->belongsTo(User::class);
     }
     public function clients(){
-            return $this->hasMany(Client::class);
+            return $this->belongsToMany(Client::class);
     }
 
     public function task(){
