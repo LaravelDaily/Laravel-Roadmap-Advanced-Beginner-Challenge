@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -27,7 +30,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $projects = Project::all()->map->only(['id','title'])->values()->toArray();
+        $clients = Client::all()->map->only(['id','company'])->values()->toArray();
+        $users = User::all();
+        return view('tasks.create',compact('projects','users','clients'));
     }
 
     /**
@@ -38,7 +44,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required',
+            'due_date' => 'required|date',
+            'user_id' => 'required|exists:users,id',
+            'taskable_type' => 'required',
+            'taskable_id' => 'required', 
+            'status' => 'required',
+            'priority' => 'required'
+        ]);
+        Task::create($validated);
+        return back()->with('status', 'task created successfuly');
     }
 
     /**
@@ -58,9 +75,12 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        //
+        $projects = Project::all()->map->only(['id','title'])->values()->toArray();
+        $clients = Client::all()->map->only(['id','company'])->values()->toArray();
+        $users = User::all();
+        return view('tasks.edit',compact('users','projects','clients','task'));
     }
 
     /**
@@ -70,9 +90,20 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required',
+            'due_date' => 'required|date',
+            'user_id' => 'required|exists:users,id',
+            'taskable_type' => 'required',
+            'taskable_id' => 'required', 
+            'status' => 'required',
+            'priority' => 'required'
+        ]);
+        $task->update($request->all());
+        return back()->with('status','task updated successfully');
     }
 
     /**
@@ -81,8 +112,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return back()->with('status','task deleted successfully');
     }
 }

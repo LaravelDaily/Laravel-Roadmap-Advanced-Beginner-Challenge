@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('create Project') }}</div>
+                <div class="card-header">{{ __('create Task') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,7 +13,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form class="row g-3 needs-validation" action="{{ route('projects.store') }}" method="POST">
+                    <form class="row g-3 needs-validation" action="{{ route('tasks.store') }}" method="POST">
                         @csrf
                         <div class="col-12">
                             <label for="title" class="form-label">Title</label>
@@ -34,9 +34,9 @@
                             @enderror
                         </div>
                         <div class="col-12">
-                            <label for="deadline" class="form-label">Deadline</label>
-                            <input type="datetime-local" class="form-control @error('deadline') is-invalid @enderror" name="deadline">
-                            @error('deadline')
+                            <label for="due_date" class="form-label">Due date</label>
+                            <input type="datetime-local" class="form-control @error('due_date') is-invalid @enderror" name="due_date">
+                            @error('due_date')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -56,25 +56,43 @@
                             @enderror
                         </div>
                         <div class="col-12">
-                            <label for="clients" class="form-label">Assigned Clients</label>
-                            <select class="form-select form-control @error('clients') is-invalid @enderror" id="multiple-select-field" name="clients[]" data-placeholder="Choose clients" multiple>
-                                @foreach($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->company }}</option>
-                                @endforeach
+                            <div class="row">
+                                <div class="col">
+                                    <label for="taskable_type"> Taskable type </label>
+                                    <select name="taskable_type" class="form-control" id="taskable_type">
+                                        <option value="">Select a Type</option>
+                                        <option value="project">Project</option>
+                                        <option value="client">Client</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="taskable_id"> Taskable id </label>
+                                    <select name="taskable_id" class="form-control" id="taskable_id">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="status" class="form-label">Status</label>
+                            <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
+                                <option value="open">Open</option>
+                                <option value="pending">Pending</option>
+                                <option value="closed">Closed</option>
                             </select>
-                            @error('clients')
+                            @error('status')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
                         <div class="col-12">
-                            <label for="status" class="form-label">Status</label>
-                            <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
-                                <option value="1">Open</option>
-                                <option value="0">Closed</option>
+                            <label for="priority" class="form-label">Priority</label>
+                            <select name="priority" class="form-control @error('priority') is-invalid @enderror" id="priority">
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
                             </select>
-                            @error('status')
+                            @error('priority')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -91,4 +109,24 @@
         </div>
     </div>
 </div>
+@endsection
+@section('after_scripts')
+<script>
+    var taskableTypeSelect = document.getElementById('taskable_type');
+    var taskableIdSelect = document.getElementById('taskable_id');
+
+    taskableTypeSelect.addEventListener('change', function() {
+        var taskableType = this.value;
+        taskableIdSelect.innerHTML = "";
+        if (taskableType !== "") {
+            var taskableIds = taskableType == "project" ? JSON.parse('{!! json_encode($projects) !!}') : JSON.parse('{!! json_encode($clients) !!}');
+            taskableIds.forEach(function(taskableId) {
+                var option = document.createElement('option');
+                option.value = taskableId.id;
+                option.text = taskableType == "project" ? taskableId.title : taskableId.company;
+                taskableIdSelect.add(option);
+            });
+        }
+    });
+</script>
 @endsection

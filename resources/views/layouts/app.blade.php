@@ -68,7 +68,7 @@
             closeOnSelect: false,
         });
     </script>
-
+      @yield('after_scripts')
 </body>
 
 </html>
