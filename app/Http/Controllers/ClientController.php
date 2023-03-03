@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::withCount('projects')->paginate(10);
+        $clients = Client::active()->withCount('projects')->paginate(10);
         return view('clients.index', compact('clients'));
     }
 
