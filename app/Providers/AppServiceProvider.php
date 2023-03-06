@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'client' => 'App\Models\Client',
             'project' => 'App\Models\Project',
+            'user' => 'App\Models\User'
         ]);
         Paginator::useBootstrap();
     }

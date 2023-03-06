@@ -15,6 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        abort_if(!auth()->user()->can('view_users'),403);
         $users = User::paginate(10);
         return view('users.index', compact('users'));
     }
@@ -26,6 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        abort_if(!auth()->user()->can('create_users'),403);
         return view('users.create');
     }
 
@@ -37,6 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(!auth()->user()->can('create_users'),403);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -66,6 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        abort_if(!auth()->user()->can('edit_users'),403);
         return view('users.edit', compact('user'));
     }
 
@@ -78,6 +82,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        abort_if(!auth()->user()->can('edit_users'),403);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -99,6 +104,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        abort_if(!auth()->user()->can('delete_users'),403);
         $user->delete();
         return back()->with('status','user deleted successfully');
     }

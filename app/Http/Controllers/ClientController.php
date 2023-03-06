@@ -15,6 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
+        abort_if(!auth()->user()->can('view_clients'),403);
         $clients = Client::active()->withCount('projects')->paginate(10);
         return view('clients.index', compact('clients'));
     }
@@ -26,6 +27,7 @@ class ClientController extends Controller
      */
     public function create()
     {
+        abort_if(!auth()->user()->can('create_clients'),403);
         $projects = Project::all();
         return view('clients.create', compact('projects'));
     }
@@ -38,6 +40,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(!auth()->user()->can('create_clients'),403);
         $validated = $request->validate([
             'company' => 'required|string',
             'vat' => 'required|numeric',
@@ -69,6 +72,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+        abort_if(!auth()->user()->can('edit_clients'),403);
         $projects = Project::all();
         return view('clients.edit', compact('client', 'projects'));
     }
@@ -82,6 +86,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+        abort_if(!auth()->user()->can('edit_clients'),403);
         $request->validate([
             'company' => 'required|string',
             'vat' => 'required|numeric',
@@ -100,6 +105,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        abort_if(!auth()->user()->can('delete_clients'),403);
         $client->projects()->detach();
         $client->delete();
         return back()->with('status', 'client deleted successfully');

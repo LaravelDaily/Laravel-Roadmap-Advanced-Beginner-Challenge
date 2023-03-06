@@ -7,15 +7,21 @@
                 <svg class="nav-icon">
                     <use xlink:href="{{asset('svg/free.svg#cil-speedometer')}}"></use>
                 </svg> Dashboard</a></li>
+        @canany(['view_users','view_clients'])
         <li class="nav-title">User Management</li>
+        @can('view_users')
         <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}">
                 <svg class="nav-icon">
                     <use xlink:href="{{asset('svg/free.svg#cil-user-plus')}}"></use>
                 </svg> Users</a></li>
+        @endcan
+        @can('view_clients')
         <li class="nav-item"><a class="nav-link" href="{{route('clients.index')}}">
                 <svg class="nav-icon">
                     <use xlink:href="{{asset('svg/free.svg#cil-people')}}"></use>
                 </svg> Clients</a></li>
+        @endcan
+        @endcan
         <li class="nav-title">Pages</li>
         <li class="nav-item"><a class="nav-link" href="{{route('projects.index')}}">
                 <svg class="nav-icon">

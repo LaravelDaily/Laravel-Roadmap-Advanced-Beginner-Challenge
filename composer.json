@@ -10,7 +10,8 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^4.2"
+        "laravel/ui": "^4.2",
+        "spatie/laravel-permission": "^5.9"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
