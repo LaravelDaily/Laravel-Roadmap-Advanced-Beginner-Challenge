@@ -1,0 +1,14 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+@import "select2/src/scss/core";
+// If you need to import Bootstrap as well:
+@import "select2-bootstrap-5-theme/src/select2-bootstrap-5-theme";
+// Or if you have already imported Bootstrap:
+@import "select2-bootstrap-5-theme/src/include-all";
