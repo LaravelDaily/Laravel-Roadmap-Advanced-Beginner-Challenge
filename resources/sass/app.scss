@@ -3,6 +3,16 @@
 
 // Variables
 @import 'variables';
+@import 'bootstrap/scss/_functions';
+@import 'bootstrap/scss/_variables';
+
+$custom-colors: (
+    "dark-gray" : #303C54,
+    "medium-gray" : #3C4B64,
+    "light-white-gray" : #EBEDEF
+);
+
+$theme-colors: map-merge($custom-colors, $theme-colors);
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';

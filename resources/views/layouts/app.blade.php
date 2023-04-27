@@ -25,8 +25,9 @@
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav me-auto">
                                 <li>
-                                    <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"><i
-                                            class="bi bi-list fs-2"></i></a>
+                                    <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse">
+                                        <i class="bi bi-list fs-2"></i>
+                                    </a>
                                 </li>
                             </ul>
 
@@ -35,7 +36,7 @@
                                 <li class="nav-item px-3">
                                     <i class="bi bi-bell fs-4"></i>
                                 </li>
-                                <li class="nav-item dropdown ps-2 pe-4">
+                                <li class="nav-item dropdown ps-2 pe-lg-2">
                                     <a id="navbarDropdown" class="nav-link" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <i class="bi bi-person fs-4"></i>
