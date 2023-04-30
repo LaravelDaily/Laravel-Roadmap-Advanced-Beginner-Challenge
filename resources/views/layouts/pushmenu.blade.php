@@ -15,10 +15,10 @@
                 <a href="{{ route('clients.index') }}">Clients</a>
             </div>
             <div>
-                <a href="{{ route('projects.index') }}">Projects</a>
+                {{-- <a href="{{ route('projects.index') }}">Projects</a> --}}
             </div>
             <div>
-                <a href="{{ route('tasks.index') }}">Tasks</a>
+                {{-- <a href="{{ route('tasks.index') }}">Tasks</a> --}}
             </div>
         </div>
     </div>

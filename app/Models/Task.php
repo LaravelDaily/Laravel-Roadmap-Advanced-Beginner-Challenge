@@ -10,6 +10,7 @@ class Task extends Model
     use HasFactory;
 
     protected $table = 'tasks';
+    protected $fillable = ['title', 'description', 'start_date', 'task_status', 'client_id'];
 
     public function client()
     {
