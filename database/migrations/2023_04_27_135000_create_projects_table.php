@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('budget');
             $table->string('project_status', 10);
             $table->foreignId('client_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->softDeletes('deleted_at');
             $table->timestamps();
         });
     }

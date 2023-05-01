@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,6 +25,7 @@ class ClientFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'country' => fake()->country(),
             'client_status' => fake()->randomElement(['Active', 'Inactive']),
+            'user_id' => collect(User::all()->modelKeys())->random(),
         ];
     }
 }

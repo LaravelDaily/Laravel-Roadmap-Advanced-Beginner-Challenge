@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,10 +20,11 @@ class TaskFactory extends Factory
     {
         return [
             'title' => fake()->title(),
-            'client_id' => Client::factory()->create(),
+            'client_id' => collect(Client::all()->modelKeys())->random(),
             'description' => fake()->sentence(),
             'start_date' => fake()->date(),
             'task_status' => fake()->randomElement(['On hold', 'Inactive']),
+            'user_id' => collect(User::all()->modelKeys())->random(),
         ];
     }
 }

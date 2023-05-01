@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->string('country', 50);
             $table->string('client_status', 10);
+            $table->foreignId('user_id')->constrained();
+            $table->softDeletes('deleted_at');
             $table->timestamps();
         });
     }
