@@ -12,23 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //No
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //No
+        $users = User::with('roles')->paginate(9);
+        
+        return view('users.index')->with('users', $users);
     }
 
     /**

@@ -12,7 +12,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+
+        return view('clients.index')->with('clients', $clients);
     }
 
     /**
@@ -20,7 +22,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.create');
     }
 
     /**
@@ -36,15 +38,15 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('clients.show')->with('client', $client);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Client $client)
-    {
-        //
+    {   
+        return view('clients.edit')->with('client', $client);
     }
 
     /**

@@ -16,11 +16,10 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Permission::create(['name' => 'edit users']);
-        Permission::create(['name' => 'show users']);
-        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'manage users']);
+        Permission::create(['name' => 'delete']);
 
         Role::create(['name' => 'user']);
-        Role::create(['name' => 'admin'])->givePermissionTo(['edit users', 'show users', 'delete users']);
+        Role::create(['name' => 'admin'])->givePermissionTo(['manage users', 'delete']);
     }
 }

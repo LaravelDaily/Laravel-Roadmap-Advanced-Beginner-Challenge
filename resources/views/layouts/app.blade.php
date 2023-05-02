@@ -59,7 +59,7 @@
                 </nav>
             @endauth
 
-            <main class="py-4 @guest d-flex align-items-center vh-100 @endguest ">
+            <main class="p-4 @guest d-flex align-items-center vh-100 @endguest ">
                 @yield('content')
             </main>
         </div>

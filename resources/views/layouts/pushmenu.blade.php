@@ -6,10 +6,12 @@
         </div>
         <div class=" ">
             <div>
-                <a href="{{ url('/dashboard') }}" >Dashboard</a>
+                <a href="{{ url('/dashboard') }}">Dashboard</a>
             </div>
             <div>
-                {{-- <a href="{{ route('') }}">Users</a> --}}
+                @can('manage users')
+                    <a href="{{ route('users.index') }}">Users</a>
+                @endcan
             </div>
             <div>
                 <a href="{{ route('clients.index') }}">Clients</a>
