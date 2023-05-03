@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -12,17 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->paginate(9);
+        $users = User::withTrashed()->with('roles')->paginate(9);
         
         return view('users.index')->with('users', $users);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
     }
 
     /**
@@ -30,7 +23,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+
+        return view('users.edit')->with([
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -38,7 +36,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validate = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'role' => ['required', 'exists:roles,id'],
+        ]);
+        
+        $user->update($validate);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -46,6 +52,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
 {
@@ -12,7 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::paginate(9);
 
         return view('clients.index')->with('clients', $clients);
     }
@@ -62,6 +64,13 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        Gate::authorize('delete');
+
+        try{
+            $client->delete();
+            return redirect()->route('clients.index');
+        }catch (QueryException $exception) {
+            return view('clients.parentError');
+        }
     }
 }

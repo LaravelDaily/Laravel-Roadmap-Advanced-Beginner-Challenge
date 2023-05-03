@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
 {
@@ -12,7 +13,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::paginate(9);
+
+        return view('projects.index')->with('projects', $projects);
     }
 
     /**
@@ -60,6 +63,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        Gate::authorize('delete');
+
+        $project->delete();
+        return redirect()->route('projects.index');
     }
 }

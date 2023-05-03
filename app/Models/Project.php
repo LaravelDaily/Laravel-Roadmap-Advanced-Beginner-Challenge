@@ -13,6 +13,11 @@ class Project extends Model
     protected $table = 'projects';
     protected $fillable = ['title', 'description', 'start_date', 'budget', 'project_status', 'client_id'];
 
+    public function user()
+    {
+        return $this->BelongsTo(User::class);
+    }
+    
     public function client()
     {
         return $this->BelongsTo(Client::class);
