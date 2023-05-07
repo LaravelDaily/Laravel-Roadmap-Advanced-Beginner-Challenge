@@ -7,15 +7,22 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Project extends Model
+class Project extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
     
     public const PROJECT_STATUS = ['On hold', 'Inactive'] ;
     
     protected $table = 'projects';
     protected $fillable = ['title', 'description', 'start_date', 'budget', 'project_status', 'client_id', 'user_id'];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('imagesCRM');
+    }
 
     public function user()
     {
