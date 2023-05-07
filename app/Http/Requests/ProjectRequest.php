@@ -26,8 +26,8 @@ class ProjectRequest extends FormRequest
             'description' => 'required',
             'start_date' => 'required',
             'budget' => 'required',
-            'project_status' => 'required',
             'client_id' => 'required',
+            'project_status' => 'required',
         ];
     }
 }

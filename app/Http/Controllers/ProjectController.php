@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
+use App\Models\Client;
 use App\Models\Project;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(9);
+        $projects = Project::latest('id')->paginate(9);
 
         return view('projects.index')->with('projects', $projects);
     }
@@ -23,7 +24,15 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $projects = Project::all();
+        $clients = Client::all();
+        $project_status = Project::PROJECT_STATUS;
+        
+        return view('projects.create')->with([
+            'projects' => $projects,
+            'clients' => $clients,
+            'project_status' => $project_status
+        ]);
     }
 
     /**
@@ -31,7 +40,11 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request)
     {
-        //
+        $validate_data = $request->validated(); 
+        $validate_data['user_id'] = auth()->id();
+        Project::create($validate_data);
+
+        return redirect()->route('projects.index');
     }
 
     /**

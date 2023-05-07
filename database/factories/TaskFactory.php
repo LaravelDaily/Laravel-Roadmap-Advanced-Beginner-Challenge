@@ -19,7 +19,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->title(),
+            'title' => fake()->sentence(),
             'client_id' => collect(Client::all()->modelKeys())->random(),
             'description' => fake()->sentence(),
             'start_date' => fake()->date(),

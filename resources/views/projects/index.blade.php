@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="{{ route('projects.create') }}" class="btn btn-success mb-3">Create project</a>
     <table class="table table-bordered align-middle">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Title</th>
+                <th scope="col">Client</th>
                 <th scope="col">Description</th>
                 <th scope="col">Start date</th>
                 <th scope="col">Budget</th>
@@ -18,6 +20,7 @@
                 <tr>
                     <th scope="row ">{{ $project->id }}</th>
                     <td>{{ $project->title }}</td>
+                    <td>{{ $project->client->first_name }}</td>
                     <td>{{ $project->description }}</td>
                     <td>{{ $project->start_date }}</td>
                     <td>{{ $project->budget }}</td>
