@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->with('roles')->paginate(9);
+        $users = User::withTrashed()->with('roles')->latest('id')->paginate(9);
         
         return view('users.index')->with('users', $users);
     }
