@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -52,13 +53,13 @@ class User extends Authenticatable implements MustVerifyEmail
     |--------------------------------------------------------------------------
     */
 
-    public function emailVerifiedAt(): Attribute
+    public function verifiedFormat(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('m-d-Y')
+            get: fn () => Carbon::createFromFormat('Y-m-d H:i:s', $this->email_verified_at)->format('m-d-Y')
         );
     }
-    
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

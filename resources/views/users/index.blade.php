@@ -18,7 +18,7 @@
                     <th scope="row ">{{ $user->id }}</th>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->email_verified_at }}</td>
+                    <td>{{ $user->verifiedFormat }}</td>
                     @foreach ($user->roles as $role)
                         <td>{{ $role->name }}</td>
                     @endforeach
