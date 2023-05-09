@@ -24,12 +24,12 @@ class ClientRequest extends FormRequest
         return [
             'first_name' => [
                 'required',
-                'unique',
+                'unique:clients',
                 'max:50'
             ],
             'last_name' => [
                 'required',
-                'unique',
+                'unique:clients',
                 'max:50'
             ],
             'company' => [
@@ -38,12 +38,12 @@ class ClientRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                'unique',
+                'unique:clients',
                 'email:rfc,dns'
             ],
             'phone' => [
-                'nullable',
-                'unique',
+                'required',
+                'unique:clients',
                 'max:20'
             ],
             'country' => [

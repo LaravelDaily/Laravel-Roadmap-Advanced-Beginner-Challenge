@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Models\Client;
+use App\Notifications\FirstClient;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
@@ -14,7 +15,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::active()->paginate(9);
+        if(Gate::allows('show all user content')) {
+            $clients = Client::active()->latest('id')->paginate(9);
+        }else {
+            $clients = Client::active()->latest('id')->where('user_id', auth()->user()->id)->paginate(9);
+        }
 
         return view('clients.index')->with('clients', $clients);
     }
@@ -24,15 +29,25 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        $client_status = Client::CLIENT_STATUS;
+        
+        return view('clients.create')->with('client_status', $client_status);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        //
+        $validate_data = $request->validated(); 
+        $validate_data['user_id'] = auth()->id();
+
+        Client::create($validate_data);
+        if(auth()->user()->clients()->count() === 1) {
+            auth()->user()->notify(new FirstClient());
+        }
+        
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -54,7 +69,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(ClientRequest $request, Client $client)
     {
         //
     }
@@ -64,7 +79,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        Gate::authorize('delete');
+        // Gate::authorize('delete');
 
         try{
             $client->delete();

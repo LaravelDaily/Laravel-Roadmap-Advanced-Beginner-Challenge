@@ -13,7 +13,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::paginate(9);
+        if(Gate::allows('show all user content')) {
+            $tasks = Task::latest('id')->paginate(9);
+        }else {
+            $tasks = Task::latest('id')->where('user_id', auth()->user()->id)->paginate(9);
+        }
 
         return view('tasks.index')->with('tasks', $tasks);
     }

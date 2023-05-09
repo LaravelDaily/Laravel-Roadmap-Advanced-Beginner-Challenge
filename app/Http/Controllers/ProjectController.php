@@ -14,7 +14,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::latest('id')->paginate(9);
+        if(Gate::allows('show all user content')) {
+            $projects = Project::latest('id')->paginate(9);
+        }else {
+            $projects = Project::latest('id')->where('user_id', auth()->user()->id)->paginate(9);
+        }
 
         return view('projects.index')->with('projects', $projects);
     }
