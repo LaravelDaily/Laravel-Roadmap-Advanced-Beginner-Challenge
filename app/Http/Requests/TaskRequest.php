@@ -26,7 +26,7 @@ class TaskRequest extends FormRequest
             'description' => 'required',
             'start_date' => 'required',
             'task_status' => 'required',
-            'client_id' => 'required',
+            'project_id' => 'required',
         ];
     }
 }

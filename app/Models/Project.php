@@ -13,22 +13,31 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Project extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
-    
-    public const PROJECT_STATUS = ['On hold', 'Inactive'] ;
-    
+
+    public const PROJECT_STATUS = ['On hold', 'Inactive'];
+
     protected $table = 'projects';
-    protected $fillable = ['title', 'description', 'start_date', 'budget', 'project_status', 'client_id', 'user_id'];
+    protected $fillable = [
+        'title',
+        'description',
+        'start_date',
+        'budget',
+        'image',
+        'project_status',
+        'client_id',
+        'user_id'
+    ];
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('imagesCRM');
+        $this->addMediaCollection('images');
     }
 
     public function user()
     {
         return $this->BelongsTo(User::class);
     }
-    
+
     public function client()
     {
         return $this->BelongsTo(Client::class);
@@ -46,7 +55,7 @@ class Project extends Model implements HasMedia
             get: fn ($value) => Carbon::parse($value)->format('m-d-Y')
         );
     }
-    
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

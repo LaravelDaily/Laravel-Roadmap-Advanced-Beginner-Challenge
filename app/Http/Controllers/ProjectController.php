@@ -28,12 +28,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $projects = Project::all();
         $clients = Client::all();
         $project_status = Project::PROJECT_STATUS;
         
         return view('projects.create')->with([
-            'projects' => $projects,
             'clients' => $clients,
             'project_status' => $project_status
         ]);
@@ -46,7 +44,11 @@ class ProjectController extends Controller
     {
         $validate_data = $request->validated(); 
         $validate_data['user_id'] = auth()->id();
-        Project::create($validate_data);
+        $project = Project::create($validate_data);
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $project->addMediaFromRequest('image')->toMediaCollection('images');
+        }
 
         return redirect()->route('projects.index');
     }

@@ -12,6 +12,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Country</th>
+                <th scope="col">Image</th>
                 <th scope="col">Client status</th>
                 <th scope="col"></th>
             </tr>
@@ -26,6 +27,9 @@
                     <td>{{ $client->email }}</td>
                     <td>{{ $client->phone }}</td>
                     <td>{{ $client->country }}</td>
+                    <td>
+                        <img src="{{ $client->image ? $client->image : $client->getFirstMediaUrl('images') }}" alt="" class="rounded" width="200" height="150">
+                    </td>
                     <td>{{ $client->client_status }}</td>
                     <td class="d-flex align-items-center mt-1">
                         <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-primary me-2">Edit</a>

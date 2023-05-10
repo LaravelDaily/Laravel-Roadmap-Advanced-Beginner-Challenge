@@ -41,8 +41,13 @@ class ClientController extends Controller
     {
         $validate_data = $request->validated(); 
         $validate_data['user_id'] = auth()->id();
+                
+        $client = Client::create($validate_data);
 
-        Client::create($validate_data);
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $client->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+        
         if(auth()->user()->clients()->count() === 1) {
             auth()->user()->notify(new FirstClient());
         }

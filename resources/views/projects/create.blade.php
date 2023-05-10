@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('projects.store') }}" method="POST">
+    <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="mb-3">
             <label class="form-label">Title*</label>
-            <input type="text" class="form-control" name="title">
+            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
         </div>
 
         @error('title')
@@ -16,9 +16,9 @@
         <div class="mb-3">
             <label class="form-label">Client*</label>
             <select class="form-select" name="client_id">
-                <option value="" selected>Choose a client</option>
+                <option value="">Choose a client</option>
                 @foreach ($clients as $client)
-                    <option value="{{ $client->id }}">
+                    <option value="{{ $client->id }}" {{ old('client->id') == $client->id ? 'selected' : '' }}>
                         {{ $client->fullName }}
                     </option>
                 @endforeach
@@ -31,7 +31,7 @@
 
         <div class="mb-3">
             <label class="form-label">Description*</label>
-            <textarea class="form-control" name="description" rows="10"></textarea>
+            <textarea class="form-control" name="description" rows="10">{{ old('description') }}</textarea>
         </div>
 
         @error('description')
@@ -40,7 +40,7 @@
         
         <div class="mb-3">
             <label class="form-label">Start date*</label>
-            <input type="date" class="form-control" name="start_date">
+            <input type="date" class="form-control" name="start_date" value="{{ old('start_date') }}">
         </div>
         
         @error('start_date')
@@ -49,7 +49,7 @@
         
         <div class="mb-3">
             <label class="form-label">Budget*</label>
-            <input type="number" class="form-control" name="budget">
+            <input type="number" class="form-control" name="budget" value="{{ old('budget') }}" >
         </div>
         
         @error('budget')
@@ -57,11 +57,17 @@
         @enderror
         
         <div class="mb-3">
+            <label class="form-label">Image</label>
+            <input type="file" class="form-control" name="image" value="{{ old('image') }}" > 
+        </div>
+        
+        <div class="mb-3">
             <label class="form-label">Project Status*</label>
             <select class="form-select" name="project_status">
                 <option value="" selected>Choose a status</option>
                 @foreach ($project_status as $status)
-                    <option value="{{ $status }}">{{ $status }}</option>
+                    <option value="{{ $status }}" {{ old('$project_status') == $status ? 'selected' : '' }}>
+                        {{ $status }}</option>
                 @endforeach
             </select>
         </div>

@@ -25,6 +25,7 @@ class ProjectFactory extends Factory
             'start_date' => fake()->date(),
             'budget' => fake()->numberBetween(100, 10000),
             'project_status' => fake()->randomElement(['On hold', 'Inactive']),
+            'image' => fake()->imageUrl(),
             'user_id' => collect(User::all()->modelKeys())->random(),
         ];
     }

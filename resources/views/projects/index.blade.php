@@ -11,6 +11,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Start date</th>
                 <th scope="col">Budget</th>
+                <th scope="col">Image</th>
                 <th scope="col">Project status</th>
                 <th scope="col"></th>
             </tr>
@@ -20,10 +21,13 @@
                 <tr>
                     <th scope="row ">{{ $project->id }}</th>
                     <td>{{ $project->title }}</td>
-                    <td>{{ $project->client->first_name }}</td>
+                    <td>{{ $project->client->fullName }}</td>
                     <td>{{ $project->description }}</td>
                     <td>{{ $project->start_date }}</td>
                     <td>{{ $project->budget }}</td>
+                    <td>
+                        <img src="{{ $project->image ? $project->image : $project->getFirstMediaUrl('images') }}"alt="" class="rounded" width="200" height="150">
+                    </td>
                     <td>{{ $project->project_status }}</td>
                     <td class="d-flex align-items-center mt-1">
                         <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary me-2">Edit</a>

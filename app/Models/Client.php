@@ -14,16 +14,26 @@ class Client extends Model implements HasMedia
 {
     use Notifiable, HasFactory, InteractsWithMedia;
 
-    public const CLIENT_STATUS = ['Active', 'Inactive'] ;
+    public const CLIENT_STATUS = ['Active', 'Inactive'];
 
     protected $table = 'clients';
-    protected $fillable = ['user_id', 'first_name', 'last_name', 'company', 'email', 'phone', 'country', 'client_status'];
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'company',
+        'email',
+        'phone',
+        'country',
+        'image',
+        'client_status'
+    ];
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('imagesCRM');
+        $this->addMediaCollection('images');
     }
-    
+
     public function user()
     {
         return $this->BelongsTo(User::class);
@@ -40,7 +50,7 @@ class Client extends Model implements HasMedia
         $query->where('client_status', 'Active');
     }
 
-       /*
+    /*
     |--------------------------------------------------------------------------
     | ACCESSORS
     |--------------------------------------------------------------------------
@@ -49,8 +59,7 @@ class Client extends Model implements HasMedia
     public function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->first_name . " " . $this->last_name
+            get: fn () => $this->first_name . " " . $this->last_name
         );
     }
-
 }

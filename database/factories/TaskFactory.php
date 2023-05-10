@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Client;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,10 +20,11 @@ class TaskFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'client_id' => collect(Client::all()->modelKeys())->random(),
+            'project_id' => collect(Project::all()->modelKeys())->random(),
             'description' => fake()->sentence(),
             'start_date' => fake()->date(),
             'task_status' => fake()->randomElement(['On hold', 'Inactive']),
+            'image' => fake()->imageUrl(),
             'user_id' => collect(User::all()->modelKeys())->random(),
         ];
     }

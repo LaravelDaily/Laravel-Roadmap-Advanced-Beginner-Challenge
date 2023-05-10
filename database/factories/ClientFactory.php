@@ -24,6 +24,7 @@ class ClientFactory extends Factory
             'email' => fake()->unique()->email(),
             'phone' => fake()->phoneNumber(),
             'country' => fake()->country(),
+            'image' => fake()->imageUrl(),
             'client_status' => fake()->randomElement(['Active', 'Inactive']),
             'user_id' => collect(User::all()->modelKeys())->random(),
         ];

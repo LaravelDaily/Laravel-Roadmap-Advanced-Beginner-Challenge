@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
+use App\Models\Project;
 use App\Models\Task;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
@@ -13,9 +14,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('show all user content')) {
+        if (Gate::allows('show all user content')) {
             $tasks = Task::latest('id')->paginate(9);
-        }else {
+        } else {
             $tasks = Task::latest('id')->where('user_id', auth()->user()->id)->paginate(9);
         }
 
@@ -27,15 +28,29 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $projects = Project::all();
+        $task_status = Task::TASK_STATUS;
+
+        return view('tasks.create')->with([
+            'projects' => $projects,
+            'task_status' =>  $task_status
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        //
+        $validate_data = $request->validated();
+        $validate_data['user_id'] = auth()->id();
+        $task = Task::create($validate_data);
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $task->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -57,7 +72,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
         //
     }
@@ -70,6 +85,6 @@ class TaskController extends Controller
         Gate::authorize('delete');
 
         $task->delete();
-        return redirect()->route('projects.index');
+        return redirect()->route('tasks.index');
     }
 }
