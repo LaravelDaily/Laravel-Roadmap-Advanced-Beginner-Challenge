@@ -33,25 +33,11 @@
 
                             <ul class="navbar-nav ms-auto align-items-center">
                                 <!-- Authentication Links -->
-                                <li class="nav-item px-3">
-                                    <i class="bi bi-bell fs-4"></i>
-                                </li>
                                 <li class="nav-item dropdown ps-2 pe-lg-2">
                                     <a id="navbarDropdown" class="nav-link" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <i class="bi bi-person fs-4"></i>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
                                 </li>
                             </ul>
                         </div>

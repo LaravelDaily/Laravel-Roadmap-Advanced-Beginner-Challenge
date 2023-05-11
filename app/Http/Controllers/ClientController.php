@@ -15,9 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('show all user content')) {
+        if (Gate::allows('show all user content')) {
             $clients = Client::active()->latest('id')->paginate(9);
-        }else {
+        } else {
             $clients = Client::active()->latest('id')->where('user_id', auth()->user()->id)->paginate(9);
         }
 
@@ -30,7 +30,7 @@ class ClientController extends Controller
     public function create()
     {
         $client_status = Client::CLIENT_STATUS;
-        
+
         return view('clients.create')->with('client_status', $client_status);
     }
 
@@ -39,19 +39,19 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        $validate_data = $request->validated(); 
+        $validate_data = $request->validated();
         $validate_data['user_id'] = auth()->id();
-                
+
         $client = Client::create($validate_data);
 
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $client->addMediaFromRequest('image')->toMediaCollection('images');
         }
-        
-        if(auth()->user()->clients()->count() === 1) {
+
+        if (auth()->user()->clients()->count() === 1) {
             auth()->user()->notify(new FirstClient());
         }
-        
+
         return redirect()->route('clients.index');
     }
 
@@ -67,8 +67,12 @@ class ClientController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Client $client)
-    {   
-        return view('clients.edit')->with('client', $client);
+    {
+        $client_status = Client::CLIENT_STATUS;
+        return view('clients.edit')->with([
+            'client' => $client,
+            'client_status' => $client_status
+        ]);
     }
 
     /**
@@ -76,7 +80,17 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
-        //
+        $validate_data = $request->validated();
+        $validate_data['user_id'] = auth()->id();
+
+        $client->update($validate_data);
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $client->clearMediaCollection('images');
+            $client->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -86,10 +100,10 @@ class ClientController extends Controller
     {
         // Gate::authorize('delete');
 
-        try{
+        try {
             $client->delete();
             return redirect()->route('clients.index');
-        }catch (QueryException $exception) {
+        } catch (QueryException $exception) {
             return view('clients.parentError');
         }
     }

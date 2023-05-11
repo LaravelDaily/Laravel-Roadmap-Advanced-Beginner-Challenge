@@ -66,7 +66,14 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $projects = Project::all();
+        $task_status = Task::TASK_STATUS;
+
+        return view('tasks.edit')->with([
+            'task' => $task,
+            'projects' => $projects,
+            'task_status' =>  $task_status
+        ]);
     }
 
     /**
@@ -74,7 +81,16 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        //
+        $validate_data = $request->validated();
+        $validate_data['user_id'] = auth()->id();
+        $task->update($validate_data);
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $task->clearMediaCollection('images');
+            $task->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        return redirect()->route('tasks.index');
     }
 
     /**

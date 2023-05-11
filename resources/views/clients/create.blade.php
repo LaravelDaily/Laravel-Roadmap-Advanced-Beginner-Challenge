@@ -33,7 +33,7 @@
         
         <div class="mb-3">
             <label class="form-label">Email*</label>
-            <input type="text" class="form-control" name="email" value="{{ old('company') }}">
+            <input type="text" class="form-control" name="email" value="{{ old('email') }}">
         </div>
         
         @error('email')

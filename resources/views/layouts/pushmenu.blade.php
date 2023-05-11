@@ -6,22 +6,35 @@
         </div>
         <div class=" ">
             <div>
-                <a href="{{ url('/dashboard') }}">Dashboard</a>
+                <div>
+                    <a href="{{ url('/dashboard') }}">Dashboard</a>
+                </div>
+                <div>
+                    @can('manage users')
+                        <a href="{{ route('users.index') }}">Users</a>
+                    @endcan
+                </div>
+                <div>
+                    <a href="{{ route('clients.index') }}">Clients</a>
+                </div>
+                <div>
+                    <a href="{{ route('projects.index') }}">Projects</a>
+                </div>
+                <div>
+                    <a href="{{ route('tasks.index') }}">Tasks</a>
+                </div>
             </div>
+
             <div>
-                @can('manage users')
-                    <a href="{{ route('users.index') }}">Users</a>
-                @endcan
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
-            <div>
-                <a href="{{ route('clients.index') }}">Clients</a>
-            </div>
-            <div>
-                <a href="{{ route('projects.index') }}">Projects</a>
-            </div>
-            <div>
-                <a href="{{ route('tasks.index') }}">Tasks</a>
-            </div>
+
         </div>
     </div>
 </div>

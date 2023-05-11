@@ -66,7 +66,14 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $clients = Client::all();
+        $project_status = Project::PROJECT_STATUS;
+
+        return view('projects.edit')->with([
+            'project' => $project,
+            'clients' => $clients,
+            'project_status' => $project_status
+        ]);
     }
 
     /**
@@ -74,7 +81,16 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
-        //
+        $validate_data = $request->validated(); 
+        $validate_data['user_id'] = auth()->id();
+        $project->update($validate_data);
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $project->clearMediaCollection('images');
+            $project->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        return redirect()->route('projects.index');
     }
 
     /**
