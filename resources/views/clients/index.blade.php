@@ -28,7 +28,8 @@
                     <td>{{ $client->phone }}</td>
                     <td>{{ $client->country }}</td>
                     <td>
-                        <img src="{{ $client->image ? $client->image : $client->getFirstMediaUrl('images') }}" alt="" class="rounded" width="200" height="150">
+                        <img src="{{ $client->image ? $client->image : $client->getFirstMediaUrl('images') }}"
+                            alt="" class="rounded" width="200" height="150">
                     </td>
                     <td>{{ $client->client_status }}</td>
                     <td class="d-flex align-items-center mt-1">

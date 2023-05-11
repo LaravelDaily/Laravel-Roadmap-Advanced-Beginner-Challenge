@@ -25,28 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/clients', ClientController::class)->names([
-        'index' => 'api.clients.index',
-        'store' => 'api.clients.store',
-        'show' => 'api.clients.show',
-        'update' => 'api.clients.update',
-        'destroy' => 'api.clients.destroy'
-    ]);
-    
-    Route::apiResource('/projects', ProjectController::class)->names([
-        'index' => 'api.projects.index',
-        'store' => 'api.projects.store',
-        'show' => 'api.projects.show',
-        'update' => 'api.projects.update',
-        'destroy' => 'api.projects.destroy'
-    ]);
-    
-    Route::apiResource('/tasks', TaskController::class)->names([
-        'index' => 'api.tasks.index',
-        'store' => 'api.tasks.store',
-        'show' => 'api.tasks.show',
-        'update' => 'api.tasks.update',
-        'destroy' => 'api.tasks.destroy'
-    ]);
+Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'api', 'as' => 'api'], function () {
+    Route::apiResource('clients', ClientController::class);
+    Route::apiResource('projects', ProjectController::class);
+    Route::apiResource('tasks', TaskController::class);
 });
