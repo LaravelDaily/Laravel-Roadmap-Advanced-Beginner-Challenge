@@ -16,8 +16,8 @@ return new class extends Migration
 
             $table->string('title_company');
             $table->text('description_company')->nullable();
-            $table->unsignedSmallInteger('vat_company');
-            $table->unsignedSmallInteger('zip_company');
+            $table->unsignedInteger('vat_company');
+            $table->unsignedInteger('zip_company');
             $table->string('name_manager');
             $table->string('email_manager')->unique();
             $table->string('phone_manager')->unique();
