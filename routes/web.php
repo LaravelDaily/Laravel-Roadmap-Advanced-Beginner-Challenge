@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Crm\Client\ClientController;
+use App\Http\Controllers\Crm\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Http\Controllers\Crm\HomeController::class);
+Route::group(['namespace' => 'App\Http\Controllers\Crm', 'prefix' => 'crm'], function() {
+    Route::get('/', HomeController::class)->name('main.index');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Crm\Client', 'prefix' => 'crm'], function() {
+    Route::resource('clients', ClientController::class, [
+        'names' => [
+            'index' => 'crm.client.index',
+            'show' => 'crm.client.show',
+            'create' => 'crm.client.create',
+            'store' => 'crm.client.store',
+            'edit' => 'crm.client.edit',
+            'update' => 'crm.client.update',
+            'destroy' => 'crm.client.destroy',
+        ]
+    ]);
+});
 
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
