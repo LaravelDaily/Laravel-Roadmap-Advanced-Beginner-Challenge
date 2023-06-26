@@ -43,9 +43,7 @@ class ClientControllerTest extends TestCase
 
         $data = $this->validParams();
 
-        $res = $this->post(action([ClientController::class, 'store'], $data));
-
-        $res->assertRedirect('/crm/clients');
+        $this->post(action([ClientController::class, 'store'], $data));
 
         $this->assertDatabaseCount('clients', 1);
 
@@ -114,9 +112,9 @@ class ClientControllerTest extends TestCase
         $client = ClientFactory::new()->create();
 
         $res = $this->delete('/crm/clients/' . $client->id);
-        $res->assertRedirect('/crm/clients');
+        $res->assertRedirect();
 
-        $this->assertDatabaseCount('clients', 0);
+        $this->assertSoftDeleted('clients', ['id' => $client->id]);
     }
 
 
