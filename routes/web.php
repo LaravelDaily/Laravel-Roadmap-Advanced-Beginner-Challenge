@@ -3,6 +3,7 @@
 use App\Http\Controllers\Crm\Client\ClientController;
 use App\Http\Controllers\Crm\HomeController;
 use App\Http\Controllers\Crm\Project\ProjectController;
+use App\Http\Controllers\Crm\Task\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,18 @@ Route::group(['prefix' => 'crm'], function () {
             'edit' => 'crm.project.edit',
             'update' => 'crm.project.update',
             'destroy' => 'crm.project.destroy',
+        ]
+    ]);
+
+    Route::resource('tasks', TaskController::class, [
+        'names' => [
+            'index' => 'crm.task.index',
+            'show' => 'crm.task.show',
+            'create' => 'crm.task.create',
+            'store' => 'crm.task.store',
+            'edit' => 'crm.task.edit',
+            'update' => 'crm.task.update',
+            'destroy' => 'crm.task.destroy',
         ]
     ]);
 

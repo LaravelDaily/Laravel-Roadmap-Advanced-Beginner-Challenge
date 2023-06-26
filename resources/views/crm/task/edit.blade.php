@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Edit project: {{ $project->title }}</h1>
+                        <h1 class="m-0">Edit task</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -27,13 +27,13 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('crm.project.update') }}" method="POST" class="w-50">
+                        <form action="{{ route('crm.task.update') }}" method="POST" class="w-50">
                             @csrf
                             @method('PATCH')
                             <label for="title">Title</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="title" name="title"
-                                       value="{{ old('title') }}" placeholder="project title">
+                                       value="{{ old('title') }}" placeholder="task title">
                             </div>
 
                             <label for="description">Description</label>
@@ -41,9 +41,10 @@
                                 <textarea type="text" class="form-control" id="description" name="description" placeholder="description">{{ old('description') }}</textarea>
                             </div>
 
-                            <label for="deadline">Deadline</label>
+                            <label for="priority">Priority</label>
                             <div class="form-group">
-                                <input type="date" id="deadline" class="form-control" name="deadline" data-provider="flatpickr" data-date-format="d M, Y" value="{{ old('deadline') }}">
+                                <input type="number" class="form-control" id="priority" name="priority"
+                                       value="{{ old('title') }}" placeholder="priority" min="0" max="5">
                             </div>
 
                             <label for="client">Client</label>
@@ -64,6 +65,17 @@
                                         <option
                                             {{ old('name') === $user->id ? ' selected' : '' }}
                                             value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <label for="project">Project</label>
+                            <div class="form-group">
+                                <select name="project_id" id="project" class="form-control">
+                                    @foreach($projects as $project)
+                                        <option
+                                            {{ old('project') === $project->id ? ' selected' : '' }}
+                                            value="{{ $project->id }}">{{ $project->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
