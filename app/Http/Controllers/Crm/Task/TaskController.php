@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $statuses = TaskStatusesEnum::values();
+        $statuses = TaskStatusesEnum::cases();
         $clients = Client::query()->select(['id', 'title_company'])->get();
         $users = User::query()->select(['id', 'name'])->get();
         $projects = Project::query()->select(['id', 'title'])->get();
@@ -60,12 +60,12 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        $statuses = TaskStatusesEnum::values();
-        $clients = Client::query()->select(['id', 'title_company']);
-        $users = User::query()->select(['id', 'name']);
-        $projects = Project::query()->select(['id', 'title']);
+        $statuses = TaskStatusesEnum::cases();
+        $clients = Client::query()->select(['id', 'title_company'])->get();
+        $users = User::query()->select(['id', 'name'])->get();
+        $projects = Project::query()->select(['id', 'title'])->get();
 
-        return view('crm.task.create', compact('statuses', 'clients', 'users', 'projects', 'task'));
+        return view('crm.task.edit', compact('statuses', 'clients', 'users', 'projects', 'task'));
     }
 
     /**

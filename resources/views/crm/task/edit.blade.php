@@ -27,24 +27,24 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('crm.task.update') }}" method="POST" class="w-50">
+                        <form action="{{ route('crm.task.update', $task->id) }}" method="POST" class="w-50">
                             @csrf
                             @method('PATCH')
                             <label for="title">Title</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="title" name="title"
-                                       value="{{ old('title') }}" placeholder="task title">
+                                       value="{{ $task->title }}" placeholder="task title">
                             </div>
 
                             <label for="description">Description</label>
                             <div class="form-group">
-                                <textarea type="text" class="form-control" id="description" name="description" placeholder="description">{{ old('description') }}</textarea>
+                                <textarea type="text" class="form-control" id="description" name="description" placeholder="description">{{ $task->description }}</textarea>
                             </div>
 
                             <label for="priority">Priority</label>
                             <div class="form-group">
                                 <input type="number" class="form-control" id="priority" name="priority"
-                                       value="{{ old('title') }}" placeholder="priority" min="0" max="5">
+                                       value="{{ $task->priority }}" placeholder="priority" min="0" max="5">
                             </div>
 
                             <label for="client">Client</label>
@@ -83,8 +83,10 @@
                             <label for="status">Status</label>
                             <div class="form-group">
                                 <select name="status" id="status" class="form-control">
-                                    @foreach($statuses as $status=>$value)
-                                        <option value="{{ $status }}">{{ $value }}</option>
+                                    @foreach($statuses as $status)
+                                        <option
+                                            {{ $status === $task->status ? ' selected' : '' }}
+                                            value="{{ $status }}">{{ $status->value }}</option>
                                     @endforeach
                                 </select>
                             </div>

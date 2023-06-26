@@ -82,8 +82,8 @@
                             <label for="status">Status</label>
                             <div class="form-group">
                                 <select name="status" id="status" class="form-control">
-                                    @foreach($statuses as $status=>$value)
-                                        <option value="{{ $status }}">{{ $value }}</option>
+                                    @foreach($statuses as $status)
+                                        <option value="{{ $status }}">{{ $status }}</option>
                                     @endforeach
                                 </select>
                             </div>

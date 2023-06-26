@@ -27,23 +27,23 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('crm.project.update') }}" method="POST" class="w-50">
+                        <form action="{{ route('crm.project.update', $project->id) }}" method="POST" class="w-50">
                             @csrf
                             @method('PATCH')
                             <label for="title">Title</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="title" name="title"
-                                       value="{{ old('title') }}" placeholder="project title">
+                                       value="{{ $project->title }}" placeholder="project title">
                             </div>
 
                             <label for="description">Description</label>
                             <div class="form-group">
-                                <textarea type="text" class="form-control" id="description" name="description" placeholder="description">{{ old('description') }}</textarea>
+                                <textarea type="text" class="form-control" id="description" name="description" placeholder="description">{{ $project->description }}</textarea>
                             </div>
 
                             <label for="deadline">Deadline</label>
                             <div class="form-group">
-                                <input type="date" id="deadline" class="form-control" name="deadline" data-provider="flatpickr" data-date-format="d M, Y" value="{{ old('deadline') }}">
+                                <input type="date" id="deadline" class="form-control" name="deadline" data-provider="flatpickr" data-date-format="d M, Y" value="{{ $project->deadline }}">
                             </div>
 
                             <label for="client">Client</label>
@@ -51,7 +51,7 @@
                                 <select name="client_id" id="client" class="form-control">
                                     @foreach($clients as $client)
                                         <option
-                                            {{ old('client_id') === $client->id ? ' selected' : '' }}
+                                            {{ $client->id === $project->category_id ? ' selected' : '' }}
                                             value="{{ $client->id }}">{{ $client->title_company }}</option>
                                     @endforeach
                                 </select>
@@ -62,7 +62,7 @@
                                 <select name="user_id" id="user" class="form-control">
                                     @foreach($users as $user)
                                         <option
-                                            {{ old('name') === $user->id ? ' selected' : '' }}
+                                            {{ $user->id === $project->user_id ? ' selected' : '' }}
                                             value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
@@ -71,8 +71,10 @@
                             <label for="status">Status</label>
                             <div class="form-group">
                                 <select name="status" id="status" class="form-control">
-                                    @foreach($statuses as $status=>$value)
-                                        <option value="{{ $status }}">{{ $value }}</option>
+                                    @foreach($statuses as $status)
+                                        <option
+                                            {{ $status === $project->status ? ' selected' : '' }}
+                                            value="{{ $status->value }}">{{ $status->value }}</option>
                                     @endforeach
                                 </select>
                             </div>

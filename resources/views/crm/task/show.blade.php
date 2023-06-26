@@ -10,7 +10,7 @@
                     <div class="col-sm-6 d-flex align-items-center">
                         <h1 class="m-0 mr-2">{{ $task->title }}</h1>
                         <a href="{{ route('crm.task.edit', compact('task')) }}" class="text-success"><i class="fas fa-pencil-alt"></i></a>
-                        <form action="{{ route('crm.task.destroy', $title->id) }}" method="POST">
+                        <form action="{{ route('crm.task.destroy', $task->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="border-0 bg-transparent">
@@ -45,35 +45,35 @@
                                     <tbody>
                                     <tr>
                                         <td>ID</td>
-                                        <td>{{ $title->id }}</td>
+                                        <td>{{ $task->id }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task title</td>
-                                        <td>{{ $title->title }}</td>
+                                        <td>{{ $task->title }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task description</td>
-                                        <td>{{ $title->description }}</td>
+                                        <td>{{ $task->description }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task client</td>
-                                        <td>{{ $title->client->title_company }}</td>
+                                        <td>{{ $task->client->title_company }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task user</td>
-                                        <td>{{ $title->user->name }}</td>
+                                        <td>{{ $task->user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task project</td>
-                                        <td>{{ $title->project->title }}</td>
+                                        <td>{{ $task->project->title }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task priority</td>
-                                        <td>{{ $title->priority }}</td>
+                                        <td>{{ $task->priority }}</td>
                                     </tr>
                                     <tr>
                                         <td>Task status</td>
-                                        <td>{{ $title->status }}</td>
+                                        <td>{{ $task->status }}</td>
                                     </tr>
 
                                     </tbody>
