@@ -51,7 +51,7 @@
 
                             <label for="description_company">Company description</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="description_company" name="description_company" placeholder="company description">
+                                <textarea type="text" class="form-control" id="description_company" name="description_company" placeholder="company description"></textarea>
                             </div>
 
                             <label for="city_company">Company city</label>

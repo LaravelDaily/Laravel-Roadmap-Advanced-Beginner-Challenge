@@ -6,10 +6,26 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
+                <a href="{{ route('crm.main.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th-list"></i>
+                    <p>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('crm.client.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-th-list"></i>
                     <p>
                         Clients
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('crm.project.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th-list"></i>
+                    <p>
+                        Projects
                     </p>
                 </a>
             </li>
