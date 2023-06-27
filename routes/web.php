@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'App\Http\Controllers\Crm', 'prefix' => 'crm'], function () {
-    Route::get('/', HomeController::class)->name('crm.main.index');
-});
 
-Route::group(['prefix' => 'crm'], function () {
+Route::group(['prefix' => 'crm', 'middleware' => ['verified']], function () {
+
+    Route::get('/', HomeController::class)->name('crm.main.index');
+
     Route::resource('clients', ClientController::class, [
         'names' => [
             'index' => 'crm.client.index',
@@ -62,5 +62,5 @@ Route::group(['prefix' => 'crm'], function () {
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
