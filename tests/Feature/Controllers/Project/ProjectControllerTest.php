@@ -134,9 +134,7 @@ class ProjectControllerTest extends TestCase
         $res = $this->delete('/crm/projects/' . $project->id);
         $res->assertRedirect('/crm/projects');
 
-        $this->assertSoftDeleted('projects', [
-            'id' => $project->id
-        ]);
+        $this->assertDatabaseCount('projects', 0);
     }
 
 

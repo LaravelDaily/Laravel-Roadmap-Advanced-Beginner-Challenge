@@ -114,7 +114,7 @@ class ClientControllerTest extends TestCase
         $res = $this->delete('/crm/clients/' . $client->id);
         $res->assertRedirect();
 
-        $this->assertSoftDeleted('clients', ['id' => $client->id]);
+        $this->assertDatabaseCount('clients', 0);
     }
 
 
