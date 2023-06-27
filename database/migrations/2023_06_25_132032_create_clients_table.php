@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('address_company');
             $table->string('city_company');
 
-            $table->softDeletes();
             $table->timestamps();
         });
     }

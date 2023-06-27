@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -84,7 +85,12 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task->delete();
+        try {
+            $task->delete();
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return redirect()->back()->with('status', 'Cannot delete task');
+        }
 
         return redirect()->route('crm.task.index');
     }

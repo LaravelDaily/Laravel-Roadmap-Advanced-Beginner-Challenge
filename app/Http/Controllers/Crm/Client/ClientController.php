@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Crm\Client\StoreRequest;
 use App\Http\Requests\Crm\Client\UpdateRequest;
 use App\Models\Client;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -70,7 +71,12 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
+        try {
+            $client->delete();
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return redirect()->back()->with('status', 'Cannot delete client');
+        }
 
         return redirect()->route('crm.client.index');
     }

@@ -10,6 +10,7 @@ use App\Http\Requests\Crm\Project\UpdateRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -82,7 +83,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $project->delete();
+        try {
+            $project->delete();
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return redirect()->back()->with('status', 'Cannot delete project');
+        }
 
         return redirect()->route('crm.project.index');
     }

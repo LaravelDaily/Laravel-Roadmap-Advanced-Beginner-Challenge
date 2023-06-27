@@ -29,7 +29,6 @@ return new class extends Migration
                 ->constrained();
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
