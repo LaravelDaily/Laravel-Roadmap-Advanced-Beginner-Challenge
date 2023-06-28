@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
- use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\User\UserRoleEnum;
+use App\QueryBuilders\User\UserBuilder;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,5 +45,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role' => UserRoleEnum::class,
     ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new UserBuilder($query);
+    }
+
+    public function scopeManagers($query)
+    {
+        return $query->select('id', 'name')->whereUserRole('manager');
+    }
 }

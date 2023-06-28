@@ -31,7 +31,7 @@ class ProjectController extends Controller
     {
         $statuses = $projectAction->getStatusValues();
         $clients = Client::all();
-        $users = User::query()->select('id', 'name')->where('role', 'manager')->get();
+        $users = User::managers()->get();
 
         return view('crm.project.create', compact('statuses', 'clients', 'users'));
     }
