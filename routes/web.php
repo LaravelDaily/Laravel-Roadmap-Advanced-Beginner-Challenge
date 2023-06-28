@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::permanentRedirect('/', 'crm');
+
 
 Route::group(['prefix' => 'crm', 'middleware' => ['verified']], function () {
 
@@ -57,7 +59,7 @@ Route::group(['prefix' => 'crm', 'middleware' => ['verified']], function () {
             'update' => 'crm.task.update',
             'destroy' => 'crm.task.destroy',
         ]
-    ]);
+    ])->middleware('admin');
 
 });
 

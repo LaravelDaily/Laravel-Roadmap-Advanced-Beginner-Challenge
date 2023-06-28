@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->softDeletes();
-            $table->unsignedSmallInteger('role')->nullable()->after('password');
+            $table->string('role')->nullable()->after('password');
         });
     }
 
