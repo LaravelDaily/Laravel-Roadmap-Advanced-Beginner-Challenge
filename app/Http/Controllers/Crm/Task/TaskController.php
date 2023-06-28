@@ -6,6 +6,7 @@ use App\Enums\Task\TaskStatusesEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Crm\Task\StoreRequest;
 use App\Http\Requests\Crm\Task\UpdateRequest;
+use App\Jobs\TaskAdminEmailSend;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Task;
@@ -43,6 +44,7 @@ class TaskController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+        TaskAdminEmailSend::dispatch($data, auth()->user());
         Task::query()->create($data);
 
         return redirect()->route('crm.task.index');
