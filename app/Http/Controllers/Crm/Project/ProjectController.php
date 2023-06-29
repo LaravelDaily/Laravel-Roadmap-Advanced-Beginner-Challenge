@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Crm\Project;
 
 use App\Actions\Crm\Project\ProjectAction;
+use App\Actions\Media\StoreMediaAction;
 use App\Enums\Project\ProjectStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\ProjectFilter;
@@ -25,13 +26,6 @@ class ProjectController extends Controller
         $filter = app()->make(ProjectFilter::class, ['queryParams' => array_filter($data)]);
         $projects = Project::filter($filter)->get();
 
-//        $query = Project::query();
-//
-//        if (isset($data['title'])) {
-//            $query->where('title', 'like', "%{$data['title']}%");
-//        }
-//
-//        $projects = $query->get();
 
         return view('crm.project.index', compact('projects'));
     }
@@ -51,10 +45,11 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, StoreMediaAction $action)
     {
         $data = $request->validated();
-        Project::query()->create($data);
+        $projects = Project::query()->create($data);
+        $action->storeMedia($projects, $request);
 
         return redirect()->route('crm.project.index');
     }

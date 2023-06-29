@@ -29,7 +29,8 @@ class StoreRequest extends FormRequest
             'deadline' => 'required|date',
             'status' => [new Enum(ProjectStatusEnum::class)],
             'user_id' => 'required|integer|exists:users,id',
-            'client_id' => 'required|integer|exists:clients,id'
+            'client_id' => 'required|integer|exists:clients,id',
+            'file' => 'file',
         ];
     }
 }

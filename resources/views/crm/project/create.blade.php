@@ -27,7 +27,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('crm.project.store') }}" method="POST" class="w-50">
+                        <form action="{{ route('crm.project.store') }}" method="POST" class="w-50" enctype="multipart/form-data">
                             @csrf
                             <label for="title">Title</label>
                             <div class="form-group">
@@ -74,6 +74,19 @@
                                         <option value="{{ $status }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="form-group w-50">
+                                <label for="file">Add image</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="file">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                </div>
                             </div>
 
                             <input type="submit" class="btn btn-primary" value="Create">

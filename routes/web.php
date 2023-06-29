@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::permanentRedirect('/', 'crm');
 
 
-Route::group(['prefix' => 'crm', 'middleware' => ['verified']], function () {
+Route::group(['prefix' => 'crm', 'middleware' => ['verified', 'auth']], function () {
 
     Route::get('/', HomeController::class)->name('crm.main.index');
 

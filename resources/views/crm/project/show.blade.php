@@ -34,7 +34,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-6 mt-3">
+                    <div class="col-12 mt-3">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Project</h3>
@@ -70,6 +70,13 @@
                                     <tr>
                                         <td>Project status</td>
                                         <td>{{ $project->status }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Project image</td>
+                                        <td>
+                                            <img src="{{ $project->getFirstMediaUrl('images', 'thumb') }}" width="150px">
+                                        </td>
                                     </tr>
 
                                     </tbody>
