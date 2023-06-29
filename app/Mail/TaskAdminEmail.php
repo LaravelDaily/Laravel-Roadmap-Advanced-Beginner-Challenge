@@ -25,8 +25,10 @@ class TaskAdminEmail extends Mailable implements ShouldQueue
 
     public function build()
     {
-        return $this->markdown('mail.welcome', [
+        return $this->markdown('mail.task', [
             'title' => $this->task['title'],
+            'status' => $this->task['status'],
+            'priority' => $this->task['priority'],
         ]);
     }
 }

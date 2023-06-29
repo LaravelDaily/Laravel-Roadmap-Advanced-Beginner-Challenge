@@ -3,6 +3,9 @@
 
     Title: {{ $title }}
 
+    Title: {{ $priority }}
+
+    Title: {{ $status }}
 
     Thanks,<br>
     {{ config('app.name') }}

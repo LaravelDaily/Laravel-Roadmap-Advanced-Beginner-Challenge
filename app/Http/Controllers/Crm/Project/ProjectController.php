@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Crm\Project;
 use App\Actions\Crm\Project\ProjectAction;
 use App\Enums\Project\ProjectStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Filters\ProjectFilter;
 use App\Http\Requests\Crm\Project\StoreRequest;
 use App\Http\Requests\Crm\Project\UpdateRequest;
+use App\Http\Requests\Filter\Project\FilterRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
@@ -17,9 +19,19 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $projects = Project::all();
+        $data = $request->validated();
+        $filter = app()->make(ProjectFilter::class, ['queryParams' => array_filter($data)]);
+        $projects = Project::filter($filter)->get();
+
+//        $query = Project::query();
+//
+//        if (isset($data['title'])) {
+//            $query->where('title', 'like', "%{$data['title']}%");
+//        }
+//
+//        $projects = $query->get();
 
         return view('crm.project.index', compact('projects'));
     }
