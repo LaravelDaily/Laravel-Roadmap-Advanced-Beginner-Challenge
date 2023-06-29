@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
          UserFactory::new()->count(5)->create();
 
-         ClientFactory::new()->count(10)->create();
+         ClientFactory::new()->count(100)->create();
 
          ProjectFactory::new()->count(10)->create();
 

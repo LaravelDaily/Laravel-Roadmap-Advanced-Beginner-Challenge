@@ -79,4 +79,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <div class="row mt-5">
+        <div class="mx-auto" style="margin-top: -100px">
+            {{ $clients->links() }}
+        </div>
+    </div>
 @endsection
