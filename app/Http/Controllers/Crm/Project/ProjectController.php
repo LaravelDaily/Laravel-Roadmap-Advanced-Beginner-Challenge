@@ -24,7 +24,10 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $filter = app()->make(ProjectFilter::class, ['queryParams' => array_filter($data)]);
-        $projects = Project::filter($filter)->latest()->paginate(10);
+        $projects = Project::filter($filter)
+            ->with('client')
+            ->latest()
+            ->paginate(10);
 
 
         return view('crm.project.index', compact('projects'));
