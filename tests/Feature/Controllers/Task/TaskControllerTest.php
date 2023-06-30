@@ -2,6 +2,7 @@
 
 namespace Controllers\Task;
 
+use App\Enums\User\UserRoleEnum;
 use App\Http\Controllers\Crm\Project\ProjectController;
 use App\Http\Controllers\Crm\Task\TaskController;
 use App\Models\Client;
@@ -19,12 +20,16 @@ class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $admin;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->admin = UserFactory::new()->create();
+        $this->admin->role = UserRoleEnum::Admin;
     }
 
-    public function test_it_index_page_success()
+    public function test_it_index_page_admin_view_success()
     {
         $this->withoutExceptionHandling();
 
@@ -34,7 +39,7 @@ class TaskControllerTest extends TestCase
 
         $tasks = $this->createTasks(10);
 
-        $res = $this->get('/crm/tasks');
+        $res = $this->actingAs($this->admin)->get('/crm/tasks');
 
         $res->assertViewIs('crm.task.index');
 
@@ -48,6 +53,15 @@ class TaskControllerTest extends TestCase
         $res->assertSeeText($priority);
     }
 
+    public function test_it_index_page_manager_cant_see_success()
+    {
+        $manager = UserFactory::new()->create();
+
+        $res = $this->actingAs($manager)->get('/crm/tasks');
+
+        $res->assertStatus(404);
+    }
+
     public function test_it_can_be_stored_success()
     {
         $this->withoutExceptionHandling();
@@ -58,7 +72,7 @@ class TaskControllerTest extends TestCase
 
         $data = $this->validParams();
 
-        $res = $this->post(action([TaskController::class, 'store'], $data));
+        $res = $this->actingAs($this->admin)->post(action([TaskController::class, 'store'], $data));
 
         $res->assertRedirect('/crm/tasks');
 
@@ -89,7 +103,7 @@ class TaskControllerTest extends TestCase
         $data['description'] = 'description changed';
         $data['title'] = 'changed';
 
-        $res = $this->patch('/crm/tasks/' . $task->id, $data);
+        $res = $this->actingAs($this->admin)->patch('/crm/tasks/' . $task->id, $data);
 
         $res->assertOk();
 
@@ -109,7 +123,7 @@ class TaskControllerTest extends TestCase
         $data = $this->validParams();
         $data['title'] = '';
 
-        $res = $this->post('/crm/tasks', $data);
+        $res = $this->actingAs($this->admin)->post('/crm/tasks', $data);
 
         $res->assertRedirect();
         $res->assertInvalid('title');
@@ -125,7 +139,7 @@ class TaskControllerTest extends TestCase
 
         $task = TaskFactory::new()->create();
 
-        $res = $this->get('/crm/tasks/' . $task->id);
+        $res = $this->actingAs($this->admin)->get('/crm/tasks/' . $task->id);
 
         $res->assertSeeText('Task');
         $res->assertViewIs('crm.task.show');
@@ -141,7 +155,7 @@ class TaskControllerTest extends TestCase
 
         $task = TaskFactory::new()->create();
 
-        $res = $this->delete('/crm/tasks/' . $task->id);
+        $res = $this->actingAs($this->admin)->delete('/crm/tasks/' . $task->id);
         $res->assertRedirect('/crm/tasks');
 
         $this->assertDatabaseCount('tasks', 0);

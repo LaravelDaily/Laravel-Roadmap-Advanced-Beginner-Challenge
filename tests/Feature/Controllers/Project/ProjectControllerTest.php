@@ -17,9 +17,12 @@ class ProjectControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $user;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->user = UserFactory::new()->create();
     }
 
     public function test_it_index_page_success()
@@ -31,7 +34,7 @@ class ProjectControllerTest extends TestCase
 
         $projects = $this->createProjects(10);
 
-        $res = $this->get('/crm/projects');
+        $res = $this->actingAs($this->user)->get('/crm/projects');
 
         $res->assertViewIs('crm.project.index');
 
@@ -54,7 +57,7 @@ class ProjectControllerTest extends TestCase
 
         $data = $this->validParams();
 
-        $res = $this->post(action([ProjectController::class, 'store'], $data));
+        $res = $this->actingAs($this->user)->post(action([ProjectController::class, 'store'], $data));
 
         $res->assertRedirect('/crm/projects');
 
@@ -83,7 +86,7 @@ class ProjectControllerTest extends TestCase
         $data['description'] = 'description changed';
         $data['title'] = 'changed';
 
-        $res = $this->patch('/crm/projects/' . $project->id, $data);
+        $res = $this->actingAs($this->user)->patch('/crm/projects/' . $project->id, $data);
 
         $res->assertOk();
 
@@ -102,7 +105,7 @@ class ProjectControllerTest extends TestCase
         $data = $this->validParams();
         $data['title'] = '';
 
-        $res = $this->post('/crm/projects', $data);
+        $res = $this->actingAs($this->user)->post('/crm/projects', $data);
 
         $res->assertRedirect();
         $res->assertInvalid('title');
@@ -117,7 +120,7 @@ class ProjectControllerTest extends TestCase
 
         $project = ProjectFactory::new()->create();
 
-        $res = $this->get('/crm/projects/' . $project->id);
+        $res = $this->actingAs($this->user)->get('/crm/projects/' . $project->id);
 
         $res->assertSeeText('Project');
         $res->assertViewIs('crm.project.show');
@@ -131,7 +134,7 @@ class ProjectControllerTest extends TestCase
         $this->createClients(1);
         $project = ProjectFactory::new()->create();
 
-        $res = $this->delete('/crm/projects/' . $project->id);
+        $res = $this->actingAs($this->user)->delete('/crm/projects/' . $project->id);
         $res->assertRedirect('/crm/projects');
 
         $this->assertDatabaseCount('projects', 0);

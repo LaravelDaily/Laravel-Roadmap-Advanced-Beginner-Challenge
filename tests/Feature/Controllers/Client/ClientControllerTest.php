@@ -4,7 +4,9 @@ namespace Controllers\Client;
 
 use App\Http\Controllers\Crm\Client\ClientController;
 use App\Models\Client;
+use App\Models\User;
 use Database\Factories\ClientFactory;
+use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,9 +14,12 @@ class ClientControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
+    protected $user;
+
+    public function setUp(): void
     {
         parent::setUp();
+        $this->user = UserFactory::new()->create();
     }
 
     public function test_it_index_page_success()
@@ -23,7 +28,7 @@ class ClientControllerTest extends TestCase
 
         $clients = ClientFactory::new()->count(10)->create();
 
-        $res = $this->get('/crm/clients');
+        $res = $this->actingAs($this->user)->get('/crm/clients');
 
         $res->assertViewIs('crm.client.index');
 
@@ -43,7 +48,7 @@ class ClientControllerTest extends TestCase
 
         $data = $this->validParams();
 
-        $this->post(action([ClientController::class, 'store'], $data));
+        $this->actingAs($this->user)->post(action([ClientController::class, 'store'], $data));
 
         $this->assertDatabaseCount('clients', 1);
 
@@ -71,7 +76,7 @@ class ClientControllerTest extends TestCase
         $data['description_company'] = 'description changed';
         $data['title_company'] = 'changed';
 
-        $res = $this->patch('/crm/clients/' . $client->id, $data);
+        $res = $this->actingAs($this->user)->patch('/crm/clients/' . $client->id, $data);
 
         $res->assertOk();
 
@@ -87,7 +92,7 @@ class ClientControllerTest extends TestCase
         $data = $this->validParams();
         $data['title_company'] = '';
 
-        $res = $this->post('/crm/clients', $data);
+        $res = $this->actingAs($this->user)->post('/crm/clients', $data);
 
         $res->assertRedirect();
         $res->assertInvalid('title_company');
@@ -99,7 +104,7 @@ class ClientControllerTest extends TestCase
 
         $client = ClientFactory::new()->create();
 
-        $res = $this->get('/crm/clients/' . $client->id);
+        $res = $this->actingAs($this->user)->get('/crm/clients/' . $client->id);
 
         $res->assertSeeText('Client');
         $res->assertViewIs('crm.client.show');
@@ -111,7 +116,7 @@ class ClientControllerTest extends TestCase
     {
         $client = ClientFactory::new()->create();
 
-        $res = $this->delete('/crm/clients/' . $client->id);
+        $res = $this->actingAs($this->user)->delete('/crm/clients/' . $client->id);
         $res->assertRedirect();
 
         $this->assertDatabaseCount('clients', 0);
