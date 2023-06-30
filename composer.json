@@ -12,7 +12,8 @@
         "laravel/telescope": "^4.15",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
-        "spatie/laravel-medialibrary": "^10.10"
+        "spatie/laravel-medialibrary": "^10.10",
+        "tymon/jwt-auth": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
