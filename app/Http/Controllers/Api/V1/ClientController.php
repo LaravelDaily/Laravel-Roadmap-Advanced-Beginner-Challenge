@@ -17,7 +17,9 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         return ClientResource::collection(
-          Client::query()->latest()->paginate($request->input('limit', 10))
+          Client::query()
+              ->latest()
+              ->paginate($request->input('limit', 10))
         );
     }
 
