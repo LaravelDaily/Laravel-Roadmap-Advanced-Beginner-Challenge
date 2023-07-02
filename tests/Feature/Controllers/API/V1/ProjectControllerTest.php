@@ -150,7 +150,7 @@ class ProjectControllerTest extends TestCase
                 'id' => $project->user->id,
                 'name' => $project->user->name,
                 'email' => $project->user->email,
-                'role' => $project->user->role,
+                'role' => $project->user->role->value,
             ]
         ]]);
     }

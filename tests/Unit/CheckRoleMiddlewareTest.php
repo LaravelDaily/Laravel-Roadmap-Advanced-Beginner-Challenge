@@ -24,6 +24,7 @@ class CheckRoleMiddlewareTest extends TestCase
     public function testAdminForbidden()
     {
         $manager = UserFactory::new()->create();
+        $manager->role = UserRoleEnum::Manager->value;
 
         $this->actingAs($manager)
             ->get('/crm/tasks')

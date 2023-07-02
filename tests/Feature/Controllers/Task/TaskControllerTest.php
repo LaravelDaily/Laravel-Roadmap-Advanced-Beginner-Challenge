@@ -56,6 +56,7 @@ class TaskControllerTest extends TestCase
     public function test_it_index_page_manager_cant_see_success()
     {
         $manager = UserFactory::new()->create();
+        $manager->role = UserRoleEnum::Manager->value;
 
         $res = $this->actingAs($manager)->get('/crm/tasks');
 
