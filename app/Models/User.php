@@ -56,7 +56,12 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function scopeManagers($query)
     {
-        return $query->select('id', 'name')->whereUserRole('manager');
+        return $query->select('id', 'name')->whereUserRole(UserRoleEnum::Manager);
+    }
+
+    public function isAdmin()
+    {
+        return $this->whereUserRole(UserRoleEnum::Admin)->get()->isNotEmpty();
     }
 
     /**

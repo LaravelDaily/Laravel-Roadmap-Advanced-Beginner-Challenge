@@ -8,6 +8,6 @@ class UserBuilder extends Builder
 {
     public function whereUserRole($role)
     {
-        return $this->where('role', $role);
+        return $this->where('role', $role->value);
     }
 }

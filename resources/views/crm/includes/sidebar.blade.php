@@ -29,6 +29,8 @@
                     </p>
                 </a>
             </li>
+
+            @can('view', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('crm.task.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-th-list"></i>
@@ -37,6 +39,9 @@
                     </p>
                 </a>
             </li>
+            @endcan
+
+
         </ul>
     </div>
     <!-- /.sidebar -->
