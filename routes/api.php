@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\ClientController;
 use App\Http\Controllers\Api\V1\ProjectController;
+use App\Http\Controllers\Api\V1\TaskController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => 'api
 Route::group(['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => 'jwt.auth'], function () {
     Route::resource('clients', ClientController::class);
     Route::resource('projects', ProjectController::class);
+    Route::resource('tasks', TaskController::class)->middleware('admin');
 });
