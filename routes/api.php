@@ -31,7 +31,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => 'api
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => 'jwt.auth'], function () {
-    Route::resource('clients', ClientController::class);
-    Route::resource('projects', ProjectController::class);
-    Route::resource('tasks', TaskController::class)->middleware('admin');
+    Route::apiResource('clients', ClientController::class);
+    Route::apiResource('projects', ProjectController::class);
+    Route::apiResource('tasks', TaskController::class)->middleware('admin');
 });
