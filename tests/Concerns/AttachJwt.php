@@ -12,8 +12,8 @@ trait AttachJwt
         return JWTAuth::fromUser($user);
     }
 
-    public function baseUri(string $token, string $addUri = '')
+    public function baseUri(string $token, string $model = '', string $addUri = '')
     {
-        return '/api/clients/' . $addUri . '?token=' . $token;
+        return '/api/' . $model . 's/' . $addUri . '?token=' . $token;
     }
 }

@@ -34,7 +34,7 @@ class ClientControllerTest extends TestCase
 
         $data = $this->validParams();
 
-        $res = $this->actingAs($this->user)->post($this->baseUri($this->token), $data);
+        $res = $this->actingAs($this->user)->post($this->baseUri($this->token, 'client'), $data);
 
         $this->assertDatabaseCount('clients', 1);
 
@@ -56,7 +56,7 @@ class ClientControllerTest extends TestCase
         $data['description_company'] = 'description_changed';
 
         $res = $this->actingAs($this->user)
-            ->patch($this->baseUri($this->token, $client->id), $data);
+            ->patch($this->baseUri($this->token, 'client', $client->id), $data);
 
         $res->assertJson([
             'data' => [
@@ -73,7 +73,7 @@ class ClientControllerTest extends TestCase
         $data['title_company'] = '';
 
         $res = $this->actingAs($this->user)
-            ->post($this->baseUri($this->token), $data);
+            ->post($this->baseUri($this->token, 'client'), $data);
 
         $res->assertStatus(422);
         $res->assertInvalid('title_company');
@@ -85,7 +85,7 @@ class ClientControllerTest extends TestCase
 
         $clients = ClientFactory::new()->count(10)->create();
 
-        $res = $this->actingAs($this->user)->get($this->baseUri($this->token));
+        $res = $this->actingAs($this->user)->get($this->baseUri($this->token, 'client'));
 
         $json = $clients->map(function ($client) {
             return $this->checkJson($client);
@@ -103,7 +103,7 @@ class ClientControllerTest extends TestCase
         $client = ClientFactory::new()->create();
 
         $res = $this->actingAs($this->user)
-            ->get($this->baseUri($this->token, $client->id));
+            ->get($this->baseUri($this->token, 'client', $client->id));
 
         $res->assertJson(['data' => $this->checkJson($client)]);
     }
@@ -114,7 +114,7 @@ class ClientControllerTest extends TestCase
 
         $client = ClientFactory::new()->create();
         $res = $this->actingAs($this->user)
-            ->delete($this->baseUri($this->token, $client->id));
+            ->delete($this->baseUri($this->token,'client', $client->id));
 
         $res->assertOk();
 
@@ -138,7 +138,7 @@ class ClientControllerTest extends TestCase
             'title' => $client->title_company,
             'description' => $client->description_company,
             'vat' => $client->vat_company,
-            'zip' => $client->id,
+            'zip' => $client->zip_company,
             'name' => $client->name_manager,
             'email' => $client->email_manager,
             'phone' => $client->phone_manager,

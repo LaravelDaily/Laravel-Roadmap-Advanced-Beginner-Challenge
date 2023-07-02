@@ -28,7 +28,7 @@ class ProjectController extends Controller
         $data = $request->validated();
 
         return new ProjectResource(
-          Client::query()->create($data)
+          Project::query()->create($data)
         );
     }
 

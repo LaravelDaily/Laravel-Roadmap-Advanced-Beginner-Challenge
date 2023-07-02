@@ -19,7 +19,7 @@ class ClientResource extends JsonResource
           'title' => $this->title_company,
           'description' => $this->description_company,
           'vat' => $this->vat_company,
-          'zip' => $this->id,
+          'zip' => $this->zip_company,
           'name' => $this->name_manager,
           'email' => $this->email_manager,
           'phone' => $this->phone_manager,
