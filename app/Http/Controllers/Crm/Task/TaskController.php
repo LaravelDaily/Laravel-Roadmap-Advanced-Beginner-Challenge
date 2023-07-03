@@ -46,9 +46,7 @@ class TaskController extends Controller
     {
         $data = $request->validated();
         TaskAdminEmailSend::dispatch($data, auth()->user());
-        $task = Task::query()->create($data);
-
-        flash()->info('Task created: ' . $task->title);
+        Task::query()->create($data);
 
         return redirect()->route('crm.task.index');
     }
@@ -82,8 +80,6 @@ class TaskController extends Controller
         $data = $request->validated();
         $task->update($data);
 
-        flash()->info('Task updated: ' . $task->title);
-
         return view('crm.task.show', compact('task'));
     }
 
@@ -93,8 +89,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-
-        flash()->info('Task deleted: ' . $task->title);
 
         return redirect()->route('crm.task.index');
     }
