@@ -25,7 +25,7 @@ class ProjectControllerTest extends TestCase
         $this->user = UserFactory::new()->create();
     }
 
-    public function test_it_index_page_success()
+    public function test_it_index_page_successs()
     {
         $this->withoutExceptionHandling();
 
@@ -42,10 +42,13 @@ class ProjectControllerTest extends TestCase
 
         $titles = $projects->pluck('title')->toArray();
         $statuses = $projects->pluck('status')->toArray();
-        $deadline = $projects->pluck('deadline')->toArray();
+        $deadlines = $projects->map(function ($project) {
+            return $project->deadline = $project->deadlineDiff;
+        })->toArray();
+
         $res->assertSeeText($titles);
         $res->assertSeeText($statuses);
-        $res->assertSeeText($deadline);
+        $res->assertSeeText($deadlines);
     }
 
     public function test_it_can_be_stored_success()

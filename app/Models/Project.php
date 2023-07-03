@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Project\ProjectStatusEnum;
 use App\Models\Traits\Filterable;
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -51,6 +52,14 @@ class Project extends Model implements HasMedia
     public function scopeOrderDeadline()
     {
         return $this->orderBy('deadline', 'asc')->latest();
+    }
+
+    /**
+    * Prepare a date for array / JSON serialization.
+    */
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('Y-m-d');
     }
 
 }

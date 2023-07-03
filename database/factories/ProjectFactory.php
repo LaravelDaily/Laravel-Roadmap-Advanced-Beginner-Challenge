@@ -24,7 +24,7 @@ class ProjectFactory extends Factory
         return [
             'title' => $this->faker->words(5, true),
             'description' => $this->faker->text(50),
-            'deadline' => $this->faker->dateTimeBetween('+1 week', '+3 week'),
+            'deadline' => $this->faker->dateTimeBetween('+1 week', '+3 week')->format('Y-m-d'),
             'status' => $this->faker->randomElement(ProjectStatusEnum::cases()),
             'user_id' => User::query()->inRandomOrder()->value('id'),
             'client_id' => Client::query()->inRandomOrder()->value('id'),
