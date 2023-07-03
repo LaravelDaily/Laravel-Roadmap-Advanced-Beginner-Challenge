@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Scopes\GroupDate;
+use App\Scopes\OrderDate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +22,11 @@ class Client extends Model
         'email_manager',
         'phone_manager',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        return static::addGlobalScope(new OrderDate());
+    }
 }

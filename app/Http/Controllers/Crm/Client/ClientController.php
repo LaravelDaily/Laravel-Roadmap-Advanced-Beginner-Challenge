@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::latest()->paginate(10);
+        $clients = Client::paginate(10);
 
         return view('crm.client.index', compact('clients'));
     }
