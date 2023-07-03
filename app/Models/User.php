@@ -61,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function isAdmin()
     {
-        return $this->whereUserRole(UserRoleEnum::Admin)->get()->isNotEmpty();
+        return $this->role === UserRoleEnum::Admin->value;
     }
 
     /**
