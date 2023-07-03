@@ -13,7 +13,6 @@ use App\Http\Requests\Filter\Project\FilterRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -51,8 +50,10 @@ class ProjectController extends Controller
     public function store(StoreRequest $request, StoreMediaAction $action)
     {
         $data = $request->validated();
-        $projects = Project::query()->create($data);
-        $action->storeMedia($projects, $request);
+        $project = Project::query()->create($data);
+        $action->storeMedia($project, $request);
+
+        flash()->info('Project created: ' . $project->title);
 
         return redirect()->route('crm.project.index');
     }
@@ -85,6 +86,8 @@ class ProjectController extends Controller
         $data = $request->validated();
         $project->update($data);
 
+        flash()->info('Project updated: ' . $project->title);
+
         return view('crm.project.show', compact('project'));
     }
 
@@ -93,12 +96,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        try {
-            $project->delete();
-        } catch (\Exception $exception) {
-            Log::error($exception);
-            return redirect()->back()->with('status', 'Cannot delete project');
-        }
+        $project->delete();
+
+        flash()->info('Project deleted: ' . $project->title);
 
         return redirect()->route('crm.project.index');
     }

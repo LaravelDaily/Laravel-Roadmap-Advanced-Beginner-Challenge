@@ -11,7 +11,6 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -47,7 +46,9 @@ class TaskController extends Controller
     {
         $data = $request->validated();
         TaskAdminEmailSend::dispatch($data, auth()->user());
-        Task::query()->create($data);
+        $task = Task::query()->create($data);
+
+        flash()->info('Task created: ' . $task->title);
 
         return redirect()->route('crm.task.index');
     }
@@ -81,6 +82,8 @@ class TaskController extends Controller
         $data = $request->validated();
         $task->update($data);
 
+        flash()->info('Task updated: ' . $task->title);
+
         return view('crm.task.show', compact('task'));
     }
 
@@ -89,12 +92,9 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        try {
-            $task->delete();
-        } catch (\Exception $exception) {
-            Log::error($exception);
-            return redirect()->back()->with('status', 'Cannot delete task');
-        }
+        $task->delete();
+
+        flash()->info('Task deleted: ' . $task->title);
 
         return redirect()->route('crm.task.index');
     }

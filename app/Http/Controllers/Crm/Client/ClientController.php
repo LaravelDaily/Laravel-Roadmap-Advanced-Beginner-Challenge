@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Crm\Client\StoreRequest;
 use App\Http\Requests\Crm\Client\UpdateRequest;
 use App\Models\Client;
-use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -34,8 +33,9 @@ class ClientController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        Client::query()->create($data);
+        $client = Client::query()->create($data);
 
+        flash()->info('Client created: ' . $client->title_company);
         return redirect()->route('crm.client.index');
     }
 
@@ -63,6 +63,8 @@ class ClientController extends Controller
         $data = $request->validated();
         $client->update($data);
 
+        flash()->info('Client updated: ' . $client->title_company);
+
         return view('crm.client.show', compact('client'));
     }
 
@@ -71,12 +73,8 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        try {
-            $client->delete();
-        } catch (\Exception $exception) {
-            Log::error($exception);
-            return redirect()->back()->with('status', 'Cannot delete client');
-        }
+        $client->delete();
+        flash()->info('Client deleted: ' . $client->title_company);
 
         return redirect()->route('crm.client.index');
     }
