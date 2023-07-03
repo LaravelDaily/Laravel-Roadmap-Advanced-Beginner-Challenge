@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use DomainException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -65,6 +66,8 @@ class Handler extends ExceptionHandler
                     }
                 }
             }
+
+            Log::error($e);
 
             return $response;
         });
