@@ -28,7 +28,6 @@ class ProjectController extends Controller
             ->orderDeadline()
             ->paginate(10);
 
-
         return view('crm.project.index', compact('projects'));
     }
 

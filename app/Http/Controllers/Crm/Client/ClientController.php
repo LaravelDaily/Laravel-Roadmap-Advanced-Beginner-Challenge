@@ -33,9 +33,8 @@ class ClientController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        $client = Client::query()->create($data);
+        Client::query()->create($data);
 
-        flash()->info('Client created: ' . $client->title_company);
         return redirect()->route('crm.client.index');
     }
 
@@ -63,8 +62,6 @@ class ClientController extends Controller
         $data = $request->validated();
         $client->update($data);
 
-        flash()->info('Client updated: ' . $client->title_company);
-
         return view('crm.client.show', compact('client'));
     }
 
@@ -74,7 +71,6 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         $client->delete();
-        flash()->info('Client deleted: ' . $client->title_company);
 
         return redirect()->route('crm.client.index');
     }
