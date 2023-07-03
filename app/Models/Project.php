@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Project\ProjectStatusEnum;
 use App\Models\Traits\Filterable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -34,6 +35,17 @@ class Project extends Model implements HasMedia
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function getDateAsCarbonAttribute($date)
+    {
+        return Carbon::parse($date);
+    }
+
+    public function getDeadlineDiffAttribute()
+    {
+        return $this->getDateAsCarbonAttribute($this->deadline)
+            ->longRelativeDiffForHumans(Carbon::now());
     }
 
 }

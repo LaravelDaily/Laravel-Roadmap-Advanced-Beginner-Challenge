@@ -42,8 +42,8 @@
                                     <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Deadline</th>
                                         <th>Client</th>
+                                        <th>Deadline</th>
                                         <th>Status</th>
                                         <th colspan="3" class="text-center">Actions</th>
                                     </tr>
@@ -53,7 +53,7 @@
                                         <tr>
                                             <td>{{ $project->title }}</td>
                                             <td>{{ $project->client->title_company }}</td>
-                                            <td>{{ $project->deadline }}</td>
+                                            <td>{{ $project->deadlineDiff }}</td>
                                             <td>{{ $project->status }}</td>
                                             <td class="text-center"><a href="{{ route('crm.project.show', $project->id) }}"><i class="far fa-eye"></i></a></td>
                                             <td class="text-center"><a href="{{ route('crm.project.edit', $project->id) }}" class="text-success"><i class="fas fa-pencil-alt"></i></a></td>

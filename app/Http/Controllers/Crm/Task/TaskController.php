@@ -20,7 +20,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::latest()
+        $tasks = Task::orderPriority()
             ->with('client')
             ->paginate(10);
 

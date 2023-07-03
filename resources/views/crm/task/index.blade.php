@@ -45,6 +45,7 @@
                                         <th>Client</th>
                                         <th>Status</th>
                                         <th>Priority</th>
+                                        <th>Date</th>
                                         <th colspan="3" class="text-center">Actions</th>
                                     </tr>
                                     </thead>
@@ -55,6 +56,7 @@
                                             <td>{{ $task->client->title_company }}</td>
                                             <td>{{ $task->status }}</td>
                                             <td>{{ $task->priority }}</td>
+                                            <td>{{ $task->dateAsCarbon->diffForHumans() }}</td>
                                             <td class="text-center"><a href="{{ route('crm.task.show', $task->id) }}"><i class="far fa-eye"></i></a></td>
                                             <td class="text-center"><a href="{{ route('crm.task.edit', $task->id) }}" class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
                                             <td class="text-center">

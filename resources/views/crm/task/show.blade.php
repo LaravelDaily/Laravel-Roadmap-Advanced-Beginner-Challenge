@@ -75,6 +75,10 @@
                                         <td>Task status</td>
                                         <td>{{ $task->status }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Task date</td>
+                                        <td>{{ $task->dateAsCarbon }}</td>
+                                    </tr>
 
                                     </tbody>
                                 </table>

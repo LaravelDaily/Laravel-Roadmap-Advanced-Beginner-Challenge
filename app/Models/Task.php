@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use App\Enums\Project\ProjectStatusEnum;
 use App\Enums\Task\TaskStatusesEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
@@ -39,5 +38,15 @@ class Task extends Model
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id', 'id');
+    }
+
+    public function getDateAsCarbonAttribute()
+    {
+        return Carbon::parse($this->created_at);
+    }
+
+    public function scopeOrderPriority()
+    {
+        return $this->orderBy('priority', 'desc')->latest();
     }
 }
