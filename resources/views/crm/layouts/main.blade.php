@@ -43,6 +43,8 @@
 
     @include('crm.includes.sidebar')
 
+    @include('shared.flash')
+
     @yield('content')
 
     <footer class="main-footer">
