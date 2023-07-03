@@ -26,7 +26,7 @@ class ProjectController extends Controller
         $filter = app()->make(ProjectFilter::class, ['queryParams' => array_filter($data)]);
         $projects = Project::filter($filter)
             ->with('client')
-            ->latest()
+            ->orderDeadline()
             ->paginate(10);
 
 

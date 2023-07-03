@@ -48,4 +48,9 @@ class Project extends Model implements HasMedia
             ->longRelativeDiffForHumans(Carbon::now());
     }
 
+    public function scopeOrderDeadline()
+    {
+        return $this->orderBy('deadline', 'asc')->latest();
+    }
+
 }
