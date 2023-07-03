@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use DomainException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -50,10 +51,24 @@ class Handler extends ExceptionHandler
                         }
                         break;
                 }
+            } else {
+                switch (get_class($e)) {
+                    case QueryException::class:
+                    {
+                        flash()->alert('this model has constrains');
+                        return redirect()->back();
+                    }
+                    case DomainException::class:
+                    {
+                        flash()->alert('domain exception');
+                        return redirect()->back();
+                    }
+                }
             }
 
             return $response;
         });
+
     }
 
 
