@@ -52,8 +52,6 @@ class ProjectController extends Controller
         $project = Project::query()->create($data);
         $action->storeMedia($project, $request);
 
-        flash()->info('Project created: ' . $project->title);
-
         return redirect()->route('crm.project.index');
     }
 
@@ -85,8 +83,6 @@ class ProjectController extends Controller
         $data = $request->validated();
         $project->update($data);
 
-        flash()->info('Project updated: ' . $project->title);
-
         return view('crm.project.show', compact('project'));
     }
 
@@ -96,8 +92,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-
-        flash()->info('Project deleted: ' . $project->title);
 
         return redirect()->route('crm.project.index');
     }
