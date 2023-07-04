@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\User\UserRoleEnum;
+use App\Notifications\SendVerifyWithQueueNotification;
 use App\QueryBuilders\User\UserBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,6 +63,11 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function isAdmin()
     {
         return $this->role->value === UserRoleEnum::Admin->value;
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new SendVerifyWithQueueNotification());
     }
 
     /**
