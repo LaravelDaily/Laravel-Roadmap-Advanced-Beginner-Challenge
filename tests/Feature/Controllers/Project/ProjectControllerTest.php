@@ -25,7 +25,7 @@ class ProjectControllerTest extends TestCase
         $this->user = UserFactory::new()->create();
     }
 
-    public function test_it_index_page_successs()
+    public function test_it_index_page_success()
     {
         $this->withoutExceptionHandling();
 
