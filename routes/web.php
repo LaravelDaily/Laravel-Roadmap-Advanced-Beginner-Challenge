@@ -4,6 +4,7 @@ use App\Http\Controllers\Crm\Client\ClientController;
 use App\Http\Controllers\Crm\HomeController;
 use App\Http\Controllers\Crm\Project\ProjectController;
 use App\Http\Controllers\Crm\Task\TaskController;
+use App\Http\Controllers\Crm\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,18 @@ Route::group(['prefix' => 'crm', 'middleware' => ['verified', 'auth']], function
             'edit' => 'crm.task.edit',
             'update' => 'crm.task.update',
             'destroy' => 'crm.task.destroy',
+        ]
+    ])->middleware('admin');
+
+    Route::resource('users', UserController::class, [
+        'names' => [
+            'index' => 'crm.user.index',
+            'show' => 'crm.user.show',
+            'create' => 'crm.user.create',
+            'store' => 'crm.user.store',
+            'edit' => 'crm.user.edit',
+            'update' => 'crm.user.update',
+            'destroy' => 'crm.user.destroy',
         ]
     ])->middleware('admin');
 
