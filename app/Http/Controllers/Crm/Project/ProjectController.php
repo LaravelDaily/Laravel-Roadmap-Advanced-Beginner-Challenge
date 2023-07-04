@@ -23,9 +23,11 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $filter = app()->make(ProjectFilter::class, ['queryParams' => array_filter($data)]);
-        $projects = Project::filter($filter)
-            ->with('client')
-            ->orderDeadline()
+
+        $projects = Project::query()
+            ->select('id', 'title', 'client_id', 'status', 'deadline')
+            ->with('client:title_company,id')
+            ->filter($filter)
             ->paginate(10);
 
         return view('crm.project.index', compact('projects'));
@@ -37,7 +39,7 @@ class ProjectController extends Controller
     public function create(ProjectAction $projectAction)
     {
         $statuses = $projectAction->getStatusValues();
-        $clients = Client::all();
+        $clients = Client::query()->select('id', 'title_company')->get();
         $users = User::managers()->get();
 
         return view('crm.project.create', compact('statuses', 'clients', 'users'));
@@ -69,8 +71,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $statuses = ProjectStatusEnum::cases();
-        $clients = Client::all();
-        $users = User::all();
+        $clients = Client::query()->select('id', 'title_company')->get();
+        $users = User::query()->managers()->get();
 
         return view('crm.project.edit', compact('project', 'statuses', 'clients', 'users'));
     }

@@ -17,7 +17,7 @@ class ProjectFilter extends AbstractFilter
 
     public function title(Builder $builder, $value)
     {
-        $builder->where('title', 'like', "%{$value}%");
+        $builder->select(['id', 'title', 'deadline', 'status', 'client_id'])->where('title', 'like', "%{$value}%");
     }
 
 //    public function status(Builder $builder, $value)

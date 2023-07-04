@@ -56,7 +56,11 @@ class Handler extends ExceptionHandler
                 switch (get_class($e)) {
                     case QueryException::class:
                     {
-                        flash()->alert('this model has constrains');
+                        if ($e->getCode() === '23000') {
+                            flash()->alert('this model has constrains');
+                        } else {
+                            flash()->alert($e->getMessage());
+                        }
                         return redirect()->back();
                     }
                     case DomainException::class:

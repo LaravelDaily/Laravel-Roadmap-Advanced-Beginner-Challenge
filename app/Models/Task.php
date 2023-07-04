@@ -47,6 +47,8 @@ class Task extends Model
 
     public function scopeOrderPriority()
     {
-        return $this->orderBy('priority', 'desc')->latest();
+        return $this->select(['id', 'title', 'client_id', 'status', 'priority', 'created_at'])
+            ->orderBy('priority', 'desc')
+            ->latest();
     }
 }
