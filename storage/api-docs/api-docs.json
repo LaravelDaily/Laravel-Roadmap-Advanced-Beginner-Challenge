@@ -1,0 +1,521 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Doc API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "email@mail.com"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "password"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "access_token": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "token_type": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/clients": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Index",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "tittle": {
+                                                        "type": "string",
+                                                        "example": "title company example"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "description_company"
+                                                    },
+                                                    "vat": {
+                                                        "type": "integer",
+                                                        "example": 123
+                                                    },
+                                                    "zip": {
+                                                        "type": "integer",
+                                                        "example": 123
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "manager"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "manager@mail.ru"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "+79559759123"
+                                                    },
+                                                    "address": {
+                                                        "type": "string",
+                                                        "example": "Lenina 10"
+                                                    },
+                                                    "city": {
+                                                        "type": "string",
+                                                        "example": "Moscow"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Create",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title_company": {
+                                                "type": "string",
+                                                "example": "title company example"
+                                            },
+                                            "description_company": {
+                                                "type": "string",
+                                                "example": "description_company"
+                                            },
+                                            "vat_company": {
+                                                "type": "integer",
+                                                "example": 123
+                                            },
+                                            "zip_company": {
+                                                "type": "integer",
+                                                "example": 123
+                                            },
+                                            "name_manager": {
+                                                "type": "string",
+                                                "example": "manager"
+                                            },
+                                            "email_manager": {
+                                                "type": "string",
+                                                "example": "manager@mail.ru"
+                                            },
+                                            "phone_manager": {
+                                                "type": "string",
+                                                "example": "+79559759123"
+                                            },
+                                            "address_company": {
+                                                "type": "string",
+                                                "example": "Lenina 10"
+                                            },
+                                            "city_company": {
+                                                "type": "string",
+                                                "example": "Moscow"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "tittle": {
+                                                    "type": "string",
+                                                    "example": "title company example"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "description_company"
+                                                },
+                                                "vat": {
+                                                    "type": "integer",
+                                                    "example": 123
+                                                },
+                                                "zip": {
+                                                    "type": "integer",
+                                                    "example": 123
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "manager"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "manager@mail.ru"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+79559759123"
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "Lenina 10"
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": "Moscow"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/clients/{client}": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Show",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Client's id",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "title company example"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "description_company"
+                                                },
+                                                "vat": {
+                                                    "type": "integer",
+                                                    "example": 123
+                                                },
+                                                "zip": {
+                                                    "type": "integer",
+                                                    "example": 123
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "manager"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "manager@mail.ru"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+79559759123"
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "Lenina 10"
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": "Moscow"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Delete",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Client's id",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Update",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Client's id",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title_company": {
+                                                "type": "string",
+                                                "example": "title company example"
+                                            },
+                                            "description_company": {
+                                                "type": "string",
+                                                "example": "description_company"
+                                            },
+                                            "vat_company": {
+                                                "type": "integer",
+                                                "example": 123
+                                            },
+                                            "zip_company": {
+                                                "type": "integer",
+                                                "example": 123
+                                            },
+                                            "name_manager": {
+                                                "type": "string",
+                                                "example": "manager"
+                                            },
+                                            "email_manager": {
+                                                "type": "string",
+                                                "example": "manager@mail.ru"
+                                            },
+                                            "phone_manager": {
+                                                "type": "string",
+                                                "example": "+79559759123"
+                                            },
+                                            "address_company": {
+                                                "type": "string",
+                                                "example": "Lenina 10"
+                                            },
+                                            "city_company": {
+                                                "type": "string",
+                                                "example": "Moscow"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "title company example"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "description_company"
+                                                },
+                                                "vat": {
+                                                    "type": "integer",
+                                                    "example": 123
+                                                },
+                                                "zip": {
+                                                    "type": "integer",
+                                                    "example": 123
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "manager"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "manager@mail.ru"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+79559759123"
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "Lenina 10"
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": "Moscow"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
