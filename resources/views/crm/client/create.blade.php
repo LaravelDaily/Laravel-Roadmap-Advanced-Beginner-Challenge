@@ -12,8 +12,9 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="{{ route('crm.main.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('crm.client.index') }}">Clients</a></li>
+                            <li class="breadcrumb-item active">Create client</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
