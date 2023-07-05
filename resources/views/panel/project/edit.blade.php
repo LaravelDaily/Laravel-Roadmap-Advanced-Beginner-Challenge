@@ -24,15 +24,16 @@
                                 @csrf
                                 @method('PATCH')
                                 <input type="text" name="title" class="form-control mb-3" placeholder="Your Name"
-                                       value="{{ $project->title }}">
+                                    value="{{ $project->title }}">
                                 @error('title')
-                                <p class="text-danger">{{ $message }}</p>
+                                    <p class="text-danger">{{ $message }}</p>
                                 @enderror
 
-                                <input type="email" name="description" class="form-control mb-3" placeholder="Your Email"
-                                       value="{{ $project->description }}">
+                                {{-- <input type="text" name="description" class="form-control mb-3" placeholder="Your Email"
+                                       value="{{ $project->description }}"> --}}
+                                <textarea name="description" cols="30" rows="10" class="form-control mb-3">{{ $project->description }}</textarea>
                                 @error('description')
-                                <p class="text-danger">{{ $message }}</p>
+                                    <p class="text-danger">{{ $message }}</p>
                                 @enderror
                                 <button class="btn btn-success col-12">Update Project</button>
 

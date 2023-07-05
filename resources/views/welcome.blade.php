@@ -42,17 +42,16 @@
             color: #fff;
             text-align: center;
             position: relative;
+            background-color: rgba(0, 0, 0, 0.3);
         }
 
-        .hero-section:before {
-            content: "";
+        .hero-section::before {
             position: absolute;
             color: #fff;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
         }
 
         .hero-section h1 {
@@ -68,6 +67,7 @@
         .hero-section .btn-primary {
             font-size: 20px;
             padding: 12px 30px;
+            cursor: pointer;
         }
 
         .features-section {
@@ -127,7 +127,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">CRM Project</a>
+            <a class="navbar-brand" href="#">Kiki CRM Plaform</a>
             <ul class="navbar-nav">
                 @guest
                     @if (Route::has('login'))
@@ -143,10 +143,11 @@
                 @endguest
 
                 @auth
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button class="btn btn-danger" type="submit">Logout</button>
-                        </form>
+                    <a href="{{ route('profile') }}" class="btn btn-primary me-3 rounded-circle"><i class="bi bi-person-fill"></i></a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Logout</button>
+                    </form>
                 @endauth
             </ul>
         </div>
@@ -154,9 +155,13 @@
 
     <section class="hero-section">
         <div class="container">
-            <h1>Welcome to our CRM Platform</h1>
-            <p>Manage your customers, track sales, and grow your business with ease.</p>
-            <a href="{{ route('login') }}" class="btn btn-primary">Get Started</a>
+            <h1>
+                {{ auth()->user() ? auth()->user()->name . ', Welcome' : 'Welome' }}
+                to our CRM Platform</h1>
+            <p>Manage your customers, track tasks, and grow your business with ease.</p>
+            @guest
+                <a href="{{ route('login') }}" class="btn btn-primary">Get Started</a>
+            @endguest
         </div>
     </section>
 
@@ -172,15 +177,15 @@
                 </div>
                 <div class="col-md-4">
                     <div class="feature-box">
-                        <i class="bi bi-currency-dollar"></i>
-                        <h3>Track Sales</h3>
-                        <p>Monitor sales performance and analyze revenue trends.</p>
+                        <i class="bi bi-check"></i>
+                        <h3>Track Tasks</h3>
+                        <p>Monitor Tasks Performance and Assign Users Tasks.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-box">
-                        <i class="bi bi-calendar-check-fill"></i>
-                        <h3>Plan Activities</h3>
+                        <i class="bi bi-clipboard-check"></i>
+                        <h3>Create Projects</h3>
                         <p>Schedule appointments, meetings, and follow-ups with ease.</p>
                     </div>
                 </div>
@@ -191,7 +196,9 @@
     <section class="cta-section">
         <div class="container">
             <h2>Ready to streamline your business operations?</h2>
-            <a href={{ route('login') }} class="btn btn-primary">Get Started</a>
+            @guest
+                <a href={{ route('login') }} class="btn btn-primary">Get Started</a>
+            @endguest
         </div>
     </section>
 

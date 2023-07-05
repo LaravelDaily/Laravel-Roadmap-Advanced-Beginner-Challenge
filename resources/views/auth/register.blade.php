@@ -75,4 +75,5 @@
             </div>
         </div>
     </div>
+    <p class="lead mt-3 text-center">Back to <a href="/">HomePage</a></p>
 @endsection

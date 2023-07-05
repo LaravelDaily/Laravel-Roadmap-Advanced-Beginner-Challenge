@@ -16,7 +16,7 @@ class ClientController extends Controller
         $this->authorize('viewAny', Client::class);
         $clientTrashed = Client::onlyTrashed();
         $clients = Client::with('clientable')->paginate(5);
-        return view('panel.client.index', compact('clients', 'clientTrashed','unreadNotifications'));
+        return view('panel.client.index', compact('clients', 'clientTrashed', 'unreadNotifications'));
     }
 
     /**
@@ -66,7 +66,7 @@ class ClientController extends Controller
         $unreadNotifications = auth()->user()->unreadNotifications;
         $this->authorize('update', Client::class);
         $clientTrashed = Client::onlyTrashed();
-        return view('panel.client.edit', compact('clientTrashed','client', 'unreadNotifications'));
+        return view('panel.client.edit', compact('clientTrashed', 'client', 'unreadNotifications'));
     }
 
     /**
@@ -88,9 +88,9 @@ class ClientController extends Controller
 
     public function restore(Client $client)
     {
-        if($client->trashed()){
+        if ($client->trashed()) {
             $client->restore();
-            return redirect()->route('clients.index');
+            return redirect()->route('clients.index')->with('msg', 'Client Restored');
         }
     }
 
@@ -107,7 +107,7 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         $this->authorize('delete', Client::class);
-        if($client->trashed()){
+        if ($client->trashed()) {
             $client->forceDelete();
         }
         $client->delete();

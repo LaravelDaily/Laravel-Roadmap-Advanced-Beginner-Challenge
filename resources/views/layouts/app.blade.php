@@ -73,7 +73,6 @@
         <main class="py-4 mt-5">
             @yield('content')
         </main>
-        <p class="lead mt-3 text-center">Back to <a href="/">HomePage</a></p>
     </div>
 </body>
 

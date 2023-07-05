@@ -14,7 +14,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|min:6',
-           'email' => 'required|email|max:255|min:6|unique:users',
+            'email' => 'required|email|max:255|min:6|unique:users',
             'password' => 'required|confirmed',
         ]);
 
@@ -45,8 +45,8 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if(!$user || !Hash::check($request->password, $user->password)){
-            abort(404,"Login Credientials Does Not Match");
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            abort(404, "Login Credientials Does Not Match");
         }
 
         $token = $user->createToken($user->name)->plainTextToken;
@@ -55,14 +55,13 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token,
         ], 200);
-
     }
 
     public function logout(Request $request)
     {
-       $request->user()->currentAccessToken()->delete();
-       return response([
-           'message' => 'You have logged Out'
-       ], 200);
+        $request->user()->currentAccessToken()->delete();
+        return response([
+            'message' => 'You have logged Out'
+        ], 200);
     }
 }

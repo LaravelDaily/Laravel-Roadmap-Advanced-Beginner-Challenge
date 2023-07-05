@@ -201,9 +201,9 @@
                             <span class="badge badge-danger bg-danger position-absolute bottom-50 rounded-circle d-none">{{ count($unreadNotifications) }}</span>
                         @endif
                     </span>
-                <button class="btn btn-primary rounded-circle shadow-sm">
+                <a href="{{ route('profile') }}" class="btn btn-primary rounded-circle shadow-sm">
                     <i class="bi bi-person-fill"></i>
-                </button>
+                </a>
             </div>
         <div id="app">
             @yield('content')
