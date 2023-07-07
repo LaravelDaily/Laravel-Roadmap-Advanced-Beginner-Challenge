@@ -1,79 +1,99 @@
-# Laravel Roadmap: Advanced Beginner Level Challenge
+## Advanced Beginner Level
+The goal of this level is to find the first job or freelance gig
 
-This is a task for the [Advanced Beginner Level of the Laravel Roadmap](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#advanced-beginner-level), with the goal to implement as many of its topics as possible.
+__Link icons: :book: Official Docs :clapper: Video :page_facing_up: Article :capital_abcd: Course__ 
 
-This repository is intentionally empty, with only a Readme file. Your task if to submit a Pull Request with your version of implementing the task, and your PR may be reviewed by someone on our team, or other volunteers.
+| Topic                                                                | Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Routing Advanced**                                                 ||
+| Route Model Binding                                                  | [web.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/routes/web.php#L29) <br> [ClientController.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Http/Controllers/Crm/Client/ClientController.php) <br> [ProjectController.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Http/Controllers/Crm/Project/ProjectController.php) <br> [TaskController.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Http/Controllers/Crm/Task/TaskController.php) <br> [UserController.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Http/Controllers/Crm/User/UserController.php) <br> |
+| Route Redirect                                                       | [web.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/routes/web.php#L22) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Middleware**                                                       ||
+| Create Custom Middleware Class                                       | [AdminMiddleware.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Http/Middleware/AdminMiddleware.php) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Database Advanced**                                                ||
+| Database Seeders and Factories                                       | [/seeders](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/database/seeders/DatabaseSeeder.php) <br> [/factories](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/database/factories) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Eloquent Query Scopes                                                | [User.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/User.php#L58) <br> [Project.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/Project.php#L52) <br>  [Task.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/Task.php#L48) <br>  [Filterable.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/Traits/Filterable.php#L16) <br>                                                                                                                                                                                                                                                     |
+| Polymorphic relationships                                            | [Projects_migration](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/database/migrations/2023_06_25_164506_create_projects_table.php) <br> [Tasks_migration](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/database/migrations/2023_06_26_185121_create_tasks_table.php) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Eloquent Accessors and Mutators                                      | [Task.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/Task.php#L43) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Eloquent Collections                                                 | _Controllers_ <br> _Tests_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Soft Deletes                                                         | [User.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/User.php#L18)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+| **Auth Advanced**                                                    ||
+| Authorization: Roles/Permissions, Gates, Policies                    | [UserRoleEnum.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Enums/User/UserRoleEnum.php) <br> [AdminPolicy.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Policies/AdminPolicy.php) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Authentication: Email Verification                                   | [SendVerifyWithQueueNotification.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Notifications/SendVerifyWithQueueNotification.php) <br> [User.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/User.php#L16) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **File Uploads Advanced**                                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+| Extra Packages: Spatie Medialibrary, Intervention Image, etc         | [StoreMediaAction.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Actions/Media/StoreMediaAction.php) <br> [Project.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/Project.php#L14) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **API Basics**                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| API Routes and Controllers                                           | [API Controllers](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/app/Http/Controllers/Api/V1) <br> [api.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/routes/api.php) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Working with API Clients: Postman or Alternatives                    | :book: [Postman API Client](https://www.postman.com/product/api-client/) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| API Eloquent Resources                                               | [Resources](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/app/Http/Resources) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| API Auth with JWT                                                    | [api.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/routes/api.php#L26) <br> [User.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Models/User.php#L16) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| API Error Handling and Status Codes                                  | [Handler.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Exceptions/Handler.php) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+| **Debugging Errors**                                                 ||
+| Log Files in Laravel                                                 | [Handler.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Exceptions/Handler.php#L74) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Try-Catch and Laravel Exceptions                                     | [Handler.php](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/blob/main/app/Exceptions/Handler.php) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Local Debugging Tools: Debugbar, Telescope, Ray                      | :book: [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar) <br>:book: [Laravel Telescope](https://laravel.com/docs/8.x/telescope) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Customizing Error Pages and Messages                                 | [/mail](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/resources/views/mail) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+| (optional) Third Party Bug Trackers: Bugsnag, Flare, Sentry, Rollbar | :book: [Bugsnag Laravel](https://docs.bugsnag.com/platforms/php/laravel/) <br>:book: [Flare Homepage](https://flareapp.io/) <br>:book: [Sentry Laravel](https://docs.sentry.io/platforms/php/guides/laravel/) <br>:book: [Rollbar Laravel](https://docs.rollbar.com/docs/laravel) <br>:clapper: [Bug Tracking in Laravel: Bugsnag vs Flare [Demo/Review]](https://www.youtube.com/watch?v=88UqUXhWwGA) <br>                                                                                                                                                                                                                                                                                                                                                                            |
+| **Sending Email**                                                    ||
+| Mailables and Mail Facade                                            | [/Mail](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/app/Mail) <br> [/Jobs](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/app/Jobs)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Configure Drivers/Services: Mailgun, Mailtrap, etc                   | :book: [MailHog](https://github.com/mailhog/MailHog)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Automated Testing with PHPUnit**                                   ||
+| Configure Testing Database and Test CRUD Operations                  | [/Feature](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/tests/Feature/Controllers) <br> [/Unit](https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge/tree/main/tests/Unit)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Deployment and Version Control**                                   ||
+| Git Version Control                                                  | :book: [Git](https://git-scm.com/) <br>:clapper: [Git in Laravel. Part 1 - Branches: Main, Develop and Feature](https://www.youtube.com/watch?v=AmScEC-_72I) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Deployment on Live Servers                                           | :book: [Deployment](https://laravel.com/docs/8.x/deployment) <br>:page_facing_up: [How to Deploy Laravel Projects to Live Server: The Ultimate Guide](https://laraveldaily.com/how-to-deploy-laravel-projects-to-live-server-the-ultimate-guide/) <br>:page_facing_up: [What Server is Needed to Deploy Laravel Projects](https://laraveldaily.com/what-server-is-needed-to-deploy-laravel-projects/) <br>:clapper: [How we Deploy Laravel: Branches, Staging Servers, Forge and Envoyer](https://www.youtube.com/watch?v=8DVuVftFZcQ) <br>                                                                                                                                                                                                                                            |
 
-## The Task: Simple CRM System for Managing Clients
+---
 
-You should create an adminpanel-like system to manage Clients, Projects, Tasks with CRUD operations.
+## This project also includes
 
-A few screenshots from the example solution:
+- Jobs
+- Observers
+- Swagger api docs
+- Custom flash
+- Actions
+- Policies
+- Requests
+- Filter
+- Commands
 
-<img width="1370" alt="Screenshot 2021-08-12 at 10 56 42" src="https://user-images.githubusercontent.com/1510147/129160013-d5c895d3-92aa-4a32-9a62-d09807f623f9.png">
-<img width="1371" alt="Screenshot 2021-08-12 at 10 57 15" src="https://user-images.githubusercontent.com/1510147/129160023-8095c1b5-d6ce-4813-b708-af1b16605160.png">
+---
 
-You can come up with whatever structure of the database tables you want, but please try to use all the Laravel features listed below.
+## Installation
 
+Setting up your development environment on your local machine :
 
+- git clone https://github.com/sodaler/Laravel-Roadmap-Advanced-Beginner-Challenge.git
+- cp .env.example .env
+- composer install
+- npm install
+- crm:install
+- php artisan serve
+- npm run dev
 
------
+---
 
-## Features to implement
+## Screenshots
 
-Here's the [list of Roadmap features](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#beginner-level) you need to try to implement in your code:
+### CRM
 
+http://localhost:8000/crm
 
-**Routing Advanced**	
+![Screenshot](public/images/img.png)
+![Screenshot](public/images/img_1.png)
+![Screenshot](public/images/img_2.png)
+![Screenshot](public/images/img_3.png)
 
-- Route Model Binding	in Resource Controllers
-- Route Redirect - homepage should automatically redirect to the login form
+### Swagger
 
+http://localhost:8000/api/documentation
 
-**Database Advanced**
+![Screenshot](public/images/img_4.png)
+![Screenshot](public/images/img_5.png)
+![Screenshot](public/images/img_6.png)
 
-- Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
-- Eloquent Query Scopes - show only active clients, for example
-- Polymorphic relationships	with [Spatie Media Library package](https://github.com/spatie/laravel-medialibrary)
-- Eloquent Accessors and Mutators	- view all date values in `m/d/Y` format
-- Soft Deletes on any Eloquent models
+### MailHog
 
+http://localhost:8025/
 
-**Auth Advanced**	
-
-- Authorization: Roles/Permissions (admin and simple users), Gates, Policies with [Spatie Permissions package](https://github.com/spatie/laravel-permission)
-- Authentication: Email Verification	
-
-
-**API Basics**	
-
-- API Routes and Controllers	
-- API Eloquent Resources	
-- API Auth with Sanctum	
-- Override API Error Handling and Status Codes	
-
-
-**Debugging Errors**	
-
-- Try-Catch and Laravel Exceptions	
-- Customizing Error Pages
-
-
-**Sending Email**
-
-- Mailables and Mail Facade	
-- Notifications System: Email
-
-
-**Extra**
-
-- Automated Tests for CRUD Operations
-
-
------ 
-
-## Example Solution
-
-If you need help, or you want to compare your version with our simple version, here's [the public repository](https://github.com/LaravelDaily/Laravel-Roadmap-Advanced-Beginner-Roadmap) with a _possible_ solution.
-
-**Notice**: please look at that repository only AFTER you've accomplished the task yourself, or if you're confident about your Laravel Advanced Beginner skills and you think you don't need to practice this task.
+![Screenshot](public/images/img_7.png)
