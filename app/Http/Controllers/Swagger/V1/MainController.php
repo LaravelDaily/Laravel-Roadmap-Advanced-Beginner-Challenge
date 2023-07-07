@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 /**
  * @OA\Info(
- *     title="My Doc API",
+ *     title="CRM Doc API",
  *     version="1.0.0"
  * ),
  * @OA\PathItem(

@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My Doc API",
+        "title": "CRM Doc API",
         "version": "1.0.0"
     },
     "paths": {

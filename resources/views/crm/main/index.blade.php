@@ -35,7 +35,7 @@
                                 <p>Clients</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="fas fa-users"></i>
                             </div>
                             <a href="{{ route('crm.client.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -50,7 +50,7 @@
                                 <p>Projects</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="fas fa-project-diagram"></i>
                             </div>
                             <a href="{{ route('crm.project.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -65,7 +65,7 @@
                                 <p>Tasks</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="fas fa-tasks"></i>
                             </div>
                             <a href="{{ route('crm.task.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -80,7 +80,7 @@
                                 <p>Users</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="fas fa-users-cog"></i>
                             </div>
                             <a href="{{ route('crm.user.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>

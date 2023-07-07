@@ -16,7 +16,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('crm.client.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th-list"></i>
+                    <i class="nav-icon fas fa-users"></i>
                     <p>
                         Clients
                     </p>
@@ -24,7 +24,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('crm.project.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th-list"></i>
+                    <i class="nav-icon fas fa-project-diagram"></i>
                     <p>
                         Projects
                     </p>
@@ -34,7 +34,7 @@
             @can('view', auth()->user())
                 <li class="nav-item">
                     <a href="{{ route('crm.task.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th-list"></i>
+                        <i class="nav-icon fas fa-tasks"></i>
                         <p>
                             Tasks
                         </p>
@@ -43,7 +43,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('crm.user.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th-list"></i>
+                        <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                             Users
                         </p>
