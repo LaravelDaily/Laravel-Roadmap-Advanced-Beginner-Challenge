@@ -9,89 +9,85 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
-
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                Our products
-                                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.</p>
-                            </caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Product name
+                                    Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Color
+                                    Position
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Category
+                                    Status
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Price
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                    Action
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Apple MacBook Pro 17"
+                            @forelse($users as $user)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                    <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                        <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <div class="ps-3">
+                                        <div class="text-base font-semibold">{{$user->name}}</div>
+                                        <div class="font-normal text-gray-500">{{$user->email}}</div>
+                                    </div>
                                 </th>
                                 <td class="px-6 py-4">
-                                    Silver
+                                    @forelse($user->getRoleNames() as $role)
+                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 border border-gray-500">
+                                            {{ucfirst($role)}}
+                                        </span>
+                                    @empty
+                                    @endforelse
                                 </td>
                                 <td class="px-6 py-4">
-                                    Laptop
+                                    <div class="flex items-center">
+                                        @if($user->hasVerifiedEmail())
+                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Verified
+                                        @else
+                                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Unverified
+                                        @endif
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    $2999
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a href="#" id="dropdownActionButton{{$loop->index}}" data-dropdown-toggle="dropdownAction{{$loop->index}}" class="inline-flex items-center text-gray-500 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z"/>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                        </svg>
+                                    </a>
+                                    <div>
+                                        <!-- Dropdown menu -->
+                                        <div id="dropdownAction{{$loop->index}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton{{$loop->index}}">
+                                                <li>
+                                                    <a href="{{route('users.edit', $user)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        Edit
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="py-1 bg-red">
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Microsoft Surface Pro
-                                </th>
-                                <td class="px-6 py-4">
-                                    White
-                                </td>
-                                <td class="px-6 py-4">
-                                    Laptop PC
-                                </td>
-                                <td class="px-6 py-4">
-                                    $1999
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Magic Mouse 2
-                                </th>
-                                <td class="px-6 py-4">
-                                    Black
-                                </td>
-                                <td class="px-6 py-4">
-                                    Accessories
-                                </td>
-                                <td class="px-6 py-4">
-                                    $99
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
+                                @empty
+
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
