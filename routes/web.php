@@ -11,6 +11,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('clients', \App\Http\Controllers\ClientController::class);
+    Route::resource('projects', \App\Http\Controllers\ProjectController::class);
+    Route::resource('tasks', \App\Http\Controllers\TaskController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
