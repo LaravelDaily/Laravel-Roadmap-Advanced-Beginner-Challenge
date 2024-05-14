@@ -26,19 +26,20 @@
                     </div>
                     @endsession
 
-                    <form action="{{route('clients.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('clients.update', $client)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div>
                                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                                <input type="text" id="company" value="{{old('company')}}" name="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Company Name" required />
+                                <input type="text" id="company" value="{{old('company') ?? $client->company}}" name="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Company Name" required />
                                 @error('company')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
                                 @enderror
                             </div>
                             <div>
                                 <label for="vat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">VAT</label>
-                                <input type="number" id="vat" value="{{old('vat')}}" name="vat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Value Added Tax" required />
+                                <input type="number" id="vat" value="{{old('vat') ?? $client->vat}}" name="vat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Value Added Tax" required />
                                 @error('vat')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
                                 @enderror
@@ -46,7 +47,7 @@
                         </div>
                         <div class="mb-6">
                             <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                            <input type="text" id="address" value="{{old('address')}}" name="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required />
+                            <input type="text" id="address" value="{{old('address') ?? $client->address}}" name="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required />
                             @error('address')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
                             @enderror

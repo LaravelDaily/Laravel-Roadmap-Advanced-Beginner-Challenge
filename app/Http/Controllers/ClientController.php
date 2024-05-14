@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
 {
@@ -13,6 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
+//        abort_if(Gate::denies('access clients'), 403);
+        Gate::authorize('access clients');
         $clients = Client::orderByDesc('id')->paginate(7);
         return view('clients.index', compact('clients'));
     }
@@ -48,15 +52,17 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', $client);
+        return view('clients.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $client->update($request->validated());
+
+        return redirect()->route('clients.index')->with('message', 'Client updated successfully.');
     }
 
     /**
