@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -13,32 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('access users', auth()->user()), 403);
         $users = User::all();
         return view('users.index', compact('users'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
     }
 
     /**
@@ -46,6 +25,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        abort_if(Gate::denies('edit users', auth()->user()), 403);
         $roles = Role::all();
         return view('users.edit', compact('user', 'roles'));
     }
@@ -53,9 +33,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        dd($request->all());
+        $user->update(['name' => $request->validated('name')]);
+        $user->syncRoles($request->validated('role'));
+
+        return redirect()->route('users.edit', $user)->with('message', 'User updated successfully.');
     }
 
     /**
@@ -63,6 +46,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        abort_if(Gate::denies('delete users', auth()->user()), 403);
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('message', 'User deleted successfully.');
     }
 }

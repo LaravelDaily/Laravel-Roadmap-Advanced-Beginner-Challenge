@@ -14,15 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(3)->create();
-
-        User::factory(1)->unverified()->create();
-
-        $admin = User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-        ]);
-
-        $admin->assignRole(Role::first());
+        User::factory()->admin()->create();
+        User::factory()->manager()->create();
+        User::factory(2)->simpleUser()->create();
+        User::factory(1)->unverified()->simpleUser()->create();
     }
 }

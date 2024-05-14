@@ -14,9 +14,29 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = Role::create(['name' => 'admin']);
-        $permissions = Permission::select('name')->get()->toArray();
-        $role->givePermissionTo($permissions);
+        $adminRole = Role::create(['name' => 'admin']);
+        $managerRole = Role::create(['name' => 'manager']);
+        $userRole = Role::create(['name' => 'user']);
 
+        $adminPermissions = Permission::select('name')->get()->toArray();
+        $adminRole->givePermissionTo($adminPermissions);
+        $userRole->givePermissionTo([
+            'access tasks',
+            'edit tasks'
+        ]);
+        $managerRole->givePermissionTo([
+            'access clients',
+            'edit clients',
+            'create clients',
+            'delete clients',
+            'access projects',
+            'edit projects',
+            'create projects',
+            'delete projects',
+            'access tasks',
+            'edit tasks',
+            'create tasks',
+            'delete tasks',
+        ]);
     }
 }

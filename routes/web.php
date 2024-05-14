@@ -10,7 +10,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('users', \App\Http\Controllers\UserController::class)->only('index', 'edit', 'update', 'destroy');
     Route::resource('clients', \App\Http\Controllers\ClientController::class);
     Route::resource('projects', \App\Http\Controllers\ProjectController::class);
     Route::resource('tasks', \App\Http\Controllers\TaskController::class);
