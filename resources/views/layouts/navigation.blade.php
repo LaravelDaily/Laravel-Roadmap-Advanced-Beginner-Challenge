@@ -21,7 +21,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @can('access users')
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                             <svg class="w-6 h-6 mr-1 text-gray-800 dark:text-white" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
                         </x-nav-link>
                     @endcan
                     @can('access clients')
-                        <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+                        <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.*')">
                             <svg class="w-6 h-6 mr-1 text-gray-800 dark:text-white" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                         </x-nav-link>
                     @endcan
                     @can('access projects')
-                        <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                        <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.*')">
                             <svg class="w-6 h-6 mr-1 text-gray-800 dark:text-white" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
@@ -56,7 +56,7 @@
                         </x-nav-link>
                     @endcan
                     @can('access tasks')
-                        <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                        <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.*')">
                             <svg class="w-6 h-6 mr-1 text-gray-800 dark:text-white" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
@@ -136,7 +136,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @can('access users')
-            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
@@ -146,7 +146,7 @@
             </x-responsive-nav-link>
             @endcan
             @can('access clients')
-            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.*')">
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -156,7 +156,7 @@
             </x-responsive-nav-link>
             @endcan
             @can('access projects')
-            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.*')">
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -166,7 +166,7 @@
             </x-responsive-nav-link>
             @endcan
             @can('access tasks')
-            <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+            <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.*')">
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
