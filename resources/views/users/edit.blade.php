@@ -55,7 +55,7 @@
                                 @forelse($roles as $role)
                                     <option value="{{$role->name}}" @selected($user->hasRole($role->name))>{{ucfirst($role->name)}}</option>
                                     @empty
-                                    <option >Roles are not defined</option>
+                                    <option selected>Roles are not defined</option>
                                 @endforelse
                             </select>
                             @error('role')
