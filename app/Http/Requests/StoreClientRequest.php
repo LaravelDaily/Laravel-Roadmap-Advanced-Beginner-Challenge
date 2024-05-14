@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class UpdateUserRequest extends FormRequest
+class StoreClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if(Gate::allows('edit users', auth()->user())) {
+        if (Gate::allows('create clients', auth()->user())) {
             return true;
         }
         return false;
@@ -26,8 +26,9 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:150',
-            'role' => 'required|string|exists:roles,name',
+            'company' => 'required|string|max:200',
+            'vat' => 'required|integer|max_digits:11',
+            'address' => 'required|string|max:200',
         ];
     }
 }

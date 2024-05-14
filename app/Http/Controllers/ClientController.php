@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::paginate(7);
+        $clients = Client::orderByDesc('id')->paginate(7);
         return view('clients.index', compact('clients'));
     }
 
@@ -27,9 +28,11 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
-        //
+        Client::create($request->validated());
+
+        return redirect()->route('clients.index')->with('message', 'New client created successfully.');
     }
 
     /**
