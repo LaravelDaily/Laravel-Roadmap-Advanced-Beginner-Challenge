@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
 {
@@ -12,7 +13,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::with('user', 'client')->paginate(7);
+
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -20,7 +23,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -44,7 +47,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -60,6 +64,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        Gate::authorize('delete projects');
+        $project->delete();
+
+        return redirect()->route('projects.index')->with('message', 'Project deleted successfully.');
     }
 }
