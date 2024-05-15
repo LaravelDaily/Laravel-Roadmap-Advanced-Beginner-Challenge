@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -23,6 +24,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $users = User::select('name')->get();
+        dd($users);
         return view('projects.create');
     }
 
