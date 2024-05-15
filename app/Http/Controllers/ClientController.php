@@ -15,9 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-//        abort_if(Gate::denies('access clients'), 403);
         Gate::authorize('access clients');
         $clients = Client::orderByDesc('id')->paginate(7);
+
         return view('clients.index', compact('clients'));
     }
 
@@ -26,6 +26,8 @@ class ClientController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create clients');
+
         return view('clients.create');
     }
 
@@ -52,6 +54,8 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+        Gate::authorize('edit clients');
+
         return view('clients.edit', compact('client'));
     }
 
@@ -70,6 +74,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        Gate::authorize('delete clients');
         $client->delete();
 
         return redirect()->route('clients.index')->with('message', 'Client deleted successfully.');
