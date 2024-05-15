@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('deadline');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('client_id')->constrained();
-            $table->boolean('status')->default(true);
+            $table->boolean('status');
             $table->softDeletes();
             $table->timestamps();
         });

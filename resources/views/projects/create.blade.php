@@ -24,11 +24,9 @@
                         <div class="mb-6">
                             <label for="description"
                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                            <textarea id="description" rows="4"
+                            <textarea id="description" name="description" rows="4" required
                                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      placeholder="Write your thoughts here...">
-                                    {{old('description')}}
-                                </textarea>
+                                      placeholder="Write your thoughts here...">{{old('description')}}</textarea>
                             @error('description')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                     class="font-medium">{{$message}}</span></p>
@@ -45,15 +43,41 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role:</label>
-                            <select id="roles" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @forelse($users as $user)
-                                    <option value="{{$user->name}}" @selected($user->hasRole($user->name))>{{ucfirst($user->name)}}</option>
+                            <label for="users" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Assigned User</label>
+                            <select id="users" required name="user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" selected>Choose a user</option>
+                                @forelse($users as $userId => $userName)
+                                    <option value="{{$userId}}" @selected(old('name') === $userName)>{{ucfirst($userName)}}</option>
                                 @empty
-                                    <option selected>Roles are not defined</option>
+                                    <option selected>There is no user to assign</option>
                                 @endforelse
                             </select>
-                            @error('role')
+                            @error('user')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                            @enderror
+                        </div>
+                        <div class="mb-6">
+                            <label for="clients" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Assigned Client</label>
+                            <select id="clients" required name="client" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" selected>Choose a client</option>
+                                @forelse($clients as $clientId => $companyName)
+                                    <option value="{{$clientId}}" @selected(old('client') === $clientId)>{{ucfirst($companyName)}}</option>
+                                @empty
+                                    <option selected>There is no client to assign</option>
+                                @endforelse
+                            </select>
+                            @error('client')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                            @enderror
+                        </div>
+                        <div class="mb-6">
+                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                            <select id="status" required name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" selected>Choose a status</option>
+                                    <option value="0" @selected(old('status') === 0)>{{__('Open')}}</option>
+                                    <option value="1" @selected(old('status') === 1)>{{__('Close')}}</option>
+                            </select>
+                            @error('status')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
                             @enderror
                         </div>
