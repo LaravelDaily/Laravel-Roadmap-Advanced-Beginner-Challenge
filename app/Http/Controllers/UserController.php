@@ -15,8 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('access users', auth()->user()), 403);
+        Gate::authorize('access users');
         $users = User::paginate(5);
+
         return view('users.index', compact('users'));
     }
 
@@ -25,8 +26,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        abort_if(Gate::denies('edit users', auth()->user()), 403);
+        Gate::authorize('edit users');
         $roles = Role::all();
+
         return view('users.edit', compact('user', 'roles'));
     }
 
@@ -46,8 +48,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        abort_if(Gate::denies('delete users', auth()->user()), 403);
-
+        Gate::authorize('delete users');
         $user->delete();
 
         return redirect()->route('users.index')->with('message', 'User deleted successfully.');
