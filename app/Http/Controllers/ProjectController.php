@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
@@ -15,7 +16,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('user', 'client')->paginate(7);
+        Gate::authorize('access projects');
+        $projects = Project::with('user', 'client')->orderByDesc('id')->paginate(7);
 
         return view('projects.index', compact('projects'));
     }
@@ -25,6 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create projects');
         $users = User::pluck('name', 'id');
         $clients = Client::pluck('company', 'id');
 
@@ -34,9 +37,11 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        dd($request->all());
+        Project::create($request->validated());
+
+        return redirect()->route('projects.index')->with('message', 'New Project created successfully.');
     }
 
     /**
