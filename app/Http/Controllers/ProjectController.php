@@ -57,8 +57,12 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        Gate::authorize('edit projects');
+        $users = User::pluck('name', 'id');
+        $clients = Client::pluck('company', 'id');
+        $project->loadMissing(['user', 'client']);
 
-        return view('projects.edit', compact('project'));
+        return view('projects.edit', compact('project', 'users', 'clients'));
     }
 
     /**
