@@ -12,7 +12,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::with('project')->paginate(7);
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
