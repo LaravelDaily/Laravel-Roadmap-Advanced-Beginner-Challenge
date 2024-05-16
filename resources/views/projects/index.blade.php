@@ -43,13 +43,16 @@
                                     Title
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Deadline
+                                    Client
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     User
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Client
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Deadline
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -66,7 +69,9 @@
                                         </div>
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{$project->deadline}}
+                                        <div class="flex items-center">
+                                            {{$project->client->company}}
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
@@ -75,8 +80,15 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            {{$project->client->company}}
+                                            @if($project->status)
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Open
+                                            @else
+                                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Close
+                                            @endif
                                         </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{$project->deadline}}
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="#" id="dropdownActionButton{{$loop->index}}"

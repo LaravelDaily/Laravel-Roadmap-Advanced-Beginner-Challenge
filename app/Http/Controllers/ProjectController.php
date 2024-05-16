@@ -62,7 +62,6 @@ class ProjectController extends Controller
         $users = User::pluck('name', 'id');
         $clients = Client::pluck('company', 'id');
         $project->loadMissing(['user', 'client']);
-//        dd($project->user->id);
 
         return view('projects.edit', compact('project', 'users', 'clients'));
     }
