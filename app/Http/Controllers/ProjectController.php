@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
@@ -61,6 +62,7 @@ class ProjectController extends Controller
         $users = User::pluck('name', 'id');
         $clients = Client::pluck('company', 'id');
         $project->loadMissing(['user', 'client']);
+//        dd($project->user->id);
 
         return view('projects.edit', compact('project', 'users', 'clients'));
     }
@@ -68,9 +70,11 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+
+        return redirect()->route('projects.index')->with('message', 'Project updated successfully.');
     }
 
     /**

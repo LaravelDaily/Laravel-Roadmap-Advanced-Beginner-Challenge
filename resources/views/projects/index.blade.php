@@ -43,9 +43,6 @@
                                     Title
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Description
-                                </th>
-                                <th scope="col" class="px-6 py-3">
                                     Deadline
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -68,9 +65,6 @@
                                             <div class="text-base font-semibold">{{$project->title}}</div>
                                         </div>
                                     </th>
-                                    <td class="px-6 py-4">
-                                        {{\Illuminate\Support\Str::limit($project->description, 100)}}
-                                    </td>
                                     <td class="px-6 py-4">
                                         {{$project->deadline}}
                                     </td>

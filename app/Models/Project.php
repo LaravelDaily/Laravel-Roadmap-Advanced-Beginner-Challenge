@@ -26,7 +26,7 @@ class Project extends Model
     protected function deadline(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => Carbon::make($value)->format('m/d/Y'),
+            get: fn (string $value) => Carbon::parse($value)->format('m/d/Y'),
         );
     }
 

@@ -9,11 +9,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{route('projects.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('projects.update', $project)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="mb-6">
                             <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                            <input type="text" id="title" value="{{old('title') ?? $project->title}}" name="title"
+                            <input type="text" id="title" value="{{$project->title}}" name="title"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="Company Name" required/>
                             @error('title')
@@ -26,7 +27,7 @@
                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                             <textarea id="description" name="description" rows="4" required
                                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      placeholder="Write your thoughts here...">{{old('description') ?? $project->description}}</textarea>
+                                      placeholder="Write your thoughts here...">{{$project->description}}</textarea>
                             @error('description')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                     class="font-medium">{{$message}}</span></p>
@@ -34,7 +35,7 @@
                         </div>
                         <div class="mb-6">
                             <label for="deadline" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline</label>
-                            <input type="date" id="deadline" value="{{old('deadline')}}" name="deadline"
+                            <input type="date" id="deadline" value="{{date('Y-m-d', strtotime($project->deadline))}}" name="deadline"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="Deadline" required/>
                             @error('deadline')
@@ -47,7 +48,7 @@
                             <select id="user_id" required name="user_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Choose a user</option>
                                 @forelse($users as $userId => $userName)
-                                    <option value="{{$userId}}" @selected(old('user_id') == $userId)>{{ucfirst($userName)}}</option>
+                                    <option value="{{$userId}}" @selected($userId == $project->user_id)>{{ucfirst($userName)}}</option>
                                 @empty
                                     <option selected>There is no user to assign</option>
                                 @endforelse
@@ -61,7 +62,7 @@
                             <select id="client_id" required name="client_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Choose a client</option>
                                 @forelse($clients as $clientId => $companyName)
-                                    <option value="{{$clientId}}" @selected(old('client_id') == $clientId)>{{ucfirst($companyName)}}</option>
+                                    <option value="{{$clientId}}" @selected($clientId == $project->client_id)>{{ucfirst($companyName)}}</option>
                                 @empty
                                     <option selected>There is no client to assign</option>
                                 @endforelse
@@ -74,8 +75,8 @@
                             <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                             <select id="status" required name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Choose a status</option>
-                                <option value="1" @selected(old('status') == 1)>{{__('Open')}}</option>
-                                <option value="0" @selected(old('status', 'empty') == 0)>{{__('Close')}}</option>
+                                <option value="1" @selected($project->status == 1)>{{__('Open')}}</option>
+                                <option value="0" @selected($project->status == 0)>{{__('Close')}}</option>
                             </select>
                             @error('status')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
