@@ -91,7 +91,7 @@
                                         {{$project->deadline}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="#" id="dropdownActionButton{{$loop->index}}"
+                                        <button id="dropdownActionButton{{$loop->index}}"
                                            data-dropdown-toggle="dropdownAction{{$loop->index}}"
                                            class="inline-flex items-center text-gray-500 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
@@ -104,7 +104,7 @@
                                                       stroke-linejoin="round" stroke-width="2"
                                                       d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                                             </svg>
-                                        </a>
+                                        </button>
                                         <div>
                                             <!-- Dropdown menu -->
                                             <div id="dropdownAction{{$loop->index}}"
