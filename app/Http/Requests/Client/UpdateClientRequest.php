@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class StoreProjectRequest extends FormRequest
+class UpdateClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if (Gate::allows('create clients')) {
+        if (Gate::allows('edit clients', auth()->user())) {
             return true;
         }
         return false;
@@ -26,12 +26,9 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:200',
-            'description' => 'required|string',
-            'deadline' => 'required|date',
-            'user_id' => 'required|integer|exists:users,id',
-            'client_id' => 'required|integer|exists:clients,id',
-            'status' => 'required|boolean',
+            'company' => 'required|string|max:200',
+            'vat' => 'required|integer|max_digits:11',
+            'address' => 'required|string|max:200',
         ];
     }
 }
