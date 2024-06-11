@@ -33,9 +33,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update([
-            'name' => $request->input('name'),
-        ]);
+        $user->update($request->validated('name'));
         $user->syncRoles(strtolower($request->input('role')));
         return response()->json(['message' => 'User updated successfully'], Response::HTTP_OK);
     }
