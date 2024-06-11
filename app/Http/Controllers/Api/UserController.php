@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('permissions')->paginate(2);
+        $users = User::with('permissions')->paginate(5);
         return new UserCollection($users);
     }
 
