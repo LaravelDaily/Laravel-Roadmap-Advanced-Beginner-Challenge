@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -15,15 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        $users = User::with('permissions')->paginate(2);
+        return new UserCollection($users);
     }
 
     /**
@@ -31,15 +25,19 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return new UserResource($user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update([
+            'name' => $request->input('name'),
+        ]);
+        $user->syncRoles(strtolower($request->input('role')));
+        return response()->json(['message' => 'User updated successfully'], Response::HTTP_OK);
     }
 
     /**
@@ -47,6 +45,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
