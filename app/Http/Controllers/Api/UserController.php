@@ -33,9 +33,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated('name'));
-        $user->syncRoles(strtolower($request->input('role')));
-        return response()->json(['message' => 'User updated successfully'], Response::HTTP_OK);
+        $user->update(['name' => $request->validated('name')]);
+        $user->syncRoles($request->validated('role'));
+        return response()->json(['message' => 'The user has been successfully updated.'], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +44,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return response()->json(['message' => 'The user has been successfully deleted.'], Response::HTTP_OK);
     }
 }
