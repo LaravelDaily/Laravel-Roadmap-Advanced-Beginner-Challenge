@@ -35,7 +35,10 @@ class UserController extends Controller
     {
         $user->update(['name' => $request->validated('name')]);
         $user->syncRoles($request->validated('role'));
-        return response()->json(['message' => 'The user has been successfully updated.'], Response::HTTP_OK);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The user has been successfully updated.'
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->json(['message' => 'The user has been successfully deleted.'], Response::HTTP_OK);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The user has been successfully deleted.'
+        ], Response::HTTP_OK);
     }
 }
