@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\{
     UserController,
     ClientController,
     ProjectController,
+    TaskController,
 };
 
 Route::get('/user', function (Request $request) {
@@ -31,5 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class)->except('store');
     Route::apiResource('clients', ClientController::class);
     Route::apiResource('projects', ProjectController::class);
+    Route::apiResource('tasks', TaskController::class);
 });
 
