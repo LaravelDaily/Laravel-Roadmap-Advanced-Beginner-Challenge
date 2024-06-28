@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{
     UserController,
     ClientController,
+    ProjectController,
 };
 
 Route::get('/user', function (Request $request) {
@@ -29,5 +30,6 @@ Route::post('login', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class)->except('store');
     Route::apiResource('clients', ClientController::class);
+    Route::apiResource('projects', ProjectController::class);
 });
 
