@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\ClientNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\StoreClientRequest;
 use App\Http\Requests\Client\UpdateClientRequest;
 use App\Http\Resources\ClientCollection;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
+use App\Services\ClientService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,46 +28,35 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreClientRequest $request)
+    public function store(StoreClientRequest $request, ClientService $clientService)
     {
-        $client = Client::create($request->validated());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The client has been successfully created.',
-            'data' => new ClientResource($client)
-        ], Response::HTTP_CREATED);
+        return $clientService->create($request->validated());
     }
 
     /**
      * Display the specified resource.
+     * @throws ClientNotFoundException
      */
-    public function show(Client $client)
+    public function show(int $id, ClientService $clientService)
     {
-        return new ClientResource($client);
+        return $clientService->show($id);
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws ClientNotFoundException
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, int $id, ClientService $clientService)
     {
-        $updatedClient = $client->update($request->validated());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The client has been successfully updated.',
-            'data' => new ClientResource($client)
-        ], Response::HTTP_OK);
+        return $clientService->update($request->validated(), $id);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws ClientNotFoundException
      */
-    public function destroy(Client $client)
+    public function destroy(int $id, ClientService $clientService)
     {
-        $client->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The client has been successfully deleted.'
-        ], Response::HTTP_OK);
+        return $clientService->delete($id);
     }
 }

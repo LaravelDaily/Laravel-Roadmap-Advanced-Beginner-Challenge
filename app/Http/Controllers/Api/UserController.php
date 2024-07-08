@@ -44,6 +44,6 @@ class UserController extends Controller
      */
     public function destroy(int $id, UserService $userService)
     {
-        return $userService->destroy($id);
+        return $userService->delete($id);
     }
 }
