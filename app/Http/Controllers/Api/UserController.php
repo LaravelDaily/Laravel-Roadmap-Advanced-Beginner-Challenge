@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Response;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
@@ -22,34 +22,28 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
+     * @throws UserNotFoundException
      */
-    public function show(User $user)
+    public function show(int $id, UserService $userService)
     {
-        return new UserResource($user);
+        return $userService->show($id);
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws UserNotFoundException
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, int $id, UserService $userService)
     {
-        $user->update(['name' => $request->validated('name')]);
-        $user->syncRoles($request->validated('role'));
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The user has been successfully updated.'
-        ], Response::HTTP_OK);
+        return $userService->update($request->validated(), $id);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws UserNotFoundException
      */
-    public function destroy(User $user)
+    public function destroy(int $id, UserService $userService)
     {
-        $user->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The user has been successfully deleted.'
-        ], Response::HTTP_OK);
+        return $userService->destroy($id);
     }
 }
