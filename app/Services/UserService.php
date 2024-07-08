@@ -8,15 +8,16 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Exception;
 
 class UserService
 {
     /**
      * @param int $id
-     * @return UserResource|JsonResponse
+     * @return UserResource
      * @throws UserNotFoundException
      */
-    public function show(int $id): UserResource|JsonResponse
+    public function show(int $id): UserResource
     {
         try {
             $user = User::findOrFail($id);
@@ -44,7 +45,7 @@ class UserService
             ], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
             throw new UserNotFoundException($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'The Process is unreachable.',
@@ -68,7 +69,7 @@ class UserService
             ], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
             throw new UserNotFoundException($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'The Process is unreachable.',

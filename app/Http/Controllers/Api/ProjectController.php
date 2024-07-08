@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\ProjectNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\ProjectCollection;
-use App\Http\Resources\ProjectResource;
 use App\Models\Project;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use App\Services\ProjectService;
 
 class ProjectController extends Controller
 {
+    protected ProjectService $projectService;
+    public function __construct(ProjectService $projectService)
+    {
+        $this->projectService = $projectService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,44 +31,33 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $createdProject = Project::create($request->validated());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Project has been successfully created.',
-            'data' => new ProjectResource($createdProject),
-        ], Response::HTTP_CREATED);
+        return $this->projectService->create($request->validated());
     }
 
     /**
      * Display the specified resource.
+     * @throws ProjectNotFoundException
      */
-    public function show(Project $project)
+    public function show(int $id)
     {
-        return new ProjectResource($project);
+        return $this->projectService->show($id);
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws ProjectNotFoundException
      */
-    public function update(UpdateProjectRequest $request, Project $project)
+    public function update(UpdateProjectRequest $request, int $id)
     {
-        $project->update($request->validated());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Project has been successfully updated.',
-            'data' => new ProjectResource($project),
-        ], Response::HTTP_OK);
+        return $this->projectService->update($request->validated(), $id);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws ProjectNotFoundException
      */
-    public function destroy(Project $project)
+    public function destroy(int $id)
     {
-        $project->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Project has been successfully deleted.',
-        ], Response::HTTP_OK);
+        return $this->projectService->delete($id);
     }
 }

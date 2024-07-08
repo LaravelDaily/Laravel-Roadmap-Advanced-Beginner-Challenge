@@ -3,15 +3,15 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\JsonResponse;
 
-class UserNotFoundException extends Exception
+class ProjectNotFoundException extends Exception
 {
-    protected int $userId;
-    public function __construct($userId)
+    protected int $projectId;
+    public function __construct(int $projectId)
     {
-        $this->userId = $userId;
+        $this->projectId = $projectId;
         parent::__construct();
     }
 
@@ -20,14 +20,11 @@ class UserNotFoundException extends Exception
         return false;
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function render(): JsonResponse
     {
         return response()->json([
             'status' => 'error',
-            'message' => "The User ID: $this->userId is not found.",
+            'message' => "The Project ID: $this->projectId is not found.",
         ], Response::HTTP_NOT_FOUND);
     }
 }
