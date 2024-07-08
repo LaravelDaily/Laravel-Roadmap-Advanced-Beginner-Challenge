@@ -7,12 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\StoreClientRequest;
 use App\Http\Requests\Client\UpdateClientRequest;
 use App\Http\Resources\ClientCollection;
-use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use App\Services\ClientService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class ClientController extends Controller
 {
