@@ -11,6 +11,13 @@ use App\Services\UserService;
 
 class UserController extends Controller
 {
+    protected UserService $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -24,26 +31,26 @@ class UserController extends Controller
      * Display the specified resource.
      * @throws UserNotFoundException
      */
-    public function show(int $id, UserService $userService)
+    public function show(int $id)
     {
-        return $userService->show($id);
+        return $this->userService->show($id);
     }
 
     /**
      * Update the specified resource in storage.
      * @throws UserNotFoundException
      */
-    public function update(UpdateUserRequest $request, int $id, UserService $userService)
+    public function update(UpdateUserRequest $request, int $id)
     {
-        return $userService->update($request->validated(), $id);
+        return $this->userService->update($request->validated(), $id);
     }
 
     /**
      * Remove the specified resource from storage.
      * @throws UserNotFoundException
      */
-    public function destroy(int $id, UserService $userService)
+    public function destroy(int $id)
     {
-        return $userService->delete($id);
+        return $this->userService->delete($id);
     }
 }
