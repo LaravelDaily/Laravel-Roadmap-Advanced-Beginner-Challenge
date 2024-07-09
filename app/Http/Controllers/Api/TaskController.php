@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\TaskNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use App\Services\TaskService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
+    protected TaskService $taskService;
+
+    public function __construct(TaskService $taskService)
+    {
+        $this->taskService = $taskService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,45 +35,33 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $createdTask = Task::create($request->validated());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Task has been successfully created.',
-            'data' => new TaskResource($createdTask->loadMissing('project')),
-        ], Response::HTTP_CREATED);
+        $this->taskService->create($request->validated());
     }
 
     /**
      * Display the specified resource.
+     * @throws TaskNotFoundException
      */
-    public function show(Task $task)
+    public function show(int $id)
     {
-        return new TaskResource($task->loadMissing('project'));
+        $this->taskService->show($id);
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws TaskNotFoundException
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, int $id)
     {
-        $updatedTask = $task->update($request->validated());
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Task has been successfully updated.',
-            'data' => $task->loadMissing('project'),
-        ], Response::HTTP_OK);
+        $this->taskService->update($request->validated(), $id);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws TaskNotFoundException
      */
-    public function destroy(Task $task)
+    public function destroy(int $id)
     {
-        $task->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Task has been successfully deleted.',
-        ], Response::HTTP_OK);
+        $this->taskService->delete($id);
     }
 }
