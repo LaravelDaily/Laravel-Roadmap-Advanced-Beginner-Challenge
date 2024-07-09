@@ -7,11 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
-use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Services\TaskService;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
