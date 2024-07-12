@@ -13,8 +13,8 @@ Route::redirect('/', '/login');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::resource('/users', UserController::class)->only('index', 'edit', 'update', 'destroy');
     Route::resources([
+        '/users' => UserController::class,
         '/clients' => ClientController::class,
         '/projects' => ProjectController::class,
         '/tasks' => TaskController::class,
