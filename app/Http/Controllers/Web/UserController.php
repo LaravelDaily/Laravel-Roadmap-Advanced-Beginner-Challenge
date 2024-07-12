@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Role;
 
@@ -38,6 +39,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        dd($request->all());
         User::create($request->validated());
 
         return redirect()->route('clients.index')->with('message', 'New client created successfully.');

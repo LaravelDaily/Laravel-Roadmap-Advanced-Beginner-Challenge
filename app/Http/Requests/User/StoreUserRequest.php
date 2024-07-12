@@ -4,6 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -23,7 +24,10 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:150',
+            'name.first_name' => 'required|string|max:150',
+            'name.last_name' => 'required|string|max:150',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:8|max:24',
             'role' => 'required|string|exists:roles,name',
         ];
     }

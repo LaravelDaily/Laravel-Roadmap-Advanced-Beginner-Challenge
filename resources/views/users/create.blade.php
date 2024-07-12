@@ -25,9 +25,6 @@
                         </button>
                     </div>
                     @endsession
-{{--                    <h2 class="font-semibold text-xl text-center text-gray-600 dark:text-gray-200 leading-tight mb-6">--}}
-{{--                        {{ __('User Information') }}--}}
-{{--                    </h2>--}}
                     <section>
                         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                             <svg class="w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -38,68 +35,71 @@
                                     <h2 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                         {{ __('User Information') }}
                                     </h2>
-                                    <form class="space-y-4 md:space-y-6" action="#">
+                                    @foreach($errors->all() as $error)
+                                        {{$error}}
+                                    @endforeach
+                                    <form class="space-y-4 md:space-y-6" action="{{route('users.store')}}" method="POST">
+                                        @csrf
                                          <div class="relative z-0 w-full mb-5 group">
-                                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-                                             <input type="text" name="first_name" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('First name:')}}</label>
+                                             <input type="text" value="{{old('first_name')}}" name="name[first_name]" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Please enter the first name')}}" required />
+                                             @error('name.first_name')
+                                             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                                             @enderror
                                          </div>
                                         <div class="relative z-0 w-full mb-5 group">
-                                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-                                            <input type="text" name="last_name" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Last name:')}}</label>
+                                            <input type="text" value="{{old('last_name')}}" name="name[last_name]" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Please enter the last name')}}" required />
+                                            @error('name.last_name')
+                                            <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                                            @enderror
                                         </div>
                                         <div>
-                                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Email:')}}</label>
+                                            <input type="email" name="email" value="{{old('email')}}" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Please enter the email address')}}" required="">
+                                            @error('email')
+                                            <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                                            @enderror
                                         </div>
                                         <div>
-                                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Password:')}}</label>
+                                            <input type="password" name="password" value="{{old('password')}}" id="password" placeholder="{{__('Please create a password')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                                            @error('password')
+                                            <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                                            @enderror
                                         </div>
                                         <div>
-                                            <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                                            <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                                            <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Confirm password:')}}</label>
+                                            <input type="password" name="password_confirmation" value="{{old('password_confirmation')}}" id="password_confirmation" placeholder="{{__('Please confirm the password')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                                            @error('password_confirmation')
+                                            <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                                            @enderror
                                         </div>
                                         <div class="mb-6">
-                                            <label for="roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role:</label>
-                                            <select id="roles" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Role')}}:</label>
+                                            <select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                                <option value="" disabled selected>{{__('Please choose a role')}}</option>
                                                 @forelse($roles as $role)
                                                     <option value="{{$role->name}}" @selected(old('$role') === $role->name)>{{ucfirst($role->name)}}</option>
                                                 @empty
-                                                    <option selected>Roles are not defined</option>
+                                                    <option selected>{{__('Roles are not defined')}}</option>
                                                 @endforelse
                                             </select>
                                             @error('role')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
+                                            <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{$message}}</span></p>
                                             @enderror
                                         </div>
                                         <div class="text-right">
                                             <a href="{{route('users.index')}}" class="text-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                                Cancel
+                                                {{__('Cancel')}}
                                             </a>
-                                        <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Create an account</button>
+                                        <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{{__('Create an account')}}</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </section>
-{{--                    <form action="{{route('users.create')}}" enctype="multipart/form-data" method="POST">--}}
-{{--                        @csrf--}}
-{{--                        <div>--}}
-{{--                            <h2 class="font-semibold text-xl text-center text-gray-600 dark:text-gray-200 leading-tight mb-6">--}}
-{{--                                {{ __('Roles & Permissions') }}--}}
-{{--                            </h2>--}}
-{{--                        </div>--}}
-{{--                        <div class="text-right">--}}
-{{--                            <a href="{{route('users.index')}}" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">--}}
-{{--                                Cancel--}}
-{{--                            </a>--}}
-{{--                            <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">--}}
-{{--                                Update--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-
                 </div>
             </div>
         </div>
