@@ -39,10 +39,10 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        dd($request->all());
-        User::create($request->validated());
+        $user = User::create($request->validated());
+        $user->assignRole($request->role);
 
-        return redirect()->route('clients.index')->with('message', 'New client created successfully.');
+        return redirect()->route('users.index')->with('message', 'New client created successfully.');
     }
 
     /**
@@ -75,6 +75,6 @@ class UserController extends Controller
         Gate::authorize('delete users');
         $user->delete();
 
-        return redirect()->route('users.index')->with('message', 'User deleted successfully.');
+        return redirect()->back()->with('message', 'User deleted successfully.');
     }
 }
