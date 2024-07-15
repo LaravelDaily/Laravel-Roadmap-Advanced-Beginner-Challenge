@@ -38,21 +38,9 @@
                                     <form class="space-y-4 md:space-y-6" action="{{route('users.store')}}" method="POST">
                                         @csrf
                                         <div class="relative z-0 w-full mb-5 group">
-                                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('First name:')}}</label>
-                                             <input type="text" value="{{old('first_name')}}" name="name[first_name]" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Please enter the first name')}}" required />
-                                             @error('name.first_name')
-                                            <li class="flex text-sm text-red-500 list-inside dark:text-red-400 items-center">
-                                                <svg class="w-4 h-4 mr-1 text-red-500 dark:text-red-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clip-rule="evenodd"/>
-                                                </svg>
-                                                {{$message}}
-                                            </li>
-                                             @enderror
-                                         </div>
-                                        <div class="relative z-0 w-full mb-5 group">
-                                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Last name:')}}</label>
-                                            <input type="text" value="{{old('last_name')}}" name="name[last_name]" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Please enter the last name')}}" required />
-                                            @error('name.last_name')
+                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Name:')}}</label>
+                                            <input type="text" value="{{old('name')}}" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Please enter the name')}}" required />
+                                            @error('name')
                                             <li class="flex text-sm text-red-500 list-inside dark:text-red-400 items-center">
                                                 <svg class="w-4 h-4 mr-1 text-red-500 dark:text-red-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clip-rule="evenodd"/>
