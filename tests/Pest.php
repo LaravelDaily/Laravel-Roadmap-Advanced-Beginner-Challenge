@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,22 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function asAdmin()
+{
+    $admin = User::factory()->admin()->create();
+    return test()->actingAs($admin);
+}
+
+function asManager()
+{
+    $manager = User::factory()->manager()->create();
+    return test()->actingAs($manager);
+}
+
+function asSimpleUser()
+{
+    $simpleUser = User::factory()->simpleUser()->create();
+    return test()->actingAs($simpleUser);
 }
