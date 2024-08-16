@@ -124,23 +124,4 @@ class UserTest extends TestCase
 
         $this->assertSoftDeleted($this->user);
     }
-
-    public function asAdmin(): UserTest
-    {
-        $admin = User::factory()->admin()->create();
-        return $this->actingAs($admin);
-    }
-
-    public function asManager(): UserTest
-    {
-        $manager = User::factory()->manager()->create();
-        return $this->actingAs($manager);
-    }
-
-    public function asSimpleUser(): UserTest
-    {
-        $simpleUser = User::factory()->simpleUser()->create();
-
-        return $this->actingAs($simpleUser);
-    }
 }
