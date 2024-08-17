@@ -26,12 +26,12 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:200',
-            'description' => 'required|string',
-            'deadline' => 'required|date',
-            'user_id' => 'required|integer|exists:users,id',
-            'client_id' => 'required|integer|exists:clients,id',
-            'status' => 'required|boolean',
+            'title' => 'sometimes|string|max:200',
+            'description' => 'sometimes|string',
+            'deadline' => 'sometimes|date',
+            'user_id' => 'sometimes|integer|exists:users,id',
+            'client_id' => 'sometimes|integer|exists:clients,id',
+            'status' => 'sometimes|boolean',
         ];
     }
 }
