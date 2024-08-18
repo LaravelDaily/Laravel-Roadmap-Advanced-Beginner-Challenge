@@ -61,8 +61,7 @@ test('admin can update project', function () {
     $this->assertDatabaseHas('projects', $updatingProjectNewData);
     $this->project->refresh();
 
-    expect($this->project->title)->toBe($updatingProjectNewData['title'])
-        ->and($this->project->description)->toBe($updatingProjectNewData['description']);
+    expect($this->project->only(['title', 'description']))->toBe($updatingProjectNewData);
 });
 
 test('admin can delete project', function () {

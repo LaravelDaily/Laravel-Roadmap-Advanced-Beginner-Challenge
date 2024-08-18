@@ -26,11 +26,11 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:200',
-            'description' => 'required|string',
-            'deadline' => 'required|date',
-            'project_id' => 'required|integer|exists:projects,id',
-            'status' => 'required|boolean',
+            'name' => 'sometimes|string|max:200',
+            'description' => 'sometimes|string',
+            'deadline' => 'sometimes|date',
+            'project_id' => 'sometimes|integer|exists:projects,id',
+            'status' => 'sometimes|boolean',
         ];
     }
 }

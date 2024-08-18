@@ -50,18 +50,24 @@ function something()
 
 function asAdmin()
 {
-    $admin = User::factory()->admin()->create();
+    $admin = User::factory()->admin()->create([
+        'email' => 'test-admin@example.com',
+    ]);
     return test()->actingAs($admin);
 }
 
 function asManager()
 {
-    $manager = User::factory()->manager()->create();
+    $manager = User::factory()->manager()->create([
+        'email' => 'test-manager@example.com',
+    ]);
     return test()->actingAs($manager);
 }
 
 function asSimpleUser()
 {
-    $simpleUser = User::factory()->simpleUser()->create();
+    $simpleUser = User::factory()->simpleUser()->create([
+        'email' => 'test-simple-user@example.com',
+    ]);
     return test()->actingAs($simpleUser);
 }
