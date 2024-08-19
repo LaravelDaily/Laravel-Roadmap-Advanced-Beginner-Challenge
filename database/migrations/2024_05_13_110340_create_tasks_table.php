@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('status')->default(true);
             $table->timestamp('deadline')->useCurrent();
-            $table->foreignId('project_id')->constrained();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

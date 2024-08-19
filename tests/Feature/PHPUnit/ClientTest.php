@@ -77,6 +77,6 @@ class ClientTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertRedirect(route('clients.index'));
-        $this->assertSoftDeleted($this->client);
+        $this->assertModelMissing($this->client);
     }
 }

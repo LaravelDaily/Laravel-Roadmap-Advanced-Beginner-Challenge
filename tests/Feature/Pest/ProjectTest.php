@@ -70,5 +70,5 @@ test('admin can delete project', function () {
         ->assertStatus(302)
         ->assertRedirect(route('projects.index'));
 
-    $this->assertSoftDeleted($this->project);
+    $this->assertModelMissing($this->project);
 });

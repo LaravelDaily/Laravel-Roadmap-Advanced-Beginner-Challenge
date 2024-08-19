@@ -92,6 +92,6 @@ class ProjectTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('projects.index'));
         $response->assertSessionHas('message', 'Project deleted successfully.');
-        $this->assertSoftDeleted($this->project);
+        $this->assertModelMissing($this->project);
     }
 }

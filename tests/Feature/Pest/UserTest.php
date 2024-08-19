@@ -93,7 +93,7 @@ test('admin can delete a user', function () {
         ->assertStatus(302)
         ->assertRedirect(route('users.index'));
 
-    $this->assertSoftDeleted($this->simpleUser);
+    $this->assertModelMissing($this->simpleUser);
 });
 
 

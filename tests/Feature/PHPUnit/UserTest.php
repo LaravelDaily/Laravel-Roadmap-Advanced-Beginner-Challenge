@@ -122,6 +122,6 @@ class UserTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('users.index'));
 
-        $this->assertSoftDeleted($this->user);
+        $this->assertModelMissing($this->user);
     }
 }

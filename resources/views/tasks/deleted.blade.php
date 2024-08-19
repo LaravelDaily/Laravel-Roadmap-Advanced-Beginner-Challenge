@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tasks') }}
+            {{ __('Deleted Tasks') }}
         </h2>
     </x-slot>
 
@@ -35,26 +35,16 @@
                     @endsession
                     <div class="grid grid-cols-2">
                         <div class="text-left">
-                        <a href="{{route('tasks.create')}}" type="button"
-                           class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-4">
-                            <svg class="w-6 h-6 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                 height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                            </svg>
-                            New Task
-                        </a>
-                        </div>
-                        <div class="text-right">
-                        <a href="{{route('tasks.deleted')}}" type="button"
-                           class="text-white focus:outline-none bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-4">
-                            <svg class="w-6 h-6 me-1" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                            </svg>
-                            Deleted Tasks
-                        </a>
+                            <a href="{{route('tasks.index')}}" type="button"
+                               class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-4">
+                                <svg class="w-6 h-6 " aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m15 19-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </a>
                         </div>
                     </div>
                     <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -127,9 +117,9 @@
                                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                                     aria-labelledby="dropdownActionButton{{$loop->index}}">
                                                     <li>
-                                                        <a href="{{route('tasks.edit', $task)}}"
+                                                        <a href="{{route('tasks.deleted.restore', $task)}}"
                                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                            Edit
+                                                            {{__('Restore')}}
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -142,7 +132,7 @@
                                                 </div>
                                             </div>
                                             <x-modal name="confirm-client-deletion{{$loop->index}}" focusable>
-                                                <form action="{{route('tasks.destroy', $task)}}" method="POST"
+                                                <form action="{{route('tasks.deleted.force', $task)}}" method="POST"
                                                       class="p-6">
                                                     @csrf
                                                     @method('delete')
@@ -152,7 +142,7 @@
                                                     </h2>
 
                                                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                                        {{ __('Once this task is deleted, all of its resources and data will be unreachable.') }}
+                                                        {{ __('Once this task is deleted, all of its resources and data will be deleted permanently.') }}
                                                     </p>
 
                                                     <div class="mt-6 flex justify-end">

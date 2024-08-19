@@ -7,6 +7,7 @@ use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Models\Project;
 use App\Models\Task;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
@@ -79,5 +80,18 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('tasks.index')->with('message', 'Task deleted successfully.');
+    }
+
+    public function getSoftDeletedTasks()
+    {
+        $tasks = Task::onlyTrashed()->with('project')->orderByDesc('id')->paginate(7);
+        return view('tasks.deleted', compact('tasks'));
+    }
+
+    public function restoreSoftDeletedTasks(int $task)
+    {
+        $task = Task::withTrashed()->findOrFail($task);
+        $task->restore();
+        return redirect()->route('tasks.deleted')->with('message', 'Task restored successfully.');
     }
 }

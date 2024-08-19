@@ -62,5 +62,5 @@ test('admin can delete client', function () {
         ->assertStatus(302)
         ->assertRedirect(route('clients.index'));
 
-    $this->assertSoftDeleted($this->client);
+    $this->assertModelMissing($this->client);
 });
