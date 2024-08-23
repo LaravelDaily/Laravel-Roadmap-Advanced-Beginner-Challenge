@@ -26,7 +26,7 @@ Route::post('login', function (Request $request) {
     return response()->json(['message' => 'Please check your Email or Password and try again to login.'], 401);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->as('api.')->group(function () {
     Route::apiResource('users', UserController::class)->except('store');
     Route::apiResources([
         'clients' => ClientController::class,
