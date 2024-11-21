@@ -12,7 +12,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::with('user', 'client', 'project')->paginate();
+
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -60,6 +62,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return redirect(route('tasks.index'))->with('status', 'Task deleted!');
     }
 }
