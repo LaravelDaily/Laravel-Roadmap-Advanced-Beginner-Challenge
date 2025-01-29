@@ -14,6 +14,14 @@ class Task extends Model
 
 
     public const STATUS = ['progress', 'ready', 'completed', 'canceled', 'estimated', 'todo'];
+    protected $fillable = [
+        'title',
+        'description',
+        'user_id',
+        'project_id',
+        'deadline',
+        'status'
+    ];
 
     /**
      * user
@@ -24,15 +32,7 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
-    /**
-     * client
-     *
-     * @return BelongsTo
-     */
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(Client::class);
-    }
+
     /**
      * project
      *
@@ -52,6 +52,14 @@ class Task extends Model
     {
         return Attribute::make(
             get: fn(string $value) => date('m/d/Y', strtotime($value))
+        );
+    }
+
+
+    protected function deadline(): Attribute
+    {
+        return Attribute::make(
+            set: fn(string $value) =>  date('Y-m-d', strtotime($value))
         );
     }
 }

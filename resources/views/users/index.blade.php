@@ -18,6 +18,7 @@
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+                            <th class="px-4 py-3"></th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Address</th>
@@ -34,8 +35,7 @@
                         <tr class="text-gray-700">
                             <td class="px-4 py-3">
                                 @if(null !== $user->getMedia('images')->first())
-
-                                <img class="w-10 h-10 rounded" src="{{ $user->image() }}" alt="Default avatar">
+                                    <img class="w-10 h-10 rounded" src="{{ $user->image('preview') }}" alt="{{ $user->first_name  }}">
                                 @endisset
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -56,9 +56,9 @@
                             <td class="px-4 py-3 text-sm">
                                 {{ $user->created_at }}
                             </td>
+                            @if (Auth::user()->can('delete', $user))
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('users.edit', $user) }}"
-                                    class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a href="{{ route('users.edit', $user) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <form method="POST" action="{{ route('users.destroy', $user) }}">
@@ -68,6 +68,7 @@
                                         onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
                                 </form>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

@@ -4,7 +4,9 @@
     </x-slot>
     <div class="p-4 bg-white rounded-lg shadow-xs">
         <div class=" mb-4 rounded-lg">
+        <a href="{{ route('tasks.create') }}">
             <x-primary-button> {{ __('Create Task') }}</x-primary-button>
+        </a>
         </div>
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -42,10 +44,10 @@
                                 {{ $task->deadline }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $task->user->first_name }} {{ $task->user->last_name }}
+                                {{ $task->user->first_name ?? null }} {{ $task->user->last_name ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $task->client->name }}
+                                {{ $task->project->client->name ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ ! empty($task->project) ? $task->project->title : ''}}
@@ -53,8 +55,10 @@
                             <td class="px-4 py-3 text-sm">
                                 {{ $task->created_at }}
                             </td>
+                            
+                            @cannot('delete', $task)
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('profile.edit', $task) }}"
+                                <a href="{{ route('tasks.edit', $task) }}"
                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -65,6 +69,7 @@
                                         onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
                                 </form>
                             </td>
+                            @endcannot
                         </tr>
                         @endforeach
                     </tbody>

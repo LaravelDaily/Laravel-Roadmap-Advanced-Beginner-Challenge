@@ -33,9 +33,10 @@
                         @foreach($projects as $project)
                         <tr class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
-                                {{ $project->title }}
+                                <a href="{{ route('projects.show', $project) }}">
+                                    {{ $project->title }}
+                                </a>
                             </td>
-
                             <td class="px-4 py-3 text-sm">
                                 {{ $project->deadline }}
                             </td>
@@ -43,16 +44,17 @@
                                 {{ $project->status }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $project->client->name }}
+                                {{ $project->client->name ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $project->user->first_name }} {{ $project->user->last_name }}
+                                {{ $project->user->first_name ?? null }} {{ $project->user->last_name ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $project->created_at }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('profile.edit', $project) }}"
+                            @if (Auth::user()->can('manage_products'))
+                           <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="{{ route('projects.edit', $project) }}"
                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -64,7 +66,8 @@
                                         onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
                                 </form>
                             </td>
-                        </tr>
+                            @endif 
+                                                </tr>
                         @endforeach
                     </tbody>
                 </table>

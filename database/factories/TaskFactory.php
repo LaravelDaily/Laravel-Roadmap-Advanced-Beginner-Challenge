@@ -23,14 +23,12 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         $users = collect(User::all()->modelKeys());
-        $clients = collect(Client::all()->modelKeys());
         $projects = collect(Project::all()->modelKeys());
 
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'user_id' => $users->random(),
-            'client_id' => $clients->random(),
             'project_id' => $projects->random(),
             'deadline' => $this->faker->dateTimeBetween('+1 month', '+6 month'),
             'status' => Arr::random(Task::STATUS),

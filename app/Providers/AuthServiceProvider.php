@@ -2,27 +2,27 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
+use App\Models\User;
+use App\Policies\TaskPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [
-        //
-    ];
 
     /**
      * Register any authentication / authorization services.
      */
     public function boot(): void
     {
-        Gate::before(function ($user, $ability) {
-            return $user->hasRole('super admin') ? true : null;
+        Gate::guessPolicyNamesUsing(function ($modelClass) {
+            return 'App\\Policies\\' . class_basename($modelClass) . 'Policy';
+        });
+       
+        Gate::define('manage_products', function ($user) {
+              return $user->hasRole('admin');
         });
     }
 }

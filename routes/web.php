@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,16 +27,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
-    Route::get('users/edit', [UserController::class, 'edit'])->name('users.edit');
-
     Route::resource('projects', ProjectController::class);
     Route::resource('tasks', TaskController::class);
-
-    Route::view('users/create', [UserController::class, 'create'])->name('users.create');
-    Route::resource('users', UserController::class);
-
-    Route::resource('clients', ClientController::class);
-
+    Route::resource('users', UserController::class)->middleware('role:Admin');;
+    Route::resource('clients', ClientController::class)->middleware('role:Admin');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

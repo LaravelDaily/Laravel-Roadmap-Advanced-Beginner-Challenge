@@ -4,11 +4,12 @@
     </x-slot>
 
     <div class="p-4 bg-white rounded-lg shadow-xs">
-        <div class=" mb-4 rounded-lg">
+        <div class="mb-4 rounded-lg">
             <a href="{{ route('clients.create') }}">
                 <x-primary-button> {{ __('Create Client') }}</x-primary-button>
             </a>
         </div>
+    
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
@@ -44,23 +45,24 @@
                                 {{ $client->status }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $client->company->name }}
+                                {{ $client->company->name ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $client->company->address }}
+                                {{ $client->company->address ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $client->company->sity }}
+                                {{ $client->company->sity ?? null}}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $client->company->post_zip }}
+                                {{ $client->company->post_zip ?? null }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $client->company->vat }}
+                                {{ $client->company->vat ?? null}}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $client->created_at }}
+                                {{ $client->created_at ?? null}}
                             </td>
+                            @cannot('delete', $client)
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('clients.edit', $client) }}"
                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -73,6 +75,7 @@
                                         onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
                                 </form>
                             </td>
+                            @endcannot
                         </tr>
                         @endforeach
                     </tbody>

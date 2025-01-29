@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Search;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,11 +40,8 @@ class Client extends Model
             'created_at' => 'datetime:m/d/Y',
         ];
     }
-
-    // protected function createdAt(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn (string $value) => date('m/d/Y', strtotime($value))
-    //     );
-    // }
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status','active');
+    }
 }

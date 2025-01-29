@@ -28,14 +28,11 @@ a<x-app-layout>
                                     <select name="company_id" id="company_id"
                                         class="form-control mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus-within:text-primary-600">
                                         @foreach ($companies as $company)
-
-                                        <option value="{{$company->id}}" {{ o company_id')==$company->id ?
-                                            'selected'
-                                            : '' }}>{{$company->name}}</option>
-
-
-                                        @endforeach
-                                    </select>
+                                            <option value="{{ $company->id }}" @selected($client->company_id == $company->id)>
+                                                {{ $company->name }}
+                                            </option>
+                                         @endforeach
+                                    </select> 
                                 </div>
                             </div>
                             <div class="grid grid-rows-2 gap-6">
@@ -48,7 +45,6 @@ a<x-app-layout>
                                     <x-input-label for="status" :value="__('Status')" />
                                     <select name="status" id="status"
                                         class="form-control mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus-within:text-primary-600">
-                                        $statuses
                                         @foreach ($statuses as $value)
                                         <option old=$status value="{{$value}}">
                                             {{$value}}
