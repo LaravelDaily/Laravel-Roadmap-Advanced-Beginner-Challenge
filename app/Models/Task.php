@@ -54,12 +54,4 @@ class Task extends Model
             get: fn(string $value) => date('m/d/Y', strtotime($value))
         );
     }
-
-
-    protected function deadline(): Attribute
-    {
-        return Attribute::make(
-            set: fn(string $value) =>  date('Y-m-d', strtotime($value))
-        );
-    }
 }

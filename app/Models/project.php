@@ -46,9 +46,4 @@ class Project extends Model
             get: fn(string $value) => date('m/d/Y', strtotime($value))
         );
     }
-
-    public function setDeadlineAttribute($value) 
-    {
-        $this->attributes['deadline'] = date('Y-m-d', strtotime($value));
-    }
 }

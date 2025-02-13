@@ -28,4 +28,10 @@ class StoreTaskRequest extends FormRequest
             'title' => 'required|string',
         ];
     }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'deadline' => date('m/d/Y', strtotime($this->deadline))
+        ]);
+    }
 }

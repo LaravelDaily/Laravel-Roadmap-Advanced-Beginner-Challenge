@@ -86,13 +86,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
          $query->whereExists('email_verified_at');
      }
 
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn(string $value) => Hash::make('password')
-        );
-    }
-
     protected static function booted(): void
     {
         static::created(function (User $user) {

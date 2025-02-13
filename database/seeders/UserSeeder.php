@@ -44,15 +44,6 @@ class UserSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $adminRole = Role::create(['name' => 'Admin']);
-        $this->command->info('Created:' . $adminRole);
-        $userRole = Role::create(['name' => 'User']);
-        $this->command->info('Created:' . $adminRole);
-        $permissions = array_merge($this->adminPermissions, $this->permissions);
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
-        }
-
         // Create admin User and assign the role to him.
         $adminuser = User::create([
             'first_name' => 'Marko',
@@ -65,17 +56,13 @@ class UserSeeder extends Seeder
 
         $users = User::factory(20)->create();
 
-        $permissionIds = Permission::pluck('id', 'id')->all();
-        $userPermissionsIds = Permission::whereIn('name', $this->permissions)->pluck('id', 'id')->all();
-
-        $userRole->syncPermissions([$userPermissionsIds]);
-
-        $adminRole->syncPermissions([$permissionIds]);
-        $adminuser->assignRole('Admin');
+        $adminuser->assignRole('admin');
 
         foreach ($users as $user) {
-            $user->assignRole('User');
+            $user->assignRole('user');
         }
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
         $this->command->info('Users created together with roles and permissions!');
     }
 }
