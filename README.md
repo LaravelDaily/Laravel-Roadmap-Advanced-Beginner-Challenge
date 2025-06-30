@@ -31,7 +31,7 @@ You can come up with whatever structure of the database tables you want, but ple
 
 ## Features to implement
 
-Here's the [list of Roadmap features](https://github.com/LaravelDaily/Laravel-Roadmap-Learning-Path#beginner-level) you need to try to implement in your code:
+Here's the [list of Roadmap features](https://laraveldaily.com/roadmap-learning-path) you need to try to implement in your code:
 
 
 **Routing Advanced**	
