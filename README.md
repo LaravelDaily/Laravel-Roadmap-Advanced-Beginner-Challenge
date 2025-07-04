@@ -1,6 +1,6 @@
-# Laravel Roadmap: Advanced Beginner Level Challenge
+# Laravel Roadmap: Junior Level Challenge
 
-This is a task for the **Advanced Beginner Level** of the [Laravel Roadmap](https://laraveldaily.com/roadmap-learning-path), with the goal to implement as many of its topics as possible.
+This is a task for the **Junior Level** of the [Laravel Roadmap](https://laraveldaily.com/roadmap-learning-path), with the goal to implement as many of its topics as possible.
 
 This repository is intentionally empty, with only a Readme file. Your task if to submit a Pull Request with your version of implementing the task, and your PR may be reviewed by someone on our team, or other volunteers.
 
@@ -86,4 +86,4 @@ Here's the [list of Roadmap features](https://laraveldaily.com/roadmap-learning-
 
 If you need help, or you want to compare your version with our simple version, here's [the public repository](https://github.com/LaravelDaily/Laravel-Roadmap-Junior-CRM) with a _possible_ solution.
 
-**Notice**: please look at that repository only AFTER you've accomplished the task yourself, or if you're confident about your Laravel Advanced Beginner skills and you think you don't need to practice this task.
+**Notice**: please look at that repository only AFTER you've accomplished the task yourself, or if you're confident about your Laravel Junior skills and you think you don't need to practice this task.
